@@ -23,16 +23,16 @@
         android:orientation="horizontal" >
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dip"
+            android:layout_height="30dip"
             android:background="@drawable/login_phone" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginLeft="10dip"
             android:layout_marginTop="5dip"
-            android:layout_marginLeft="10dip" >
+            android:orientation="vertical" >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -51,8 +51,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dip"
-                    android:inputType="textPhonetic"
-                    android:background="@null" />
+                    android:background="@null"
+                    android:inputType="textPhonetic" />
             </LinearLayout>
 
             <View
@@ -62,65 +62,66 @@
                 android:background="#ffffff" />
         </LinearLayout>
     </LinearLayout>
-    
+
     <LinearLayout
         android:id="@+id/login_layout_verification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dip"
+        android:layout_below="@id/login_layout_phone"
+        android:layout_marginLeft="70dip"
         android:layout_marginRight="30dip"
         android:layout_marginTop="20dip"
-        android:layout_below="@id/login_layout_phone"
-        android:orientation="horizontal" >
+        android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/phone_verification"
-            android:textSize="18sp"
-            android:textColor="#ffffff"/>
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="5dip"
-            android:layout_marginLeft="10dip" >
+            android:layout_height="wrap_content" >
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/login_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phone_verification"
+                android:textColor="#ffffff"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/regist_verification_btn"
+                android:layout_width="60dip"
+                android:layout_height="25dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/login_verification_btn"
+                android:text="@string/get_verification" />
+
+            <EditText
+                android:id="@+id/login_edit_verification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:layout_marginLeft="5dip"
+                android:layout_toRightOf="@id/login_text"
+                android:background="@null"
+                android:layout_centerVertical="true"
+                android:hint="@string/phone_verification_code"
+                android:layout_toLeftOf="@id/regist_verification_btn"
+                android:textSize="14sp" />
+        </RelativeLayout>
 
-                <EditText
-                    android:id="@+id/login_edit_verification"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dip"
-                    android:hint="@string/phone_verification_code"
-                    android:background="@null" />
-                <Button android:id="@+id/regist_verification_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/get_verification"
-                    android:background="@drawable/login_register"/>
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dip"
-                android:layout_marginTop="3dip"
-                android:background="#ffffff" />
-        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_marginTop="3dip"
+            android:background="#ffffff" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/login_layout_pwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/login_layout_verification"
         android:layout_marginLeft="30dip"
         android:layout_marginRight="30dip"
         android:layout_marginTop="20dip"
-        android:layout_below="@id/login_layout_verification"
         android:orientation="horizontal" >
 
         <ImageView
@@ -131,9 +132,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginLeft="10dip"
             android:layout_marginTop="5dip"
-            android:layout_marginLeft="10dip" >
+            android:orientation="vertical" >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -162,16 +163,17 @@
                 android:background="#ffffff" />
         </LinearLayout>
     </LinearLayout>
-	
-	<Button android:id="@+id/login_register"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:text="@string/register"
-	    android:textSize="18sp"
-	    android:background="@drawable/login_register"
-	    android:layout_below="@id/login_btn"
-	    android:layout_marginLeft="30dip"
-	    android:layout_marginTop="20dip"
-	    android:layout_marginRight="30dip"/>
-	
+
+    <Button
+        android:id="@+id/login_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_layout_pwd"
+        android:layout_marginLeft="30dip"
+        android:layout_marginRight="30dip"
+        android:layout_marginTop="20dip"
+        android:background="@drawable/login_btn"
+        android:text="@string/register"
+        android:textSize="18sp" />
+
 </RelativeLayout>
