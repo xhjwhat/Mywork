@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+    <include 
+        android:id="@+id/title_bar"
+        layout="@layout/title_bar"/>
+    <ListView android:id="@+id/shopcar_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_bar"/>
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="45dip"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff">
+        <ImageView android:id="@+id/shopcar_select_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dip"
+            android:background="@drawable/shopcar_select"/>
+        <TextView 
+            android:id="@+id/select_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:text="@string/all_selected"
+            android:layout_toRightOf="@id/shopcar_select_img"
+            android:textSize="17sp"
+            android:textColor="@color/text_49"/>
+        <TextView 
+            android:id="@+id/combine_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="17sp"
+            android:textColor="@color/text_49"
+            android:text="@string/combined"
+            android:layout_toRightOf="@id/select_text"
+            android:layout_marginLeft="30dip"/>
+        <TextView 
+            android:id="@+id/money_lable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="15sp"
+            android:textColor="@color/red_text"
+            android:text="¥"
+            android:layout_toRightOf="@id/combine_text"
+            android:layout_marginLeft="3dip"/>
+        <TextView 
+            android:id="@+id/shopcar_combine_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="19sp"
+            android:textColor="@color/red_text"
+            android:layout_toRightOf="@id/money_lable"
+            />
+        <Button android:id="@+id/shopcar_settlement_btn"
+            android:layout_width="80dip"
+            android:layout_height="match_parent"
+            android:text="@string/settlement"
+            android:textSize="17sp"
+            android:textColor="#ffffff"
+            android:background="@color/red_text"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+</RelativeLayout>

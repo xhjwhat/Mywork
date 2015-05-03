@@ -57,4 +57,8 @@
 	<string name="store_order">综合排序</string>
 	<string name="store_location">您现在的位置：</string>
 	<string name="sale_product">主营产品</string>
+	<string name="edit">编辑</string>
+	<string name="all_selected">全选</string>
+	<string name="combined">合计：</string>
+	<string name="settlement">去结算</string>
 </resources>

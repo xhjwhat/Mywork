@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#ffffff">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dip"
+        android:background="@drawable/my_inform_bg"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dip"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/myinform_edit_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/myinform_edit" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="30dip"
+                android:background="@drawable/myinform_head" />
+
+            <ImageView
+                android:id="@+id/myinform_exit_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="30dip"
+                android:background="@drawable/myinform_exit" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dip"
+            android:orientation="horizontal">
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#ffffff"
+                android:text="你好，"/>
+            <TextView 
+                android:id="@+id/myinform_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#ffffff"
+                android:text="向小花"/>
+        </LinearLayout>
+        <TextView 
+                android:id="@+id/myinform_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginTop="10dip"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:text="90分"/>
+        
+    </LinearLayout>
+	<RelativeLayout android:layout_width="match_parent"
+	    android:layout_height="40dip">
+	    <TextView android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="17sp"
+	        android:textColor="@color/text_49"
+	        android:drawableLeft="@drawable/myinform_"
+	        android:layout_centerVertical="true"
+	        android:drawablePadding="15dip"
+	        android:text="我的订单"/>
+	</RelativeLayout>
+</LinearLayout>
