@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="line_bg">#d0d0d0</color>
+    <color name="nomal_text">#909090</color>
+    <color name="red_text">#f5ac39</color>
+    <color name="title_bg">#f5ac39</color>
+    <color name="background">#f3f3f3</color>
+</resources>

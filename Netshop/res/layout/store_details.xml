@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <include layout="@layout/title_bar" />
+
+    <ImageView
+        android:id="@+id/@+id/store_img"
+        android:layout_width="match_parent"
+        android:layout_height="120dip" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/store_name"
+            android:layout_width="match_parent"
+            android:layout_height="35dip"
+            android:layout_marginLeft="20dip"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="20dip"
+            android:background="@color/line_bg" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dip" >
+
+            <TextView
+                android:id="@+id/store_addr"
+                android:layout_width="match_parent"
+                android:layout_height="35dip"
+                android:layout_marginLeft="20dip"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/store_location_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dip"
+                android:background="@drawable/store_location" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dip"
+                android:layout_marginRight="15dip"
+                android:layout_marginTop="5dip"
+                android:layout_toLeftOf="@id/store_location_img"
+                android:background="@color/line_bg" />
+        </RelativeLayout>
+    </LinearLayout>
+	<RelativeLayout android:layout_width="match_parent"
+	    android:layout_height="50dip"
+	    android:background="#ffffff"
+	    android:layout_marginTop="10dip">
+	    <TextView 
+	        android:id="@+id/conn_people"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="17sp"
+	        android:layout_centerVertical="true"
+	        android:textColor="@color/nomal_text"
+	        android:text="@string/connect_people"
+	        android:layout_marginLeft="20dip"/>
+	    <TextView 
+	        android:id="@+id/store_conn_people_text"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@id/conn_people"
+	        android:textSize="17sp"
+	        android:layout_centerVertical="true"
+	        android:textColor="@color/nomal_text"
+	        />
+	    <TextView 
+	        android:id="@+id/conn_people_phone_text"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@id/store_conn_people_text"
+	        android:layout_marginLeft="20dip"
+	        android:textSize="17sp"
+	        android:layout_centerVertical="true"
+	        android:textColor="@color/nomal_text"
+	        />
+	    <ImageView
+                android:id="@+id/store_phone_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dip"
+                android:background="@drawable/store_phone_icon" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dip"
+                android:layout_marginRight="15dip"
+                android:layout_marginTop="5dip"
+                android:layout_toLeftOf="@id/store_phone_img"
+                android:background="@color/line_bg" />
+	</RelativeLayout>
+	<TextView android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="20dip"
+	    android:layout_marginTop="15dip"
+	    android:layout_marginBottom="15dip"
+	    android:textSize="20sp"
+	    android:textColor="#000000"
+	    android:text="@string/sale_product"/>
+	<ListView android:id="@+id/store_product_list"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:background="#ffffff"/>
+</LinearLayout>

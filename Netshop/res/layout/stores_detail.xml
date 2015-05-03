@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+    <include layout="@layout/title_bar"/>
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:orientation="horizontal">
+        <RelativeLayout 
+            android:id="@+id/store_area_layout"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/nomal_text"
+                android:drawableLeft="@drawable/store_area"
+                android:drawablePadding="5dip"
+                android:text="@string/store_area"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dip"/>
+            <ImageView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/store_icon_down"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dip"/>
+        </RelativeLayout>
+        <View android:layout_height="match_parent"
+            android:layout_width="1px"
+            android:background="@color/line_bg"/>
+        <RelativeLayout 
+            android:id="@+id/store_distance_layout"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/nomal_text"
+                android:drawableLeft="@drawable/store_distance"
+                android:drawablePadding="5dip"
+                android:text="@string/store_distance"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dip"/>
+            <ImageView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/store_icon_down"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dip"/>
+        </RelativeLayout>
+        <View android:layout_height="match_parent"
+            android:layout_width="1px"
+            android:background="@color/line_bg"/>
+        <RelativeLayout 
+            android:id="@+id/store_order_layout"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/nomal_text"
+                android:drawableLeft="@drawable/store_order"
+                android:drawablePadding="5dip"
+                android:text="@string/store_order"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dip"/>
+            <ImageView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/store_icon_down"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dip"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <View android:layout_height="1px"
+            android:layout_width="match_parent"
+            android:background="@color/line_bg"/>
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        >
+        <TextView 
+            android:id="@+id/location_text"
+            android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/nomal_text"
+                android:drawableLeft="@drawable/store_location_icon"
+                android:drawablePadding="5dip"
+                android:text="@string/store_location"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dip"/>
+        
+        <ImageView 
+            android:id="@+id/store_location_refresh_img"
+            android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/store_loaction_refresh"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dip"/>
+        <TextView android:id="@+id/store_location_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:layout_toRightOf="@id/location_text"
+            android:layout_toLeftOf="@id/store_location_refresh_img"
+            android:textColor="@color/nomal_text"/>
+    </RelativeLayout>
+    <ListView android:id="@+id/store_list"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:scrollbars="none"/>
+</LinearLayout>
