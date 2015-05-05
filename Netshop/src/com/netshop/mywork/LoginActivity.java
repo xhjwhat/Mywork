@@ -1,11 +1,14 @@
 package com.netshop.mywork;
 
 
+import com.netshop.util.DES3;
+import com.netshop.util.DESCrypto;
 import com.netshop.util.StringUtil;
 import com.netshop.util.ToastUtil;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -20,7 +23,16 @@ public class LoginActivity extends Activity implements OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        
+        String str = "si=3&cd=0001&ap=18565699305,ae79b33b63ba28a0443b62d1ec1032ff";
+        DESCrypto des;
+		try {
+			des = new DESCrypto();
+			Log.e("What",des.encrypt(str));
+			Log.e("What2",des.decrypt(des.encrypt(str)));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
     }
     public void initView(){

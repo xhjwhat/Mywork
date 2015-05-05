@@ -34,7 +34,8 @@ public final class DES3
     /**
      * 密钥
      */
-    private static final String SECRET_KEY = "0MLk7TY6hR/PFCefQUcDX6tdK";
+    //private static final String SECRET_KEY = "0MLk7TY6hR/PFCefQUcDX6tdK";
+    private static final String SECRET_KEY = "12345678";
     
     /**
      * 向量参数规格
