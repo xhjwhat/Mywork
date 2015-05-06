@@ -1,10 +1,13 @@
 package com.netshop.mywork;
 
 
+import net.sf.json.xml.XMLSerializer;
+
 import com.netshop.util.DES3;
 import com.netshop.util.DESCrypto;
 import com.netshop.util.StringUtil;
 import com.netshop.util.ToastUtil;
+import com.thoughtworks.xstream.XStream;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -24,6 +27,7 @@ public class LoginActivity extends Activity implements OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         String str = "si=3&cd=0001&ap=18565699305,ae79b33b63ba28a0443b62d1ec1032ff";
+        String tempstr = "<response description=\"获取成功\" error=\"0\"><list currentpage=\"1\" totalpage=\"1\" totalnum=\"4\"> <product pid=\"7\" pname=\"化肥7\" price=\"456\" pimg=\"http://localhost:8080/wxnhProject/upload/proImg/1430549033557.jpg\" weight=\"70\"/></list></response>";
         DESCrypto des;
 		try {
 			des = new DESCrypto();
@@ -34,6 +38,9 @@ public class LoginActivity extends Activity implements OnClickListener{
 			e.printStackTrace();
 		}
         
+		XMLSerializer xmls = new XMLSerializer();
+		Log.e("What",xmls.read(tempstr).toString());
+		
     }
     public void initView(){
     	loginBtn = (Button)findViewById(R.id.regist_verification_btn);
