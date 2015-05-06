@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="#ffffff">
+    android:background="#ffffff"
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,44 +40,321 @@
                 android:layout_marginLeft="30dip"
                 android:background="@drawable/myinform_exit" />
         </LinearLayout>
-        <LinearLayout android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dip"
-            android:orientation="horizontal">
-            <TextView android:layout_width="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:text="你好，"
                 android:textColor="#ffffff"
-                android:text="你好，"/>
-            <TextView 
+                android:textSize="16sp" />
+
+            <TextView
                 android:id="@+id/myinform_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:text="向小花"
                 android:textColor="#ffffff"
-                android:text="向小花"/>
+                android:textSize="16sp" />
         </LinearLayout>
-        <TextView 
-                android:id="@+id/myinform_points"
+
+        <TextView
+            android:id="@+id/myinform_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dip"
+            android:text="90分"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dip"
+            android:drawableLeft="@drawable/myinform_"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="我的订单"
+            android:textColor="@color/text_49"
+            android:textSize="17sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:background="@drawable/arrow_right" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line_bg" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dip"
+        android:background="@color/background" >
+
+        <ImageView
+            android:id="@+id/myinform_product_img1"
+            android:layout_width="40dip"
+            android:layout_height="40dip"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dip" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/myinform_product_img1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/myinform_proname_text1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:layout_marginTop="10dip"
-                android:layout_gravity="center_horizontal"
-                android:textColor="#ffffff"
-                android:text="90分"/>
-        
-    </LinearLayout>
-	<RelativeLayout android:layout_width="match_parent"
-	    android:layout_height="40dip">
-	    <TextView android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textSize="17sp"
-	        android:textColor="@color/text_49"
-	        android:drawableLeft="@drawable/myinform_"
-	        android:layout_centerVertical="true"
-	        android:drawablePadding="15dip"
-	        android:text="我的订单"/>
-	</RelativeLayout>
+                android:textColor="@color/text_49"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/myinform_proprice_text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_49"
+                android:textSize="17sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/myinform_price_text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red_text"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/myinform_num_text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/myinform_price_text1"
+                    android:textColor="@color/text_49"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/myinform_date_text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dip"
+                    android:textColor="@color/nomal_text"
+                    android:textSize="17sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="20dip"
+        android:background="@color/line_bg" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dip"
+        android:background="@color/background" >
+
+        <ImageView
+            android:id="@+id/myinform_product_img2"
+            android:layout_width="40dip"
+            android:layout_height="40dip"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dip" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dip"
+            android:layout_marginTop="10dip"
+            android:layout_toRightOf="@id/myinform_product_img2"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/myinform_proname_text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_49"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/myinform_proprice_text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_49"
+                android:textSize="17sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/myinform_price_text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red_text"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/myinform_num_text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/myinform_price_text2"
+                    android:textColor="@color/text_49"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/myinform_date_text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dip"
+                    android:textColor="@color/nomal_text"
+                    android:textSize="17sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dip"
+            android:drawableLeft="@drawable/myinform_collect"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="我的收藏"
+            android:textColor="@color/text_49"
+            android:textSize="17sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:background="@drawable/arrow_right" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="20dip"
+        android:background="@color/line_bg" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dip"
+            android:drawableLeft="@drawable/myinform_addr"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="收货地址管理"
+            android:textColor="@color/text_49"
+            android:textSize="17sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:background="@drawable/arrow_right" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="20dip"
+        android:background="@color/line_bg" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dip"
+            android:drawableLeft="@drawable/myinform_account"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="账户安全"
+            android:textColor="@color/text_49"
+            android:textSize="17sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:background="@drawable/arrow_right" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="20dip"
+        android:background="@color/line_bg" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dip" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dip"
+            android:drawableLeft="@drawable/myinform_more"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:text="更多"
+            android:textColor="@color/text_49"
+            android:textSize="17sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:background="@drawable/arrow_right" />
+    </RelativeLayout>
+
 </LinearLayout>

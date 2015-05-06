@@ -11,6 +11,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.IvParameterSpec;
 
+import android.net.MailTo;
 import android.text.TextUtils;
 import android.util.Base64;
 
@@ -109,6 +110,18 @@ public class StringUtil {
 		} catch (Exception e) {
 			throw new Exception(e);
 		}
+	}
+	
+	public static void main(String[] args) {
+		String str = "si=1&cd=0001&ap=7012125874,AE79B33B63BA28A0443B62D1EC1032FF&pn=13535355656";
+		try {
+			System.out.println(decode("12345678",str.getBytes()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// http://www.xxxxxx.com/android.do?d=f971b468bc4d524d18ab1cdae6c631cd13426fd6a4eb8859ecbbe13fa10594b570f89bbcf44b578a3f27022b767a17ab3167803450f47fa5c806d1f9f43ade20ef4b155d51dfd4c6ee6d252986b4780e&vi=101000000
+
 	}
 
 	/**
