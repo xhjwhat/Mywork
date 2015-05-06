@@ -39,7 +39,7 @@
                 android:layout_marginTop="15dip"
                 android:text="@string/update_head"
                 android:textColor="#f5ac39"
-                android:textSize="17sp" />
+                android:textSize="15sp" />
         </LinearLayout>
 
         <LinearLayout
