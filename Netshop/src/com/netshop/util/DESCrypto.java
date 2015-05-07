@@ -3,6 +3,7 @@ package com.netshop.util;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.Key;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.Security;
 
@@ -26,7 +27,9 @@ public class DESCrypto {
 	  
 	  
 	  private static byte[] iv = { 1, 2, 3, 4, 5, 6, 7, 8 };
-	  
+	  //十六进制下数字到字符的映射数组  
+	    private final static String[] hexDigits = {"0", "1", "2", "3", "4",  
+	        "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"};  
 
 	  /**
 	   * 将byte数组转换为表示16进制值的字符串， 如：byte[]{8,18}转换为：0813， 和public static byte[]
@@ -196,6 +199,43 @@ public class DESCrypto {
 	    Key key = new javax.crypto.spec.SecretKeySpec(arrB, "DES");
 	    return key;
 	  }
+	  
+	  public static String GetMD5Code(String strObj) {
+	        String resultString = null;
+	        try {
+	            resultString = new String(strObj);
+	            MessageDigest md = MessageDigest.getInstance("MD5");
+	            // md.digest() 该函数返回值为存放哈希值结果的byte数组
+	            resultString = byteToString(md.digest(strObj.getBytes()));
+	        } catch (NoSuchAlgorithmException ex) {
+	            ex.printStackTrace();
+	        }
+	        return resultString;
+	    }
+	  
+	  
+	  /**  
+	     * 转换字节数组为十六进制字符串 
+	     * @param     字节数组 
+	     * @return    十六进制字符串 
+	     */  
+	    private static String byteToString(byte[] b){  
+	        StringBuffer resultSb = new StringBuffer();  
+	        for (int i = 0; i < b.length; i++){  
+	            resultSb.append(byteToHexString(b[i]));  
+	        }  
+	        return resultSb.toString();  
+	    }  
+	      
+	    /** 将一个字节转化成十六进制形式的字符串     */  
+	    private static String byteToHexString(byte b){  
+	        int n = b;  
+	        if (n < 0)  
+	            n = 256 + n;  
+	        int d1 = n / 16;  
+	        int d2 = n % 16;  
+	        return hexDigits[d1] + hexDigits[d2];  
+	    }  
 	  
 	  public static void main(String[] args) {	
 		try {

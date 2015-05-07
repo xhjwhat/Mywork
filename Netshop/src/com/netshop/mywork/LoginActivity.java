@@ -3,11 +3,12 @@ package com.netshop.mywork;
 
 import net.sf.json.xml.XMLSerializer;
 
-import com.netshop.util.DES3;
+import com.netshop.entity.Products;
+import com.netshop.net.HttpRequest;
+import com.netshop.net.ProductRequest;
 import com.netshop.util.DESCrypto;
 import com.netshop.util.StringUtil;
 import com.netshop.util.ToastUtil;
-import com.thoughtworks.xstream.XStream;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -37,9 +38,22 @@ public class LoginActivity extends Activity implements OnClickListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
-		XMLSerializer xmls = new XMLSerializer();
-		Log.e("What",xmls.read(tempstr).toString());
+        ProductRequest request = new ProductRequest();
+        request.request(HttpRequest.REQUEST_GET, new HttpRequest.HttpCallBack() {
+
+			@Override
+			public void success(Object obj) {
+				Products product = (Products) obj;
+				if(product!=null)
+				Log.e("What", product.getList().get(0).pname);
+			}
+
+			@Override
+			public void fail(String failReason) {
+				Log.e("What", failReason);
+				
+			}
+		});
 		
     }
     public void initView(){
