@@ -31,6 +31,7 @@ import com.netshop.entity.BaseEntity;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 public abstract class HttpRequest<T extends BaseEntity> {
 	public String cd;
@@ -118,6 +119,7 @@ public abstract class HttpRequest<T extends BaseEntity> {
 		protected void onPostExecute(String result) {
 			XMLSerializer xmls = new XMLSerializer();
 			String json = xmls.read(result).toString().replace("@", "");
+			Log.e("What", json);
 			try {
 				JSONObject jsonObject = new JSONObject(json);
 				if (!jsonObject.isNull("error")) {
