@@ -1,6 +1,7 @@
 package com.netshop.mywork;
 
 
+
 import net.sf.json.xml.XMLSerializer;
 
 import com.netshop.entity.Products;
@@ -45,7 +46,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 			public void success(Object obj) {
 				Products product = (Products) obj;
 				if(product!=null)
-				Log.e("What", product.getList().get(0).pname);
+				Log.e("What", product.getList().product.get(0).pname);
 			}
 
 			@Override

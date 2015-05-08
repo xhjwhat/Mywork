@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <include layout="@layout/title_bar" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dip" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dip"
+                    android:text="昵称："
+                    android:textColor="@color/nomal_text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/person_nickname_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="110dip"
+                    android:text="周大大"
+                    android:textColor="@color/text_49"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/update_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dip"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:text="修改"
+                    android:textColor="@color/red_text"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dip"
+                android:background="@color/line_bg" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dip" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dip"
+                    android:text="绑定手机："
+                    android:textColor="@color/nomal_text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/person_phone_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="110dip"
+                    android:text="周大大"
+                    android:textColor="@color/text_49"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/update_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dip"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:text="修改"
+                    android:textColor="@color/red_text"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dip"
+                android:background="@color/line_bg" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dip" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dip"
+                    android:text="性别："
+                    android:textColor="@color/nomal_text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/person_sex_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="110dip"
+                    android:text="周大大"
+                    android:textColor="@color/text_49"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/update_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dip"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:text="修改"
+                    android:textColor="@color/red_text"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dip"
+                android:background="@color/line_bg" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dip" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dip"
+                    android:text="出生年月："
+                    android:textColor="@color/nomal_text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/person_birth_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="110dip"
+                    android:text="周大大"
+                    android:textColor="@color/text_49"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/update_birth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dip"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:text="修改"
+                    android:textColor="@color/red_text"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dip"
+                android:background="@color/line_bg" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dip" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dip"
+                    android:text="固定电话："
+                    android:textColor="@color/nomal_text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/person_fixphone_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="110dip"
+                    android:text="周大大"
+                    android:textColor="@color/text_49"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/update_fixphone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dip"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:text="修改"
+                    android:textColor="@color/red_text"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dip"
+                android:background="@color/line_bg" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="20dip"
+                    android:text="地址："
+                    android:textColor="@color/nomal_text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/person_addr_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="20dip"
+                    android:layout_marginLeft="110dip"
+                    android:layout_marginRight="70dip"
+                    android:layout_marginTop="20dip"
+                    android:text="周大大的试试看的减肥速度水电费加速度开了房间速度开了房建设路口的附近"
+                    android:textColor="@color/text_49"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/update_addr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dip"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:text="修改"
+                    android:textColor="@color/red_text"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dip"
+                android:background="@color/line_bg" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/personal_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginTop="20dip"
+                    android:text="种植面积："
+                    android:textColor="@color/nomal_text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/person_area_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/personal_area"
+                    android:layout_marginBottom="10dip"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginTop="10dip"
+                    android:text="请选择您的种植面积，方便我们为您更好的服务"
+                    android:textColor="@color/nomal_text"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/update_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_marginTop="20dip"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:text="修改"
+                    android:textColor="@color/red_text"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/person_area_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/person_area_service"
+                    android:layout_marginBottom="10dip"
+                    android:layout_marginLeft="20dip"
+                    android:background="#ffffff"
+                    android:gravity="center"
+                    android:textColor="@color/nomal_text"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dip"
+                android:background="@color/line_bg" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/personal_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginTop="20dip"
+                    android:text="主要种植作物："
+                    android:textColor="@color/nomal_text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/person_plant_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/personal_area"
+                    android:layout_marginBottom="10dip"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginTop="10dip"
+                    android:text="请选择您正在种植的作物，方便我们为您更好的服务"
+                    android:textColor="@color/nomal_text"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/update_plant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_marginTop="20dip"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:text="修改"
+                    android:textColor="@color/red_text"
+                    android:textSize="15sp" />
+
+                <GridView
+                    android:id="@+id/person_grid"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/person_plant_service"
+                    android:layout_height="wrap_content"
+                    android:numColumns="3" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dip"
+                android:background="@color/line_bg" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dip" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dip"
+                    android:text="真实姓名："
+                    android:textColor="@color/nomal_text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/person_name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="110dip"
+                    android:text="周大大"
+                    android:textColor="@color/text_49"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/update_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dip"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:text="修改"
+                    android:textColor="@color/red_text"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
