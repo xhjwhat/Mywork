@@ -27,91 +27,127 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.l99gson.Gson;
+import com.netshop.app.NetShopApp;
 import com.netshop.entity.BaseEntity;
+import com.netshop.util.DESCrypto;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public abstract class HttpRequest<T extends BaseEntity> {
-	public String cd;
+public class HttpRequest {
 	public static final int REQUEST_POST = 1;
 	public static final int REQUEST_GET = 0;
-	private static int MAX_HTTP_THREAD_COUNT = 5;
+	
 	public int requestType = 0;
-	String tempstr = "<response description=\"获取成功\" error=\"0\"><list currentpage=\"1\" totalpage=\"1\" totalnum=\"4\"> <product pid=\"7\" pname=\"化肥7\" price=\"456\" pimg=\"http://localhost:8080/wxnhProject/upload/proImg/1430549033557.jpg\" weight=\"70\"/> <product pid=\"6\" pname=\"化肥6\" price=\"456\" pimg=\"http://localhost:8080/wxnhProject/upload/proImg/1430549033557.jpg\" weight=\"70\"/></list></response>";
-//	private static ExecutorService ThreadPool = Executors.newFixedThreadPool(
-//			MAX_HTTP_THREAD_COUNT, new ThreadFactory() {
-//				@Override
-//				public Thread newThread(Runnable r) {
-//					AtomicInteger ints = new AtomicInteger(0);
-//					return new Thread(r, "httpThreadPool#"
-//							+ ints.getAndIncrement());
-//				}
-//			});
 
-	public interface HttpCallBack{
-		public void success(Object obj);
+	public String vi = Constants.VI;
+	public String si = "";
+	public String cd = "";
+	public String ap = "";
+	public String ps = "";
+	public String pg = "";
+	public String userId="";
+	public String password="";
+	public SharedPreferences preferences;
+	String tempstr = "<response description=\"获取成功\" error=\"0\"><list currentpage=\"1\" totalpage=\"1\" totalnum=\"4\"> <product pid=\"7\" pname=\"化肥7\" price=\"456\" pimg=\"http://localhost:8080/wxnhProject/upload/proImg/1430549033557.jpg\" weight=\"70\"/> <product pid=\"6\" pname=\"化肥6\" price=\"456\" pimg=\"http://localhost:8080/wxnhProject/upload/proImg/1430549033557.jpg\" weight=\"70\"/></list></response>";
+
+	
+
+	public interface HttpCallBack {
+		public void success(String json);
+
 		public void fail(String failReason);
 	}
+
+	public HttpRequest(String si, String cd) {
+		this.si = si;
+		this.cd = cd;
+		String userId = NetShopApp.getInstance().getUserId();
+		String password = NetShopApp.getInstance().getPassword();
+		// String phoneNum = NetShopApp.getInstance().getPhoneNum();
+		ap = "ap=" + userId + "," + password;
+	}
+
 	/**
 	 * 添加公共参数
 	 */
-	public abstract String combineUrl();
-	public abstract Object pasreRespone(String json); 
-	
-	public void request(int rquestype,HttpCallBack callback){
-		RequestTask task = new RequestTask(combineUrl(),callback);
-		//task.executeOnExecutor(ThreadPool, "");
-		task.execute("");
+	public String combineUrl() {
+		try {
+			StringBuffer buffer = new StringBuffer();
+			buffer.append("si=" + si + "&cd=" + cd);
+			buffer.append("&ap=" + ap);
+			if(!ps.equals("")){
+				buffer.append("&ps="+ps);
+			}
+			if(!pg.equals("")){
+				buffer.append("&pg="+pg);
+			}
+			buffer.append("&vi="+Constants.VI);
+			DESCrypto des = new DESCrypto();
+			String desString = des.encrypt(buffer.toString());
+
+			return Constants.TEST_NETSHOP_URL + desString;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
 	}
-	
-	
-	
+
+	public void request(int rquestype, HttpCallBack callback) {
+		RequestTask task = new RequestTask(combineUrl(), callback);
+		task.executeOnExecutor(NetShopApp.getInstance().threadPool, "");
+	}
+
 	public class RequestTask extends AsyncTask<String, Integer, String> {
 		private String url;
 		private HttpCallBack callback;
-		public RequestTask(String url,HttpCallBack callback){
+
+		public RequestTask(String url, HttpCallBack callback) {
 			this.url = url;
 			this.callback = callback;
 		}
+
 		@Override
 		protected String doInBackground(String... params) {
 			InputStream is = null;
 			String result = tempstr;
-//			try {
-//				HttpParams httpParams = new BasicHttpParams();
-//				HttpConnectionParams.setSoTimeout(httpParams, 8000);
-//				HttpConnectionParams.setConnectionTimeout(httpParams, 8000);
-//				HttpClient httpclient = new DefaultHttpClient(httpParams);
-//				HttpResponse response;
-//				if (requestType == REQUEST_GET) {
-//					HttpGet httpget = new HttpGet(url);
-//					response = httpclient.execute(httpget);
-//
-//				} else {
-//					HttpPost httppost = new HttpPost(url);
-////					StringEntity httpbody = new StringEntity(params[0],HTTP.UTF_8);
-////					httppost.setEntity(httpbody);
-//					response = httpclient.execute(httppost);
-//
-//				}
-//				HttpEntity entity = response.getEntity();
-//				is = entity.getContent();
-//				BufferedReader reader = new BufferedReader(
-//						new InputStreamReader(is, "UTF-8"));
-//				StringBuilder sb = new StringBuilder();
-//				String line = null;
-//				while ((line = reader.readLine()) != null) {
-//					sb.append(line);
-//				}
-//				is.close();
-//				result = sb.toString();
-//			} catch (ClientProtocolException e) {
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
+			// try {
+			// HttpParams httpParams = new BasicHttpParams();
+			// HttpConnectionParams.setSoTimeout(httpParams, 8000);
+			// HttpConnectionParams.setConnectionTimeout(httpParams, 8000);
+			// HttpClient httpclient = new DefaultHttpClient(httpParams);
+			// HttpResponse response;
+			// if (requestType == REQUEST_GET) {
+			// HttpGet httpget = new HttpGet(url);
+			// response = httpclient.execute(httpget);
+			//
+			// } else {
+			// HttpPost httppost = new HttpPost(url);
+			// // StringEntity httpbody = new
+			// StringEntity(params[0],HTTP.UTF_8);
+			// // httppost.setEntity(httpbody);
+			// response = httpclient.execute(httppost);
+			//
+			// }
+			// HttpEntity entity = response.getEntity();
+			// is = entity.getContent();
+			// BufferedReader reader = new BufferedReader(
+			// new InputStreamReader(is, "UTF-8"));
+			// StringBuilder sb = new StringBuilder();
+			// String line = null;
+			// while ((line = reader.readLine()) != null) {
+			// sb.append(line);
+			// }
+			// is.close();
+			// result = sb.toString();
+			// } catch (ClientProtocolException e) {
+			// e.printStackTrace();
+			// } catch (IOException e) {
+			// e.printStackTrace();
+			// }
 			return result;
 		}
 
@@ -123,9 +159,9 @@ public abstract class HttpRequest<T extends BaseEntity> {
 			try {
 				JSONObject jsonObject = new JSONObject(json);
 				if (!jsonObject.isNull("error")) {
-					if(jsonObject.optString("error").equals("0")){
-						callback.success(pasreRespone(json));
-					}else{
+					if (jsonObject.optString("error").equals("0")) {
+						callback.success(json);
+					} else {
 						callback.fail(jsonObject.optString("description"));
 					}
 				}

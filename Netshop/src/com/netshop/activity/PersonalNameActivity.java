@@ -1,4 +1,8 @@
-package com.netshop.mywork;
+package com.netshop.activity;
+
+import com.netshop.app.R;
+import com.netshop.net.HttpRequest;
+import com.netshop.net.HttpRequest.HttpCallBack;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PersonalNameActivity extends Activity implements OnClickListener{
 	public Button commitBtn;
@@ -29,6 +34,17 @@ public class PersonalNameActivity extends Activity implements OnClickListener{
 			break;
 		case R.id.person_commit:
 			String name = editText.getText().toString();
+			HttpRequest request = new HttpRequest("1", "0006");
+			request.request(HttpRequest.REQUEST_GET, new HttpCallBack() {
+				@Override
+				public void success(String json) {
+					Toast.makeText(PersonalNameActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+				}
+				@Override
+				public void fail(String failReason) {
+					Toast.makeText(PersonalNameActivity.this, failReason, Toast.LENGTH_SHORT).show();
+				}
+			});
 		}
 		
 	}

@@ -1,4 +1,4 @@
-package com.netshop.mywork;
+package com.netshop.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
