@@ -24,15 +24,6 @@ public class StringUtil {
 		return m.matches();
 	}
 
-	public static boolean isStandar(String str){
-    	Pattern pattern = Pattern.compile("(^[a-zA-Z0-9~!@#$%&*_+-]{6,64}$)");
-    	Matcher m = pattern.matcher(str);
-    	if(m.matches()){
-    		return true;
-    	}else{
-    		return false;
-    	}
-    }
 	/**
 	 * @param nickname
 	 *            输入的是字母或者中文
@@ -121,5 +112,42 @@ public class StringUtil {
 		}
 	}
 	
+	public static void main(String[] args) {
+		String str = "si=1&cd=0001&ap=7012125874,AE79B33B63BA28A0443B62D1EC1032FF&pn=13535355656";
+		try {
+			System.out.println(decode("12345678",str.getBytes()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// http://www.xxxxxx.com/android.do?d=f971b468bc4d524d18ab1cdae6c631cd13426fd6a4eb8859ecbbe13fa10594b570f89bbcf44b578a3f27022b767a17ab3167803450f47fa5c806d1f9f43ade20ef4b155d51dfd4c6ee6d252986b4780e&vi=101000000
 
+	}
+
+	/**
+	 * 获取编码后的值
+	 * 
+	 * @param key
+	 * @param data
+	 * @return
+	 * @throws Exception
+	 */
+	/*public static String decodeValue(String key, String data) {
+		byte[] datas;
+		String value = null;
+		try {
+			if (System.getProperty("os.name") != null
+					&& (System.getProperty("os.name").equalsIgnoreCase("sunos") || System
+							.getProperty("os.name").equalsIgnoreCase("linux"))) {
+				datas = decode(key, Base64.encodeToString(data,Base64.DEFAULT));
+			} else {
+				datas = decode(key, Base64.encodeToString(data));
+			}
+
+			value = new String(datas);
+		} catch (Exception e) {
+			value = "";
+		}
+		return value;
+	}*/
 }
