@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.netshop.mywork.R;
+import com.netshop.app.R;
 
 public class HomePageFragment extends Fragment implements OnClickListener{
 	private ImageView classificationImg;

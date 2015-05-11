@@ -210,7 +210,7 @@ public class DESCrypto {
 	        } catch (NoSuchAlgorithmException ex) {
 	            ex.printStackTrace();
 	        }
-	        return resultString;
+	        return resultString.toLowerCase();
 	    }
 	  
 	  

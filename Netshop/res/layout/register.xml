@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dip"
                     android:background="@null"
-                    android:inputType="textPhonetic" />
+                    android:inputType="phone" />
             </LinearLayout>
 
             <View
@@ -171,9 +171,10 @@
         android:layout_below="@id/login_layout_pwd"
         android:layout_marginLeft="30dip"
         android:layout_marginRight="30dip"
-        android:layout_marginTop="20dip"
+        android:layout_marginTop="30dip"
         android:background="@drawable/login_btn"
         android:text="@string/register"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textColor="@color/red_text" />
 
 </RelativeLayout>
