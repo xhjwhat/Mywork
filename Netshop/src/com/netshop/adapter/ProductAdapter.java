@@ -36,7 +36,7 @@ public class ProductAdapter extends BaseAdapter {
 		HolderView holder;
 		if(convertView == null){
 			holder = new HolderView();
-			convertView = LayoutInflater.from(context).inflate(R.layout., root)
+			//convertView = LayoutInflater.from(context).inflate(R.layout., root)
 		}
 		return null;
 	}
