@@ -37,7 +37,7 @@ public class HomePageFragment extends Fragment implements OnClickListener{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view =inflater.inflate(R.layout.main, null);
+		View view =inflater.inflate(R.layout.homepager, null);
 		classificationImg = (ImageView)view.findViewById(R.id.main_img_classification);
 		classificationImg.setOnClickListener(this);
 		searchImg = (ImageView)view.findViewById(R.id.main_seach_img);
