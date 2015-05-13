@@ -8,19 +8,27 @@ import java.util.concurrent.atomic.AtomicInteger;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap.CompressFormat;
+import android.support.mdroid.cache.ImageCache;
+import android.support.mdroid.cache.AbstractCache.CacheParams;
 
 public class NetShopApp extends Application {
 	private static NetShopApp instance;
 	public SharedPreferences share;
 	public static int MAX_HTTP_THREAD_COUNT = 5;
 	public ExecutorService threadPool;
-
+	public ImageCache mCache;
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		instance = this;
 		share = getSharedPreferences("netshop", Context.MODE_PRIVATE);
 
+		CacheParams cacheParams = new CacheParams("file_icon");
+		cacheParams.compressFormat = CompressFormat.JPEG;
+		// cacheParams.memCacheSize = (int) (Runtime.getRuntime().maxMemory() /
+		// 8);
+		mCache = new ImageCache(this, cacheParams);
 		threadPool = Executors.newFixedThreadPool(MAX_HTTP_THREAD_COUNT,
 				new ThreadFactory() {
 					@Override
@@ -31,7 +39,9 @@ public class NetShopApp extends Application {
 					}
 				});
 	}
-
+	public ImageCache getImageCache(){
+		return mCache;
+	}
 	public static NetShopApp getInstance() {
 		return instance;
 	}
