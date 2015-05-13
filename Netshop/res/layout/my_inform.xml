@@ -76,6 +76,7 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/order_layout"
         android:layout_width="match_parent"
         android:layout_height="40dip" >
 
@@ -108,7 +109,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dip"
-        android:background="@color/background" >
+        android:background="@color/background" 
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/myinform_product_img1"
@@ -177,7 +179,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dip"
-        android:background="@color/background" >
+        android:background="@color/background"
+        android:visibility="gone" >
 
         <ImageView
             android:id="@+id/myinform_product_img2"
@@ -240,6 +243,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/my_collect"
         android:layout_width="match_parent"
         android:layout_height="40dip" >
 
@@ -271,6 +275,7 @@
         android:background="@color/line_bg" />
 
     <RelativeLayout
+        android:id="@+id/my_addr"
         android:layout_width="match_parent"
         android:layout_height="40dip" >
 
@@ -302,6 +307,7 @@
         android:background="@color/line_bg" />
 
     <RelativeLayout
+        android:id="@+id/my_account"
         android:layout_width="match_parent"
         android:layout_height="40dip" >
 
@@ -333,6 +339,7 @@
         android:background="@color/line_bg" />
 
     <RelativeLayout
+        android:id="@+id/my_more"
         android:layout_width="match_parent"
         android:layout_height="40dip" >
 

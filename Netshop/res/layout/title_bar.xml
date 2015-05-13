@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dip"
         android:layout_centerVertical="true"
+        android:visibility="gone"
         android:background="@drawable/title_back" />
 
     <TextView

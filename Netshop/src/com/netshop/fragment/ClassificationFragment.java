@@ -49,7 +49,6 @@ public class ClassificationFragment extends Fragment {
 		seriesImg = (ImageView)view.findViewById(R.id.class_img);
 		seriesList = (ListView)view.findViewById(R.id.class_list);
 		seriesList.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {

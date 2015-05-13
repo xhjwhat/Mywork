@@ -10,6 +10,11 @@ import com.netshop.app.R;
 import com.netshop.view.TabPageIndicator;
 
 public class MainActivity extends FragmentActivity {
+	public static final int HOME_PAGER = 0;
+	public static final int CLASSIFICATION= 1;
+	public static final int STORE = 2;
+	public static final int SHOPCAR = 3;
+	public static final int PERSONAL = 4;
 	public ViewPager viewpager;
 	public TabPageIndicator indicator;
 	public MainPagerAdapter adapter;
