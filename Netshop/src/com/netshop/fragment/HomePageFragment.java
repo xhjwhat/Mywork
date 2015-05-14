@@ -41,7 +41,7 @@ public class HomePageFragment extends Fragment implements OnClickListener{
 	private ImageWorker imageWorker;
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		imageWorker = new DefaultLoader(getActivity());
+		
 		HttpRequest request = new HttpRequest("3", "0010");//获取首页四个推荐
 		request.request(HttpRequest.REQUEST_GET, new HttpCallBack() {
 			@Override
@@ -74,6 +74,7 @@ public class HomePageFragment extends Fragment implements OnClickListener{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		imageWorker = new DefaultLoader(getActivity());
 		View view =inflater.inflate(R.layout.homepager, null);
 		classificationImg = (ImageView)view.findViewById(R.id.main_img_classification);
 		classificationImg.setOnClickListener(this);

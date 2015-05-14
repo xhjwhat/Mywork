@@ -114,49 +114,48 @@ public class HttpRequest {
 		protected String doInBackground(String... params) {
 			InputStream is = null;
 			String result = tempstr;
-			// try {
-			// HttpParams httpParams = new BasicHttpParams();
-			// HttpConnectionParams.setSoTimeout(httpParams, 8000);
-			// HttpConnectionParams.setConnectionTimeout(httpParams, 8000);
-			// HttpClient httpclient = new DefaultHttpClient(httpParams);
-			// HttpResponse response;
-			// if (requestType == REQUEST_GET) {
-			// HttpGet httpget = new HttpGet(url);
-			// response = httpclient.execute(httpget);
-			//
-			// } else {
-			// HttpPost httppost = new HttpPost(url);
-			// // StringEntity httpbody = new
-			// StringEntity(params[0],HTTP.UTF_8);
-			// // httppost.setEntity(httpbody);
-			// response = httpclient.execute(httppost);
-			//
-			// }
-			// HttpEntity entity = response.getEntity();
-			// is = entity.getContent();
-			// BufferedReader reader = new BufferedReader(
-			// new InputStreamReader(is, "UTF-8"));
-			// StringBuilder sb = new StringBuilder();
-			// String line = null;
-			// while ((line = reader.readLine()) != null) {
-			// sb.append(line);
-			// }
-			// is.close();
-			// result = sb.toString();
-			// } catch (ClientProtocolException e) {
-			// e.printStackTrace();
-			// } catch (IOException e) {
-			// e.printStackTrace();
-			// }
+			 try {
+			 HttpParams httpParams = new BasicHttpParams();
+			 HttpConnectionParams.setSoTimeout(httpParams, 8000);
+			 HttpConnectionParams.setConnectionTimeout(httpParams, 8000);
+			 HttpClient httpclient = new DefaultHttpClient(httpParams);
+			 HttpResponse response;
+			 if (requestType == REQUEST_GET) {
+			 HttpGet httpget = new HttpGet(url);
+			 response = httpclient.execute(httpget);
+			
+			 } else {
+			 HttpPost httppost = new HttpPost(url);
+			  StringEntity httpbody = new StringEntity(params[0],HTTP.UTF_8);
+			  httppost.setEntity(httpbody);
+			 response = httpclient.execute(httppost);
+			
+			 }
+			 HttpEntity entity = response.getEntity();
+			 is = entity.getContent();
+			 BufferedReader reader = new BufferedReader(
+			 new InputStreamReader(is, "UTF-8"));
+			 StringBuilder sb = new StringBuilder();
+			 String line = null;
+			 while ((line = reader.readLine()) != null) {
+			 sb.append(line);
+			 }
+			 is.close();
+			 result = sb.toString();
+			 } catch (ClientProtocolException e) {
+			 e.printStackTrace();
+			 } catch (IOException e) {
+			 e.printStackTrace();
+			 }
 			return result;
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
-			XMLSerializer xmls = new XMLSerializer();
-			String json = xmls.read(result).toString().replace("@", "");
-			Log.e("What", json);
 			try {
+				XMLSerializer xmls = new XMLSerializer();
+				String json = xmls.read(result).toString().replace("@", "");
+				Log.e("What", json);
 				JSONObject jsonObject = new JSONObject(json);
 				if (!jsonObject.isNull("error")) {
 					if (jsonObject.optString("error").equals("0")) {
@@ -167,6 +166,8 @@ public class HttpRequest {
 				}
 				return;
 			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch(Exception e){
 				e.printStackTrace();
 			}
 			callback.fail("网络异常，请稍后再试");

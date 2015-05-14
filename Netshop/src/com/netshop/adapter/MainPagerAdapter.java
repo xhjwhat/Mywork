@@ -16,8 +16,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class MainPagerAdapter extends FragmentPagerAdapter implements IconPagerAdapter{
 	
-	public int[] icons=  new int[]{R.drawable.icon_home,R.drawable.icon_class,R.drawable.icon_store,
-	                             R.drawable.icon_shopcar,R.drawable.icon_person};
+	public int[] icons=  new int[]{R.drawable.icon_home_selector,R.drawable.icon_class_selector,R.drawable.icon_store_selector,
+	                             R.drawable.icon_shopcar_selector,R.drawable.icon_person_selector};
+	
+	public String[] titles = new String[]{"首页","分类","门店","购物车","我的"};
 	public MainPagerAdapter(FragmentManager fm) {
 		super(fm);
 		
@@ -50,4 +52,10 @@ public class MainPagerAdapter extends FragmentPagerAdapter implements IconPagerA
 		return icons[index];
 	}
 
+	@Override
+	public CharSequence getPageTitle(int position) {
+		
+		return titles[position];
+	}
+	
 }

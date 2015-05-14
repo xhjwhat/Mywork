@@ -2,6 +2,7 @@ package com.netshop.adapter;
 
 import java.util.List;
 
+import com.netshop.app.R;
 import com.netshop.entity.Product;
 
 import android.content.Context;
@@ -36,7 +37,11 @@ public class ProductAdapter extends BaseAdapter {
 		HolderView holder;
 		if(convertView == null){
 			holder = new HolderView();
-			//convertView = LayoutInflater.from(context).inflate(R.layout., root)
+			convertView = LayoutInflater.from(context).inflate(R.layout.products_item, null);
+			holder.productImg = (ImageView) convertView.findViewById(R.id.shop_car_product_img);
+			holder.productName = (TextView)convertView.findViewById(R.id.confirm_product_name);
+			holder.productPrice = (TextView)convertView.findViewById(R.id.confirm_money_text);
+			holder.productWeight = (TextView)convertView.findViewById(R.id.confirm_weight_text);
 		}
 		return null;
 	}

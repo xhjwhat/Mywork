@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/shop_car_product_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dip" />
+
+        <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/confirm_product_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:text="长袖肥"
+                android:textSize="18sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dip"
+                android:layout_marginBottom="10dip" >
+
+                <TextView
+                    android:id="@+id/confirm_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="¥"
+                    android:textColor="@color/red_text"
+                    android:gravity="bottom"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/confirm_money_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/confirm_money"
+                    android:textColor="@color/red_text"
+                    android:text="300"
+                    android:gravity="bottom"
+                    android:textSize="23sp" />
+
+                
+                <TextView
+                    android:id="@+id/confirm_weight_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/confirm_money_text"
+                    android:textColor="@color/nomal_text"
+                    android:text="袋/70kg"
+                    android:gravity="bottom"
+                    android:textSize="18sp" 
+                    />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
