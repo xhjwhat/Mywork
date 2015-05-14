@@ -25,6 +25,7 @@ public class ClassifiDetaiFragment extends Fragment {
 	private ImageView searImg;
 	private EditText editText;
 	private List<Product> datas;
+	public ClassFragment parentFragment;
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -41,6 +42,7 @@ public class ClassifiDetaiFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				getFragmentManager().popBackStack();
+				//parentFragment.changetoClassiFragment();
 			}
 		});
 		editText = (EditText)view.findViewById(R.id.main_search_edit);
@@ -55,6 +57,9 @@ public class ClassifiDetaiFragment extends Fragment {
 		return view;
 	}
 	
+	public void setParentFragment(ClassFragment fragment){
+		parentFragment = fragment;
+	}
 	HttpCallBack callBack = new HttpCallBack() {
 		@Override
 		public void success(String json) {

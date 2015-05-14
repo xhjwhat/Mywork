@@ -3,17 +3,24 @@ package com.netshop.fragment;
 import java.util.List;
 
 import com.google.l99gson.Gson;
+import com.netshop.activity.SearchActivity;
+import com.netshop.adapter.ProductGridAdapter;
 import com.netshop.adapter.ProductTypeAdapter;
 import com.netshop.app.R;
 import com.netshop.entity.ProductTypes;
+import com.netshop.entity.ProductTypes.CType;
 import com.netshop.entity.ProductTypes.ProductType;
 import com.netshop.net.HttpRequest;
 import com.netshop.net.HttpRequest.HttpCallBack;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -29,11 +36,19 @@ public class ClassificationFragment extends Fragment {
 	public ListView seriesList;
 	public GridView seriesGrid;
 	public List<ProductType> datas;
+	public List<CType> ctypeList;
 	public ProductTypeAdapter adapter;
+	public ProductGridAdapter gridAdapter;
+	public ClassifiDetaiFragment fragment;
+	public FragmentTransaction transaction;
+	public FragmentManager manager;
+	public ClassFragment parentFragment;
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
+		HttpRequest request = new HttpRequest("3", "0001");
+		request.request(HttpRequest.REQUEST_GET, callback);
 		
+		super.onActivityCreated(savedInstanceState);
 	}
 
 	@Override
@@ -41,11 +56,25 @@ public class ClassificationFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 	}
 
+	public void setParentFragment(ClassFragment parentFragment){
+		this.parentFragment = parentFragment;
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.classification, null);
+		searchEdit = (EditText)view.findViewById(R.id.main_search_edit);
 		searchImg = (ImageView)view.findViewById(R.id.main_seach_img);
+		searchImg.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(),SearchActivity.class);
+				intent.putExtra("key", searchEdit.getText().toString());
+				startActivity(intent);
+				
+			}
+		});
 		seriesImg = (ImageView)view.findViewById(R.id.class_img);
 		seriesList = (ListView)view.findViewById(R.id.class_list);
 		seriesList.setOnItemClickListener(new OnItemClickListener() {
@@ -55,12 +84,22 @@ public class ClassificationFragment extends Fragment {
 				if(adapter!=null){
 					adapter.setSelectItem(position);
 					adapter.notifyDataSetChanged();
+					ctypeList = datas.get(position).getCtype();
+					gridAdapter.setData(ctypeList);
+					gridAdapter.notifyDataSetChanged();
 				}
 			}
 		});
 		seriesGrid = (GridView)view.findViewById(R.id.class_grid);
-		HttpRequest request = new HttpRequest("3", "0001");
-		request.request(HttpRequest.REQUEST_GET, callback);
+		seriesGrid.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Bundle bundle = new Bundle();
+				bundle.putString("type_id", ctypeList.get(position).getId());
+				parentFragment.changetoDetialFragment(bundle);;
+			}
+		});
 		return view;
 	}
 	HttpCallBack callback = new HttpCallBack() {
@@ -71,6 +110,9 @@ public class ClassificationFragment extends Fragment {
 			datas = (List<ProductType>) entity.getPtype();
 			adapter = new ProductTypeAdapter(getActivity(), datas);
 			seriesList.setAdapter(adapter);
+			ctypeList = datas.get(0).getCtype();
+			gridAdapter = new ProductGridAdapter(getActivity(),ctypeList );
+			seriesGrid.setAdapter(gridAdapter);
 		}
 		
 		@Override
