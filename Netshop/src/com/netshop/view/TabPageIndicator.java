@@ -16,6 +16,8 @@
  */
 package com.netshop.view;
 
+import com.netshop.app.R;
+
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -84,10 +86,10 @@ public class TabPageIndicator extends LinearLayout implements PageIndicator {
         final TabView tabView = new TabView(getContext());
         tabView.mIndex = index;
         tabView.setGravity(Gravity.CENTER);
+        tabView.setText(text);
+        tabView.setTextColor(getResources().getColorStateList(R.drawable.text_selector));
         tabView.setFocusable(true);
         tabView.setOnClickListener(mTabClickListener);
-        tabView.setText(text);
-
         if (iconResId != 0) {
             tabView.setCompoundDrawablesWithIntrinsicBounds(0, iconResId, 0, 0);
         }
