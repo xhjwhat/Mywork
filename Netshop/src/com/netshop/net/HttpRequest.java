@@ -40,7 +40,7 @@ public class HttpRequest {
 	public static final int REQUEST_POST = 1;
 	public static final int REQUEST_GET = 0;
 	
-	public int requestType = 0;
+	public int requestType = REQUEST_GET;
 
 	public String vi = Constants.VI;
 	public String si = "";
@@ -48,6 +48,7 @@ public class HttpRequest {
 	public String ap = "";
 	public String ps = "";
 	public String pg = "";
+	public String pc = "";
 	public String userId="";
 	public String password="";
 	public SharedPreferences preferences;
@@ -84,6 +85,9 @@ public class HttpRequest {
 			if(!pg.equals("")){
 				buffer.append("&pg="+pg);
 			}
+			if(!pc.equals("")){
+				buffer.append("&pc="+pc);
+			}
 			buffer.append("&vi="+Constants.VI);
 			DESCrypto des = new DESCrypto();
 			String desString = des.encrypt(buffer.toString());
@@ -96,7 +100,13 @@ public class HttpRequest {
 
 	}
 
+	
+
 	public void request(int rquestype, HttpCallBack callback) {
+		RequestTask task = new RequestTask(combineUrl(), callback);
+		task.executeOnExecutor(NetShopApp.getInstance().threadPool, "");
+	}
+	public void request(HttpCallBack callback) {
 		RequestTask task = new RequestTask(combineUrl(), callback);
 		task.executeOnExecutor(NetShopApp.getInstance().threadPool, "");
 	}
@@ -173,6 +183,69 @@ public class HttpRequest {
 			callback.fail("网络异常，请稍后再试");
 		}
 
+	}
+	public int getRequestType() {
+		return requestType;
+	}
+
+	public void setRequestType(int requestType) {
+		this.requestType = requestType;
+	}
+
+	public String getSi() {
+		return si;
+	}
+
+	public void setSi(String si) {
+		this.si = si;
+	}
+
+	public String getCd() {
+		return cd;
+	}
+
+	public void setCd(String cd) {
+		this.cd = cd;
+	}
+
+	public String getPs() {
+		return ps;
+	}
+
+	public void setPs(String ps) {
+		this.ps = ps;
+	}
+
+	public String getPg() {
+		return pg;
+	}
+
+	public void setPg(String pg) {
+		this.pg = pg;
+	}
+
+	public String getPc() {
+		return pc;
+	}
+
+	public void setPc(String pc) {
+		this.pc = pc;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

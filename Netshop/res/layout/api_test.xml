@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/btn_registe"
+                android:layout_width="130dip"
+                android:layout_height="40dip"
+                android:text="注册" />
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="130dip"
+                android:layout_height="40dip"
+                android:text="登录" />
+
+            <Button
+                android:id="@+id/btn_verify"
+                android:layout_width="130dip"
+                android:layout_height="40dip"
+                android:text="获取验证码" />
+
+            <Button
+                android:id="@+id/btn_update_pwd"
+                android:layout_width="130dip"
+                android:layout_height="40dip"
+                android:text="修改密码" />
+
+            <Button
+                android:id="@+id/btn_update_phone"
+                android:layout_width="130dip"
+                android:layout_height="40dip"
+                android:text="修改手机号" />
+
+            <Button
+                android:id="@+id/btn_update_person"
+                android:layout_width="130dip"
+                android:layout_height="40dip"
+                android:text="修改个人信息" />
+
+            <Button
+                android:id="@+id/btn_check_verify"
+                android:layout_width="130dip"
+                android:layout_height="40dip"
+                android:text="验证验证码" />
+
+            <Button
+                android:id="@+id/btn_get_area"
+                android:layout_width="130dip"
+                android:layout_height="40dip"
+                android:text="获取种植面积" />
+
+            <Button
+                android:id="@+id/btn_get_plant"
+                android:layout_width="130dip"
+                android:layout_height="40dip"
+                android:text="获取种植作物" />
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="130dip"
+                android:layout_height="40dip"
+                android:text="登录" />
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="130dip"
+                android:layout_height="40dip"
+                android:text="登录" />
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="130dip"
+                android:layout_height="40dip"
+                android:text="登录" />
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="130dip"
+                android:layout_height="40dip"
+                android:text="登录" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
