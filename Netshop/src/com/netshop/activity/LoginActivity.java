@@ -8,6 +8,7 @@ import com.netshop.app.R;
 import com.netshop.net.HttpRequest;
 import com.netshop.net.HttpRequest.HttpCallBack;
 import com.netshop.util.DESCrypto;
+import com.netshop.util.NetShopUtil;
 import com.netshop.util.StringUtil;
 import com.netshop.util.ToastUtil;
 
@@ -17,6 +18,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -34,6 +36,13 @@ public class LoginActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if(!NetShopApp.getInstance().getUserId().equals("") && 
+				!NetShopApp.getInstance().getPassword().equals("")){
+			Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+			startActivity(intent);
+			finish();
+		}
+			
 		setContentView(R.layout.login);
 		initView();
 	}
@@ -87,22 +96,41 @@ public class LoginActivity extends Activity implements OnClickListener {
 			return;
 		}
 		HttpRequest loginRequest = new HttpRequest("1", "0002");
+		loginRequest.setUserId(account);
+		String pwd= DESCrypto.GetMD5Code(passWord);
+		loginRequest.setPassword(pwd);
 		loginRequest.request(HttpRequest.REQUEST_GET, loginCallback);
 	}
 	HttpCallBack loginCallback = new HttpCallBack() {
 		@Override
 		public void success(String json) {
-			Gson gson = new Gson();
-			AccountEntity account = gson.fromJson(json, AccountEntity.class);
+//			Gson gson = new Gson();
+//			AccountEntity account = gson.fromJson(json, AccountEntity.class);
 			SharedPreferences share = NetShopApp.getInstance().share;
 			Editor editor = share.edit();
 			editor.putString("user_id", phone);
 			editor.putString("password", DESCrypto.GetMD5Code(password));
 			editor.commit();
+			Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+			startActivity(intent);
+			finish();
 		}
 		@Override
 		public void fail(String failReason) {
 			Toast.makeText(LoginActivity.this, failReason, Toast.LENGTH_SHORT).show();
 		}
 	};
+
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+		boolean result = super.dispatchTouchEvent(ev);
+		if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+			View v = getCurrentFocus();
+
+			v.clearFocus();
+			NetShopUtil.hideSoftKeyboard(this, v);
+		}
+		return result;
+	}
+	
 }

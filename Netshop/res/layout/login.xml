@@ -51,7 +51,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dip"
-                    android:background="@null" />
+                    android:inputType="phone"
+                    android:background="@null"
+                    android:textColor="#ffffff" 
+                    android:maxLength="11"
+                    />
             </LinearLayout>
 
             <View
@@ -101,7 +105,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dip"
-                    android:background="@null" />
+                    android:inputType="textPassword"
+                    android:background="@null"
+                    android:textColor="#ffffff"
+                     />
             </LinearLayout>
 
             <View
@@ -116,6 +123,7 @@
 	    android:layout_height="wrap_content"
 	    android:text="@string/login"
 	    android:textSize="18sp"
+	    android:textColor="@color/red_text"
 	    android:background="@drawable/login_btn"
 	    android:layout_below="@id/login_layout_pwd"
 	    android:layout_marginLeft="30dip"
@@ -127,6 +135,7 @@
 	    android:layout_height="wrap_content"
 	    android:text="@string/register"
 	    android:textSize="18sp"
+	    android:textColor="#ffffff"
 	    android:background="@drawable/login_register"
 	    android:layout_below="@id/login_btn"
 	    android:layout_marginLeft="30dip"

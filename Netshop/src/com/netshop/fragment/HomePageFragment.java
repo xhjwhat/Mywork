@@ -50,10 +50,10 @@ public class HomePageFragment extends Fragment implements OnClickListener{
 				ProductEntity entity = gson.fromJson(json, ProductEntity.class);
 				productList = entity.getList().getProduct();
 				if(productList!=null && productList.size()==4){
-					imageWorker.loadImage(productList.get(0), productImg0);
-					imageWorker.loadImage(productList.get(1), productImg1);
-					imageWorker.loadImage(productList.get(2), productImg2);
-					imageWorker.loadImage(productList.get(3), productImg3);
+					imageWorker.loadImage(productList.get(0).getPimg(), productImg0);
+					imageWorker.loadImage(productList.get(1).getPimg(), productImg1);
+					imageWorker.loadImage(productList.get(2).getPimg(), productImg2);
+					imageWorker.loadImage(productList.get(3).getPimg(), productImg3);
 				}
 			}
 			
@@ -63,6 +63,19 @@ public class HomePageFragment extends Fragment implements OnClickListener{
 				
 			}
 		});
+//		HttpRequest bannerRequest = new HttpRequest("8", "0003");//获取首页四个推荐
+//		bannerRequest.request(HttpRequest.REQUEST_GET, new HttpCallBack() {
+//			@Override
+//			public void success(String json) {
+//				
+//			}
+//			
+//			@Override
+//			public void fail(String failReason) {
+//				Toast.makeText(getActivity(), failReason, Toast.LENGTH_SHORT).show();
+//				
+//			}
+//		});
 		super.onActivityCreated(savedInstanceState);
 	}
 

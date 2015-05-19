@@ -107,31 +107,6 @@ public abstract class ImageWorker {
 	public void loadImage(Object data, ImageView imageView, ImageLoadingListener listener) {
 		Bitmap bitmap = null;
 
-		// final DisplayMetrics displayMetrics =
-		// imageView.getContext().getResources().getDisplayMetrics();
-		// final LayoutParams params = imageView.getLayoutParams();
-		// if (params != null) {
-		// int width = params.width == LayoutParams.WRAP_CONTENT ? 0 :
-		// imageView.getWidth(); // Get actual image width
-		// if (width <= 0) width = params.width; // Get layout width parameter
-		// if (width <= 0) width = getImageViewFieldValue(imageView,
-		// "mMaxWidth"); // Check maxWidth parameter
-		// if (width <= 0) width = displayMetrics.widthPixels;
-		//
-		// int height = params.height == LayoutParams.WRAP_CONTENT ? 0 :
-		// imageView.getHeight(); // Get actual image height
-		// if (height <= 0) height = params.height; // Get layout height
-		// parameter
-		// if (height <= 0) height = getImageViewFieldValue(imageView,
-		// "mMaxHeight"); // Check maxHeight parameter
-		// if (height <= 0) height = displayMetrics.heightPixels;
-		// mImageWidth = width;
-		// mImageHeight = height;
-		// } else {
-		// mImageWidth = displayMetrics.widthPixels;
-		// mImageHeight = displayMetrics.heightPixels;
-		// }
-
 		if (mImageCache != null) {
 			final String key = getKey(String.valueOf(data));
 			bitmap = mImageCache.getFromMemCache(key);

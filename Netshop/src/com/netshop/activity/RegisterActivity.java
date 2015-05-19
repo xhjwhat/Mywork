@@ -3,11 +3,15 @@ package com.netshop.activity;
 import com.netshop.app.R;
 import com.netshop.net.HttpRequest;
 import com.netshop.net.HttpRequest.HttpCallBack;
+import com.netshop.util.DESCrypto;
+import com.netshop.util.NetShopUtil;
 import com.netshop.util.StringUtil;
 import com.netshop.util.ToastUtil;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -32,6 +36,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 		registBtn = (Button) findViewById(R.id.login_register);
 		registBtn.setOnClickListener(this);
 		phoneEdit = (EditText) findViewById(R.id.login_edit_phone);
+		pwdEdit = (EditText) findViewById(R.id.login_edit_pwd);
 		verificationEdit = (EditText) findViewById(R.id.login_edit_verification);
 	}
 
@@ -70,35 +75,60 @@ public class RegisterActivity extends Activity implements OnClickListener {
 			ToastUtil.toastOnUiThread(this, R.string.illegal_mobile_num);
 			return;
 		}
-		if(!StringUtil.isStandar(passWord)){
-			ToastUtil.toastOnUiThread(this,"密码请输入字母或数字");
+		if (!StringUtil.isStandar(passWord)) {
+			ToastUtil.toastOnUiThread(this, "密码请输入字母或数字");
 			return;
 		}
 		HttpRequest registRequest = new HttpRequest("1", "0001");
+		registRequest.setUserId(account);
+		String pwd = DESCrypto.GetMD5Code(passWord);
+		Log.e("register", account + "," + pwd);
+		registRequest.setPassword(pwd);
 		registRequest.request(HttpRequest.REQUEST_GET, registCcallback);
 	}
-	HttpCallBack veriCcallback = new HttpCallBack(){
+
+	HttpCallBack veriCcallback = new HttpCallBack() {
 
 		@Override
 		public void success(String obj) {
-			Toast.makeText(RegisterActivity.this, "获取成功，请稍后", Toast.LENGTH_SHORT).show();
+			Toast.makeText(RegisterActivity.this, "获取成功，请稍后",
+					Toast.LENGTH_SHORT).show();
 		}
+
 		@Override
 		public void fail(String failReason) {
-			Toast.makeText(RegisterActivity.this, "获取失败，请稍后再试", Toast.LENGTH_SHORT).show();
+			Toast.makeText(RegisterActivity.this, failReason,
+					Toast.LENGTH_SHORT).show();
 		}
-		
+
 	};
-	HttpCallBack registCcallback = new HttpCallBack(){
+	HttpCallBack registCcallback = new HttpCallBack() {
 
 		@Override
 		public void success(String obj) {
-			Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+			Log.e("register_callback", obj);
+			Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT)
+					.show();
 		}
+
 		@Override
 		public void fail(String failReason) {
-			Toast.makeText(RegisterActivity.this, failReason, Toast.LENGTH_SHORT).show();
+			Log.e("register_callback", failReason);
+			Toast.makeText(RegisterActivity.this, failReason,
+					Toast.LENGTH_SHORT).show();
 		}
-		
+
 	};
+
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+		boolean result = super.dispatchTouchEvent(ev);
+		if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+			View v = getCurrentFocus();
+
+			v.clearFocus();
+			NetShopUtil.hideSoftKeyboard(this, v);
+		}
+		return result;
+	}
 }

@@ -1,5 +1,6 @@
 package com.netshop.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
@@ -8,7 +9,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 public class NetShopUtil {
 	
@@ -44,6 +47,16 @@ public class NetShopUtil {
 			return true;
 		}
 		return false;
+	}
+	
+	public static void hideSoftKeyboard(Context context, View v) {
+		InputMethodManager imm = (InputMethodManager) context
+				.getSystemService(Activity.INPUT_METHOD_SERVICE);
+		if(v != null){
+			if(imm.isActive()){
+				imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+			}
+		}
 	}
 	
 	public static void getLocation(Context context,double[] mylocation){

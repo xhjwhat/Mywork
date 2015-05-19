@@ -39,7 +39,7 @@ import android.util.Log;
 public class HttpRequest {
 	public static final int REQUEST_POST = 1;
 	public static final int REQUEST_GET = 0;
-	
+
 	public int requestType = REQUEST_GET;
 
 	public String vi = Constants.VI;
@@ -49,12 +49,10 @@ public class HttpRequest {
 	public String ps = "";
 	public String pg = "";
 	public String pc = "";
-	public String userId="";
-	public String password="";
+	public String userId = "";
+	public String password = "";
 	public SharedPreferences preferences;
-	String tempstr = "<response description=\"获取成功\" error=\"0\"><list currentpage=\"1\" totalpage=\"1\" totalnum=\"4\"> <product pid=\"7\" pname=\"化肥7\" price=\"456\" pimg=\"http://localhost:8080/wxnhProject/upload/proImg/1430549033557.jpg\" weight=\"70\"/> <product pid=\"6\" pname=\"化肥6\" price=\"456\" pimg=\"http://localhost:8080/wxnhProject/upload/proImg/1430549033557.jpg\" weight=\"70\"/></list></response>";
-
-	
+	//String tempstr = "<response description=\"获取成功\" error=\"0\"><list currentpage=\"1\" totalpage=\"1\" totalnum=\"4\"> <product pid=\"7\" pname=\"化肥7\" price=\"456\" pimg=\"http://localhost:8080/wxnhProject/upload/proImg/1430549033557.jpg\" weight=\"70\"/> <product pid=\"6\" pname=\"化肥6\" price=\"456\" pimg=\"http://localhost:8080/wxnhProject/upload/proImg/1430549033557.jpg\" weight=\"70\"/></list></response>";
 
 	public interface HttpCallBack {
 		public void success(String json);
@@ -65,10 +63,10 @@ public class HttpRequest {
 	public HttpRequest(String si, String cd) {
 		this.si = si;
 		this.cd = cd;
-		String userId = NetShopApp.getInstance().getUserId();
-		String password = NetShopApp.getInstance().getPassword();
+		userId = NetShopApp.getInstance().getUserId();
+		password = NetShopApp.getInstance().getPassword();
 		// String phoneNum = NetShopApp.getInstance().getPhoneNum();
-		ap = "ap=" + userId + "," + password;
+
 	}
 
 	/**
@@ -76,23 +74,25 @@ public class HttpRequest {
 	 */
 	public String combineUrl() {
 		try {
+			ap = userId + "," + password;
 			StringBuffer buffer = new StringBuffer();
 			buffer.append("si=" + si + "&cd=" + cd);
 			buffer.append("&ap=" + ap);
-			if(!ps.equals("")){
-				buffer.append("&ps="+ps);
+			if (!ps.equals("")) {
+				buffer.append("&ps=" + ps);
 			}
-			if(!pg.equals("")){
-				buffer.append("&pg="+pg);
+			if (!pg.equals("")) {
+				buffer.append("&pg=" + pg);
 			}
-			if(!pc.equals("")){
-				buffer.append("&pc="+pc);
+			if (!pc.equals("")) {
+				buffer.append("&pc=" + pc);
 			}
-			buffer.append("&vi="+Constants.VI);
+			Log.e("params", buffer.toString());
 			DESCrypto des = new DESCrypto();
 			String desString = des.encrypt(buffer.toString());
 
-			return Constants.TEST_NETSHOP_URL + desString;
+			return Constants.TEST_NETSHOP_URL + desString + "&vi="
+					+ Constants.VI;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -100,12 +100,11 @@ public class HttpRequest {
 
 	}
 
-	
-
 	public void request(int rquestype, HttpCallBack callback) {
 		RequestTask task = new RequestTask(combineUrl(), callback);
 		task.executeOnExecutor(NetShopApp.getInstance().threadPool, "");
 	}
+
 	public void request(HttpCallBack callback) {
 		RequestTask task = new RequestTask(combineUrl(), callback);
 		task.executeOnExecutor(NetShopApp.getInstance().threadPool, "");
@@ -123,40 +122,42 @@ public class HttpRequest {
 		@Override
 		protected String doInBackground(String... params) {
 			InputStream is = null;
-			String result = tempstr;
-			 try {
-			 HttpParams httpParams = new BasicHttpParams();
-			 HttpConnectionParams.setSoTimeout(httpParams, 8000);
-			 HttpConnectionParams.setConnectionTimeout(httpParams, 8000);
-			 HttpClient httpclient = new DefaultHttpClient(httpParams);
-			 HttpResponse response;
-			 if (requestType == REQUEST_GET) {
-			 HttpGet httpget = new HttpGet(url);
-			 response = httpclient.execute(httpget);
-			
-			 } else {
-			 HttpPost httppost = new HttpPost(url);
-			  StringEntity httpbody = new StringEntity(params[0],HTTP.UTF_8);
-			  httppost.setEntity(httpbody);
-			 response = httpclient.execute(httppost);
-			
-			 }
-			 HttpEntity entity = response.getEntity();
-			 is = entity.getContent();
-			 BufferedReader reader = new BufferedReader(
-			 new InputStreamReader(is, "UTF-8"));
-			 StringBuilder sb = new StringBuilder();
-			 String line = null;
-			 while ((line = reader.readLine()) != null) {
-			 sb.append(line);
-			 }
-			 is.close();
-			 result = sb.toString();
-			 } catch (ClientProtocolException e) {
-			 e.printStackTrace();
-			 } catch (IOException e) {
-			 e.printStackTrace();
-			 }
+			String result = "";
+			try {
+				HttpParams httpParams = new BasicHttpParams();
+				//HttpConnectionParams.setSoTimeout(httpParams, 10000);
+				HttpConnectionParams.setConnectionTimeout(httpParams, 10000);
+				HttpClient httpclient = new DefaultHttpClient(httpParams);
+				Log.e("url", url);
+				HttpResponse response;
+				if (requestType == REQUEST_GET) {
+					HttpGet httpget = new HttpGet(url);
+					response = httpclient.execute(httpget);
+
+				} else {
+					HttpPost httppost = new HttpPost(url);
+					StringEntity httpbody = new StringEntity(params[0],
+							HTTP.UTF_8);
+					httppost.setEntity(httpbody);
+					response = httpclient.execute(httppost);
+
+				}
+				HttpEntity entity = response.getEntity();
+				is = entity.getContent();
+				BufferedReader reader = new BufferedReader(
+						new InputStreamReader(is, "UTF-8"));
+				StringBuilder sb = new StringBuilder();
+				String line = null;
+				while ((line = reader.readLine()) != null) {
+					sb.append(line);
+				}
+				is.close();
+				result = sb.toString();
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			return result;
 		}
 
@@ -177,13 +178,14 @@ public class HttpRequest {
 				return;
 			} catch (JSONException e) {
 				e.printStackTrace();
-			} catch(Exception e){
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			callback.fail("网络异常，请稍后再试");
 		}
 
 	}
+
 	public int getRequestType() {
 		return requestType;
 	}
