@@ -2,6 +2,7 @@ package com.netshop.adapter;
 
 import com.netshop.activity.MainActivity;
 import com.netshop.app.R;
+import com.netshop.fragment.ClassFragment;
 import com.netshop.fragment.ClassificationFragment;
 import com.netshop.fragment.HomePageFragment;
 import com.netshop.fragment.PersonFragment;
@@ -31,7 +32,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter implements IconPagerA
 		case MainActivity.HOME_PAGER:
 			return new HomePageFragment();
 		case MainActivity.CLASSIFICATION:
-			return new ClassificationFragment();
+			return new ClassFragment();
 		case MainActivity.STORE:
 			return new StoreFragment();
 		case MainActivity.SHOPCAR:

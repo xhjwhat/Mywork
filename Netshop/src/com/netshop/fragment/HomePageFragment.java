@@ -23,22 +23,27 @@ import com.google.l99gson.Gson;
 import com.netshop.activity.GoodsDetilsActivity;
 import com.netshop.activity.MainActivity;
 import com.netshop.activity.SearchActivity;
+import com.netshop.adapter.BannerAdapter;
 import com.netshop.app.R;
+import com.netshop.entity.BannerEntity;
 import com.netshop.entity.Product;
 import com.netshop.entity.ProductEntity;
 import com.netshop.net.HttpRequest;
 import com.netshop.net.HttpRequest.HttpCallBack;
+import com.netshop.view.CirclePageIndicator;
 
 public class HomePageFragment extends Fragment implements OnClickListener{
 	private ImageView classificationImg;
 	private ImageView searchImg;
 	private EditText searchEdit;
 	private ViewPager viewPager;
+	private CirclePageIndicator indicator;
 	private LinearLayout bookLayout,feedbackLayout,adviceLayout,informLayout;
 	private TextView moreText;
 	private ImageView productImg0,productImg1,productImg2,productImg3;
 	private List<Product> productList;
 	private ImageWorker imageWorker;
+	private BannerAdapter adapter;
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		
@@ -63,19 +68,23 @@ public class HomePageFragment extends Fragment implements OnClickListener{
 				
 			}
 		});
-//		HttpRequest bannerRequest = new HttpRequest("8", "0003");//获取首页四个推荐
-//		bannerRequest.request(HttpRequest.REQUEST_GET, new HttpCallBack() {
-//			@Override
-//			public void success(String json) {
-//				
-//			}
-//			
-//			@Override
-//			public void fail(String failReason) {
-//				Toast.makeText(getActivity(), failReason, Toast.LENGTH_SHORT).show();
-//				
-//			}
-//		});
+		HttpRequest bannerRequest = new HttpRequest("8", "0003");//首页banner
+		bannerRequest.request(HttpRequest.REQUEST_GET, new HttpCallBack() {
+			@Override
+			public void success(String json) {
+				Gson gson = new Gson();
+				BannerEntity entity = gson.fromJson(json, BannerEntity.class);
+				adapter = new BannerAdapter(getActivity(), entity.getLists());
+				viewPager.setAdapter(adapter);
+				indicator.setViewPager(viewPager);
+			}
+			
+			@Override
+			public void fail(String failReason) {
+				Toast.makeText(getActivity(), failReason, Toast.LENGTH_SHORT).show();
+				
+			}
+		});
 		super.onActivityCreated(savedInstanceState);
 	}
 
@@ -95,6 +104,7 @@ public class HomePageFragment extends Fragment implements OnClickListener{
 		searchImg.setOnClickListener(this);
 		searchEdit = (EditText)view.findViewById(R.id.main_search_edit);
 		viewPager = (ViewPager)view.findViewById(R.id.main_viewpager);
+		indicator = (CirclePageIndicator)view.findViewById(R.id.indicator);
 		bookLayout = (LinearLayout)view.findViewById(R.id.main_book_layout);
 		bookLayout.setOnClickListener(this);
 		feedbackLayout = (LinearLayout)view.findViewById(R.id.main_feedback_layout);

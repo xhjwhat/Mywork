@@ -22,12 +22,7 @@ public class ClassFragment extends Fragment {
 		manager = getFragmentManager();
 		transaction = manager.beginTransaction();
 		fragment = (ClassificationFragment) manager.findFragmentByTag("classification");
-		detailFragment = (ClassifiDetaiFragment) manager.findFragmentByTag("details");
-		if(detailFragment == null){
-			detailFragment = new ClassifiDetaiFragment();
-			detailFragment.setParentFragment(this);
-			transaction.add(detailFragment, "details");
-		}
+		
 		if(fragment == null){
 			fragment = new ClassificationFragment();
 			fragment.setParentFragment(this);
@@ -49,15 +44,15 @@ public class ClassFragment extends Fragment {
 	}
 	
 	public void changetoDetialFragment(Bundle bundle){
-		
+		detailFragment = (ClassifiDetaiFragment) manager.findFragmentByTag("details");
 		if(detailFragment == null){
 			detailFragment = new ClassifiDetaiFragment();
 			detailFragment.setParentFragment(this);
-			transaction.add(detailFragment, "details");
+			//transaction.add(detailFragment, "details");
 		}
 		detailFragment.setArguments(bundle);
 		transaction.replace(R.id.frame_layout, detailFragment);
-		transaction.commit();
+		//transaction.commit();
 	}
 	public void changetoClassiFragment(){
 		

@@ -29,13 +29,18 @@ public class ClassifiDetaiFragment extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		HttpRequest request = new HttpRequest("3", "0002");
-		request.request(HttpRequest.REQUEST_GET, callBack);
+		
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		HttpRequest request = new HttpRequest("3", "0002");
+		if(getArguments()!=null){
+			String id = getArguments().getString("type_id");
+			request.setPc(id);
+		}
+		request.request(HttpRequest.REQUEST_GET, callBack);
 		View view = inflater.inflate(R.layout.class2, null);
 		backImg = (ImageView)view.findViewById(R.id.main_img_classification);
 		backImg.setOnClickListener(new OnClickListener() {

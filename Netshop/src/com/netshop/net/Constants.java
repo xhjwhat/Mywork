@@ -1,7 +1,7 @@
 package com.netshop.net;
 
 public class Constants {
-	public static final String TEST_NETSHOP_URL = "http://183.14.163.14:8088/wxnhProject/android.do?d=";
+	public static final String TEST_NETSHOP_URL = "http://183.14.160.15:8088/wxnhProject/android.do?d=";
 	public static final String RELEASE_NETSHOP_URL = "";
 	
 	public static final String SI_PRODUCT = "3";

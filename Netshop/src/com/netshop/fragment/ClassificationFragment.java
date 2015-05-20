@@ -97,7 +97,7 @@ public class ClassificationFragment extends Fragment {
 					int position, long id) {
 				Bundle bundle = new Bundle();
 				bundle.putString("type_id", ctypeList.get(position).getId());
-				parentFragment.changetoDetialFragment(bundle);;
+				parentFragment.changetoDetialFragment(bundle);
 			}
 		});
 		return view;

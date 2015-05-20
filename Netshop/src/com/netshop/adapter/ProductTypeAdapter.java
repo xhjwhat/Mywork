@@ -2,8 +2,6 @@ package com.netshop.adapter;
 
 import java.util.List;
 
-import com.netshop.entity.ProductEntity;
-import com.netshop.entity.ProductTypes;
 import com.netshop.entity.ProductTypes.ProductType;
 import com.netshop.util.NetShopUtil;
 
@@ -12,9 +10,9 @@ import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 public class ProductTypeAdapter extends BaseAdapter {
@@ -53,15 +51,15 @@ public class ProductTypeAdapter extends BaseAdapter {
 		}else{
 			text = (TextView) convertView;
 		}
-		text.setTextColor(0x494949);
+		text.setTextColor(0xff494949);
 		text.setTextSize(18.0f);
 		text.setGravity(Gravity.CENTER);
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, NetShopUtil.dip2px(context, 40));
+		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, NetShopUtil.dip2px(context, 60));
 		text.setLayoutParams(params);
 		text.setText(datas.get(position).getName());
 		if(position == selectItem){
-			text.setBackgroundColor(0xffffff);
-			text.setTextColor(0xf5ac39);
+			text.setBackgroundColor(0xffffffff);
+			text.setTextColor(0xfff5ac39);
 		}else{
 			text.setBackgroundColor(Color.TRANSPARENT);
 		}

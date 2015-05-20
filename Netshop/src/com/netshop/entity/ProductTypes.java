@@ -4,19 +4,19 @@ import java.util.List;
 
 public class ProductTypes extends BaseEntity {
 	
-	public List<ProductType> ptype;
+	public List<ProductType> list;
 	
 	
 	public List<ProductType> getPtype() {
-		return ptype;
+		return list;
 	}
-	public void setPtype(List<ProductType> ptype) {
-		this.ptype = ptype;
+	public void setPtype(List<ProductType> list) {
+		this.list = list;
 	}
 	public class ProductType{
 		public String name;
 		public String id;
-		public List<CType> ctype;
+		public List<CType> clist;
 		public String getName() {
 			return name;
 		}
@@ -30,10 +30,10 @@ public class ProductTypes extends BaseEntity {
 			this.id = id;
 		}
 		public List<CType> getCtype() {
-			return ctype;
+			return clist;
 		}
 		public void setCtype(List<CType> ctype) {
-			this.ctype = ctype;
+			this.clist = ctype;
 		}
 		
 		
