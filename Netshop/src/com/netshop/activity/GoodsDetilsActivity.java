@@ -1,6 +1,7 @@
 package com.netshop.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -32,7 +33,14 @@ public class GoodsDetilsActivity extends Activity implements OnClickListener{
 		super.onCreate(bundle);
 		setContentView(R.layout.goods_detail);
 		initView();
+		
 		HttpRequest  request = new HttpRequest("3", "0004");
+		Intent intent = getIntent();
+		String id=intent.getStringExtra("id");
+		if(id!=null){
+			request.setPc(id);
+		}
+		
 		request.request(new HttpCallBack() {
 			@Override
 			public void success(String json) {

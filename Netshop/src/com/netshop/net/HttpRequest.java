@@ -46,8 +46,8 @@ public class HttpRequest {
 	public String si = "";
 	public String cd = "";
 	public String ap = "";
-	public String ps = "10";
-	public String pg = "1";
+	public String ps = "";
+	public String pg = "";
 	public String pc = "";
 	public String userId = "";
 	public String password = "";

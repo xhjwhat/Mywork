@@ -3,18 +3,23 @@ package com.netshop.fragment;
 import java.util.List;
 
 import com.google.l99gson.Gson;
+import com.netshop.activity.GoodsDetilsActivity;
+import com.netshop.adapter.ProductAdapter;
 import com.netshop.app.R;
 import com.netshop.entity.Product;
 import com.netshop.entity.ProductEntity;
 import com.netshop.net.HttpRequest;
 import com.netshop.net.HttpRequest.HttpCallBack;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -26,6 +31,7 @@ public class ClassifiDetaiFragment extends Fragment {
 	private EditText editText;
 	private List<Product> datas;
 	public ClassFragment parentFragment;
+	public ProductAdapter adapter;
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -39,10 +45,12 @@ public class ClassifiDetaiFragment extends Fragment {
 		if(getArguments()!=null){
 			String id = getArguments().getString("type_id");
 			request.setPc(id);
+			request.setPs("8");
+			request.setPg("1");
 		}
 		request.request(HttpRequest.REQUEST_GET, callBack);
-		View view = inflater.inflate(R.layout.class2, null);
-		backImg = (ImageView)view.findViewById(R.id.main_img_classification);
+		View view = inflater.inflate(R.layout.classdetial, null);
+		backImg = (ImageView)view.findViewById(R.id.main_img_back);
 		backImg.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -71,6 +79,19 @@ public class ClassifiDetaiFragment extends Fragment {
 			Gson gson = new Gson();
 			ProductEntity entity = gson.fromJson(json, ProductEntity.class);
 			datas = (List<Product>) entity.getList().getProduct();
+			if(datas != null){
+				adapter = new ProductAdapter(getActivity(), datas);
+				list.setAdapter(adapter);
+				list.setOnItemClickListener(new OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+						Intent intent = new Intent(getActivity(),GoodsDetilsActivity.class);
+						intent.putExtra("id", datas.get(position).getPid());
+						getActivity().startActivity(intent);
+					}
+				});
+			}
 		}
 		
 		@Override

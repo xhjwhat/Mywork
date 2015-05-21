@@ -11,12 +11,12 @@
         android:background="#f5ac39" >
 
         <ImageView
-            android:id="@+id/main_img_classification"
+            android:id="@+id/main_img_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dip"
-            android:background="@drawable/main_classification" />
+            android:background="@drawable/title_back" />
 
         <RelativeLayout
             android:layout_width="200dip"

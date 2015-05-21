@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 public class ClassFragment extends Fragment {
 	public FragmentManager manager;
-	public FragmentTransaction transaction;
 	public ClassifiDetaiFragment detailFragment;
 	public ClassificationFragment fragment;
 	@Override
@@ -20,7 +19,7 @@ public class ClassFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.classfragment, null);
 		manager = getFragmentManager();
-		transaction = manager.beginTransaction();
+		FragmentTransaction transaction = manager.beginTransaction();
 		fragment = (ClassificationFragment) manager.findFragmentByTag("classification");
 		
 		if(fragment == null){
@@ -44,6 +43,7 @@ public class ClassFragment extends Fragment {
 	}
 	
 	public void changetoDetialFragment(Bundle bundle){
+		FragmentTransaction transaction = manager.beginTransaction();
 		detailFragment = (ClassifiDetaiFragment) manager.findFragmentByTag("details");
 		if(detailFragment == null){
 			detailFragment = new ClassifiDetaiFragment();
@@ -52,7 +52,7 @@ public class ClassFragment extends Fragment {
 		}
 		detailFragment.setArguments(bundle);
 		transaction.replace(R.id.frame_layout, detailFragment);
-		//transaction.commit();
+		transaction.commit();
 	}
 	public void changetoClassiFragment(){
 		

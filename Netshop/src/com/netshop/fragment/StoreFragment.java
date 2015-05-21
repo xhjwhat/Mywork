@@ -47,13 +47,15 @@ public class StoreFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		HttpRequest request = new HttpRequest("4", "0001");
+		request.setPg("1");
+		request.setPs("8");
 		request.request(HttpRequest.REQUEST_GET, new HttpCallBack() {
 			
 			@Override
 			public void success(String json) {
 				Gson gson = new Gson();
 				ShopsEntity entity = gson.fromJson(json, ShopsEntity.class);
-				shopList = entity.getShop();
+				shopList = entity.getList().getShop();
 				adapter = new StoreAdapter(getActivity(), shopList);
 				listview.setAdapter(adapter);
 				listview.setOnItemClickListener(new OnItemClickListener() {
