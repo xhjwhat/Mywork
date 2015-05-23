@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/getproduct_layout"
+        android:layout_width="match_parent"
+        android:layout_height="80dip"
+        android:layout_below="@id/title"
+        android:background="#ffffff" >
+
+        <ImageView
+            android:id="@+id/addmanage_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dip"
+            android:background="@drawable/store_location" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/addmanage_img"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="收货人："
+                    android:textColor="@color/text_49"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/addmanage_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_49"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/addmanage_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:textColor="@color/text_49"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="地址："
+                    android:textColor="@color/text_49"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/addmanage_addr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_49"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:background="@drawable/arrow_right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/default_layout"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:layout_below="@id/getproduct_layout"
+        android:background="#ffffff" >
+
+        <ImageView
+            android:id="@+id/addrmanage_default_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dip"
+            android:background="@drawable/shopcar_select" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:layout_toRightOf="@id/addrmanage_default_img"
+            android:text="设为默认"
+            android:textColor="@color/text_49"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/addrmanage_delete_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dip"
+            android:text="删除"
+            android:textColor="@color/text_49"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="20dip"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="4dip"
+            android:layout_toLeftOf="@id/addrmanage_delete_text"
+            android:background="@color/text_49" />
+
+        <TextView
+            android:id="@+id/addrmanage_eidt_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:layout_toLeftOf="@id/addrmanage_delete_text"
+            android:text="编辑"
+            android:textColor="@color/text_49"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    
+
+</RelativeLayout>

@@ -38,6 +38,7 @@
         android:background="#000000" />
 
     <RelativeLayout
+        android:id="@+id/phone_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dip"
@@ -77,6 +78,7 @@
         android:background="#000000" />
 
     <RelativeLayout
+        android:id="@+id/password_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dip"

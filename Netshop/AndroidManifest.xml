@@ -48,7 +48,18 @@
         <activity android:name="com.netshop.activity.RegisterActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:screenOrientation="portrait"/>
-        
+        <activity android:name="com.netshop.activity.SupportActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.netshop.activity.AddrManagerActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.netshop.activity.AddrEditActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.netshop.activity.CollectActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

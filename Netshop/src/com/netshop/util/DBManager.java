@@ -23,7 +23,7 @@ public class DBManager {
     private Context context;
     private File file=null;
     
-    DBManager(Context context) {
+    public DBManager(Context context) {
     	Log.e("cc", "DBManager");
         this.context = context;
     }

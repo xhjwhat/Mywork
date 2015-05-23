@@ -16,49 +16,32 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class SearchActivity extends Activity {
-	private ImageView backImg;
-	private ImageView searchImg;
-	private EditText searchEdit;
+public class CollectActivity extends Activity {
+	private TextView title;
 	private ListView listView;
-	private String key;
+	private ImageView backImg;
 	private List<Product> datas;
 	public ProductAdapter adapter;
 	public void onCreate(Bundle bundle){
 		super.onCreate(bundle);
-		setContentView(R.layout.search);
-		Intent intent = getIntent();
-		key = intent.getStringExtra("key");
-		backImg = (ImageView)findViewById(R.id.title_back_img);
+		setContentView(R.layout.collect);
+		backImg = (ImageView) findViewById(R.id.title_back_img);
+		backImg.setVisibility(View.VISIBLE);
 		backImg.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				finish();
 			}
 		});
-		searchEdit = (EditText)findViewById(R.id.search_edit);
-		searchImg = (ImageView)findViewById(R.id.seach_img);
-		searchImg.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				
-			}
-		});
-		listView = (ListView)findViewById(R.id.search_list);
-	}
-	public void initData(String key){
-		HttpRequest request = new HttpRequest("3", "0003");
-		request.setPc(key);
-		request.setPs("10");
-		request.setPg("1");
-		request.request(callBack);
-		
+		title = (TextView)findViewById(R.id.title_text);
+		title.setText("收藏");
+		listView = (ListView)findViewById(R.id.list);
+		HttpRequest request = new HttpRequest("5", "0001");
 	}
 	HttpCallBack callBack = new HttpCallBack() {
 		@Override
@@ -67,15 +50,15 @@ public class SearchActivity extends Activity {
 			ProductEntity entity = gson.fromJson(json, ProductEntity.class);
 			datas = (List<Product>) entity.getList().getProduct();
 			if(datas != null){
-				adapter = new ProductAdapter(SearchActivity.this, datas);
+				adapter = new ProductAdapter(CollectActivity.this, datas);
 				listView.setAdapter(adapter);
 				listView.setOnItemClickListener(new OnItemClickListener() {
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
-						Intent intent = new Intent(SearchActivity.this,GoodsDetilsActivity.class);
+						Intent intent = new Intent(CollectActivity.this,GoodsDetilsActivity.class);
 						intent.putExtra("id", datas.get(position).getPid());
-						startActivity(intent);
+						CollectActivity.this.startActivity(intent);
 					}
 				});
 			}
@@ -83,8 +66,7 @@ public class SearchActivity extends Activity {
 		
 		@Override
 		public void fail(String failReason) {
-			if(failReason!=null)
-			Toast.makeText(SearchActivity.this, failReason, Toast.LENGTH_SHORT).show();
+			
 		}
 	};
 }

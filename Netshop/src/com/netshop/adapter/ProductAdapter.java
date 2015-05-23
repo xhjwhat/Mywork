@@ -55,8 +55,8 @@ public class ProductAdapter extends BaseAdapter {
 		}else{
 			holder = (HolderView) convertView.getTag();
 		}
-		if(holder.productImg != null){
-			worker.loadImage(datas.get(position).getImg(), holder.productImg);
+		if(datas.get(position).getPimg() != null){
+			worker.loadImage(datas.get(position).getPimg(), holder.productImg);
 		}else{
 			holder.productImg.setImageResource(R.drawable.ic_launcher);
 		}
