@@ -8,12 +8,15 @@ public class Addr extends BaseEntity{
 	public String name;
 	public String phone;
 	public String address;
-	public boolean isDefault;
-	public boolean isDefault() {
-		return isDefault;
+	public String isde;
+	public String isde() {
+		return isde;
 	}
-	public void setDefault(boolean isDefault) {
-		this.isDefault = isDefault;
+	public String getIsde() {
+		return isde;
+	}
+	public void setIsde(String isde) {
+		this.isde = isde;
 	}
 	public String getId() {
 		return id;

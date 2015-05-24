@@ -9,6 +9,7 @@ import com.netshop.entity.ShopEntity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.mdroid.cache.DefaultLoader;
 import android.support.mdroid.cache.ImageWorker;
@@ -25,6 +26,7 @@ public class ShopDetialsActivity extends Activity {
 	
 	private ImageView backImg;
 	private ImageView storeImg;
+	private ImageView callImg;
 	private ImageWorker worker;
 	public void onCreate(Bundle bundle){
 		super.onCreate(bundle);
@@ -53,6 +55,15 @@ public class ShopDetialsActivity extends Activity {
 		addr = (TextView)findViewById(R.id.store_addr);
 		connPeople = (TextView)findViewById(R.id.store_conn_people_text);
 		connPhone = (TextView)findViewById(R.id.conn_people_phone_text);
+		callImg = (ImageView)findViewById(R.id.store_phone_img);
+		callImg.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				String strMobile = connPhone.getText().toString();
+				if(!strMobile.equals(""));
+				 Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+strMobile));
+				 startActivity(intent);
+			}
+		});
 	}
 	public void initData(String pc){
 		HttpRequest request = new HttpRequest("4", "0003");

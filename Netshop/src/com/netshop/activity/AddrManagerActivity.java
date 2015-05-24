@@ -8,6 +8,7 @@ import com.netshop.adapter.AddrAdapter;
 import com.netshop.app.R;
 import com.netshop.entity.Addr;
 import com.netshop.entity.AddrEntity;
+import com.netshop.entity.AddrsEntity;
 import com.netshop.net.HttpRequest;
 import com.netshop.net.HttpRequest.HttpCallBack;
 
@@ -50,7 +51,7 @@ public class AddrManagerActivity extends Activity {
 		newText.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent intent= new Intent(AddrManagerActivity.this,AddrEditActivity.class);
-				startActivity(intent);
+				startActivityForResult(intent, ADD_NEW);
 			}
 		});
 		list = (ListView) findViewById(R.id.addr_list);
@@ -62,30 +63,45 @@ public class AddrManagerActivity extends Activity {
 	
 	public void initData(){
 		datas.clear();
-		HttpRequest defaultRequest = new HttpRequest("6", "0001");
-		defaultRequest.request(new HttpCallBack() {
-			public void success(String json) {
-				Gson gson = new Gson();
-				Addr entity = gson.fromJson(json, Addr.class);
-				if(entity!=null){
-					datas.add(0, entity);
-					adapter.setList(datas);
-					adapter.notifyDataSetChanged();
-				}
-			}
-			public void fail(String failReason) {
-				
-			}
-		});
+//		HttpRequest defaultRequest = new HttpRequest("6", "0001");
+//		defaultRequest.request(new HttpCallBack() {
+//			public void success(String json) {
+//				Gson gson = new Gson();
+//				Addr entity = gson.fromJson(json, Addr.class);
+//				if(entity!=null){
+//					datas.add(0, entity);
+//					adapter.setList(datas);
+//					adapter.notifyDataSetChanged();
+//				}
+//			}
+//			public void fail(String failReason) {
+//				
+//			}
+//		});
 		HttpRequest nomalRequest = new HttpRequest("6", "0002");
+		nomalRequest.setPs("20");
+		nomalRequest.setPg("1");
 		nomalRequest.request(new HttpCallBack() {
 			public void success(String json) {
 				Gson gson = new Gson();
-				AddrEntity entity = gson.fromJson(json, AddrEntity.class);
-				if(entity!=null && entity.getList().getDelivery().size()>0){
-					datas.addAll(entity.getList().getDelivery());
+				AddrsEntity entitys = null;
+				try{
+					entitys = gson.fromJson(json, AddrsEntity.class);
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				
+				if(entitys!=null){
+					datas.addAll(entitys.getList().getDelivery());
 					adapter.setList(datas);
 					adapter.notifyDataSetChanged();
+				}else{
+					AddrEntity entity = gson.fromJson(json, AddrEntity.class);
+					if(entity!=null){
+						datas.add(entity.getList().getDelivery());
+						adapter.setList(datas);
+						adapter.notifyDataSetChanged();
+					}
 				}
 			}
 			public void fail(String failReason) {
@@ -98,7 +114,7 @@ public class AddrManagerActivity extends Activity {
 			switch(msg.what){
 			case DELETE:
 				HttpRequest delRequest = new HttpRequest("6", "0004");
-				delRequest.setPc(msg.arg1+"");
+				delRequest.setPc(msg.obj.toString());
 				delRequest.request(new HttpCallBack() {
 					public void success(String json) {
 						initData();
@@ -109,11 +125,12 @@ public class AddrManagerActivity extends Activity {
 				});
 				break;
 			case EDIT:
-				//Intent intent = new Intent(AddrManagerActivity.this,);
+				Intent intent = new Intent(AddrManagerActivity.this,AddrEditActivity.class);
+				startActivity(intent);
 				break;
 			case CHECK_DEFAULT:
 				HttpRequest defaultRequest = new HttpRequest("6", "0005");
-				defaultRequest.setPc(msg.arg1+"");
+				defaultRequest.setPc(msg.obj.toString());
 				defaultRequest.request(new HttpCallBack() {
 					public void success(String json) {
 						initData();
@@ -131,7 +148,7 @@ public class AddrManagerActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(requestCode == ADD_NEW){
-			
+			initData();
 		}
 	}
 }

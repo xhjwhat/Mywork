@@ -27,6 +27,7 @@ import com.google.l99gson.Gson;
 import com.netshop.activity.ShopDetialsActivity;
 import com.netshop.adapter.CityAdapter;
 import com.netshop.adapter.StoreAdapter;
+import com.netshop.app.NetShopApp;
 import com.netshop.app.R;
 import com.netshop.entity.ShopEntity;
 import com.netshop.entity.ShopsEntity;
@@ -48,7 +49,9 @@ public class StoreFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		initData("");
+		double[] location = NetShopApp.getInstance().getLocation();
+		String pc="lan:"+location[0]+";lat:"+location[1];
+		initData(pc);
 		View view = inflater.inflate(R.layout.stores_detail, null);
 		titleText = (TextView) view.findViewById(R.id.title_text);
 		titleText.setText("门店");

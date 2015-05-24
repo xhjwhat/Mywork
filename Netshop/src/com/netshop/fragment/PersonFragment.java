@@ -1,10 +1,17 @@
 package com.netshop.fragment;
 
+import com.netshop.activity.AccountActivity;
 import com.netshop.activity.AddrManagerActivity;
 import com.netshop.activity.CollectActivity;
+import com.netshop.activity.LoginActivity;
+import com.netshop.activity.PersonInfoActivity;
+import com.netshop.app.NetShopApp;
 import com.netshop.app.R;
+import com.netshop.util.DESCrypto;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,7 +26,7 @@ public class PersonFragment extends Fragment implements OnClickListener{
 	private TextView nameText;
 	private TextView pointText;
 	private RelativeLayout orderLayout,collectLayout,addrLayout,accountLayout,moreLayout;
-	private ImageView editImg;
+	private ImageView editImg,exitImg;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -27,6 +34,9 @@ public class PersonFragment extends Fragment implements OnClickListener{
 		nameText = (TextView)view.findViewById(R.id.myinform_name);
 		pointText = (TextView)view.findViewById(R.id.myinform_points);
 		editImg = (ImageView)view.findViewById(R.id.myinform_edit_img);
+		editImg.setOnClickListener(this);
+		exitImg = (ImageView)view.findViewById(R.id.myinform_exit_img);
+		exitImg.setOnClickListener(this);
 		orderLayout = (RelativeLayout)view.findViewById(R.id.order_layout);
 		orderLayout.setOnClickListener(this);
 		collectLayout = (RelativeLayout)view.findViewById(R.id.my_collect);
@@ -63,6 +73,22 @@ public class PersonFragment extends Fragment implements OnClickListener{
 			getActivity().startActivity(intent);
 			break;
 		case R.id.my_account:
+			Intent accountIntent = new Intent(getActivity(),AccountActivity.class);
+			getActivity().startActivity(accountIntent);
+			break;
+		case R.id.myinform_edit_img:
+			Intent infoIntent = new Intent(getActivity(),PersonInfoActivity.class);
+			getActivity().startActivity(infoIntent);
+			break;
+		case R.id.myinform_exit_img:
+			SharedPreferences share = NetShopApp.getInstance().share;
+			Editor editor = share.edit();
+			editor.putString("user_id", "");
+			editor.putString("password", "");
+			editor.commit();
+			Intent loginIntent = new Intent(getActivity(),LoginActivity.class);
+			getActivity().startActivity(loginIntent);
+			getActivity().finish();
 			break;
 		}
 		

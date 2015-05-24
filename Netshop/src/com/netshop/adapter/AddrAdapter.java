@@ -10,6 +10,7 @@ import com.netshop.net.HttpRequest.HttpCallBack;
 
 import android.content.Context;
 import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -55,7 +56,7 @@ public class AddrAdapter extends BaseAdapter {
 			holder.name = (TextView)convertView.findViewById(R.id.addmanage_name);
 			holder.phone = (TextView)convertView.findViewById(R.id.addmanage_phone);
 			holder.del = (TextView)convertView.findViewById(R.id.addrmanage_delete_text);
-			holder.edit = (TextView)convertView.findViewById(R.id.addrmanage_eidt_text);
+			//holder.edit = (TextView)convertView.findViewById(R.id.addrmanage_eidt_text);
 			holder.check = (ImageView)convertView.findViewById(R.id.addrmanage_default_img);
 			holder.layout = convertView.findViewById(R.id.default_layout);
 			convertView.setTag(holder);
@@ -63,23 +64,29 @@ public class AddrAdapter extends BaseAdapter {
 		else{
 			holder = (HoldView) convertView.getTag();
 		}
-		if(addrs.get(position).isDefault()){
+		if(addrs.get(position).getIsde().equals("1")){
 			holder.layout.setVisibility(View.GONE);
 		}else{
 			holder.layout.setVisibility(View.VISIBLE);
 			holder.check.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
-					handler.sendEmptyMessage(AddrManagerActivity.CHECK_DEFAULT);
+					Message msg = handler.obtainMessage();
+					msg.obj = addrs.get(position).getId();
+					msg.what = AddrManagerActivity.CHECK_DEFAULT;
+					handler.sendMessage(msg);
 				}
 			});
-			holder.edit.setOnClickListener(new OnClickListener() {
-				public void onClick(View v) {
-					handler.sendEmptyMessage(AddrManagerActivity.EDIT);
-				}
-			});
+//			holder.edit.setOnClickListener(new OnClickListener() {
+//				public void onClick(View v) {
+//					handler.sendEmptyMessage(AddrManagerActivity.EDIT);
+//				}
+//			});
 			holder.del.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
-					handler.sendEmptyMessage(AddrManagerActivity.DELETE);
+					Message msg = handler.obtainMessage();
+					msg.obj = addrs.get(position).getId();
+					msg.what = AddrManagerActivity.DELETE;
+					handler.sendMessage(msg);
 				}
 			});
 		}

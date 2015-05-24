@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dip"
         android:layout_marginLeft="20dip"
         android:layout_marginRight="20dip" >
 
@@ -17,7 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/account_name"
-            android:textColor="#000000"
+            android:layout_centerVertical="true"
+            android:textColor="@color/text_49"
             android:textSize="17sp" />
 
         <TextView
@@ -25,22 +26,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:textColor="#000000"
+            android:layout_centerVertical="true"
+            android:textColor="@color/text_49"
             android:textSize="17sp" />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_marginBottom="10dip"
         android:layout_marginLeft="20dip"
-        android:layout_marginTop="10dip"
-        android:background="#000000" />
+        android:background="@color/line_bg" />
 
     <RelativeLayout
         android:id="@+id/phone_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dip"
         android:layout_marginLeft="20dip"
         android:layout_marginRight="20dip" >
 
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="@string/update_phone"
-            android:textColor="#000000"
+            android:textColor="@color/text_49"
             android:textSize="17sp" />
 
         <ImageView
@@ -65,30 +65,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/arrow_right_img"
-            android:textColor="#000000"
+            android:textColor="@color/text_49"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dip"
             android:textSize="17sp" />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_marginBottom="10dip"
         android:layout_marginLeft="20dip"
-        android:layout_marginTop="10dip"
-        android:background="#000000" />
+        android:background="@color/line_bg" />
 
     <RelativeLayout
         android:id="@+id/password_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dip"
         android:layout_marginLeft="20dip"
         android:layout_marginRight="20dip" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/update_phone"
-            android:textColor="#000000"
+            android:text="@string/update_pwd"
+            android:textColor="@color/text_49"
+            android:layout_centerVertical="true"
             android:textSize="17sp" />
 
         <ImageView
@@ -104,7 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/arrow_right_img2"
-            android:textColor="#000000"
+            android:textColor="@color/text_49"
             android:textSize="17sp" />
     </RelativeLayout>
 

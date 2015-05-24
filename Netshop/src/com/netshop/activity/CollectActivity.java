@@ -42,6 +42,7 @@ public class CollectActivity extends Activity {
 		title.setText("收藏");
 		listView = (ListView)findViewById(R.id.list);
 		HttpRequest request = new HttpRequest("5", "0001");
+		request.request(callBack);
 	}
 	HttpCallBack callBack = new HttpCallBack() {
 		@Override

@@ -36,7 +36,7 @@ public class SearchActivity extends Activity {
 		setContentView(R.layout.search);
 		Intent intent = getIntent();
 		key = intent.getStringExtra("key");
-		backImg = (ImageView)findViewById(R.id.title_back_img);
+		backImg = (ImageView)findViewById(R.id.title_back);
 		backImg.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				finish();
@@ -51,6 +51,7 @@ public class SearchActivity extends Activity {
 			}
 		});
 		listView = (ListView)findViewById(R.id.search_list);
+		initData(key);
 	}
 	public void initData(String key){
 		HttpRequest request = new HttpRequest("3", "0003");

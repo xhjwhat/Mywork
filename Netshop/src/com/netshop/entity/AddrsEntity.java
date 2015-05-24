@@ -2,8 +2,8 @@ package com.netshop.entity;
 
 import java.util.List;
 
-public class AddrEntity extends BaseEntity {
-	public AddrEntity() {
+public class AddrsEntity extends BaseEntity {
+	public AddrsEntity() {
 
 	}
 
@@ -21,7 +21,7 @@ public class AddrEntity extends BaseEntity {
 		public String currentpage;
 		public String totalpage;
 		public String totalnum;
-		public Addr delivery;
+		public List<Addr> delivery;
 
 		public String getCurrentpage() {
 			return currentpage;
@@ -47,11 +47,11 @@ public class AddrEntity extends BaseEntity {
 			this.totalnum = totalnum;
 		}
 
-		public Addr getDelivery() {
+		public List<Addr> getDelivery() {
 			return delivery;
 		}
 
-		public void setDelivery(Addr delivery) {
+		public void setDelivery(List<Addr> delivery) {
 			this.delivery = delivery;
 		}
 
