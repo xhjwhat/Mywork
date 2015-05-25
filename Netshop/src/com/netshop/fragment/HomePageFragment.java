@@ -30,6 +30,7 @@ import com.netshop.entity.Product;
 import com.netshop.entity.ProductEntity;
 import com.netshop.net.HttpRequest;
 import com.netshop.net.HttpRequest.HttpCallBack;
+import com.netshop.util.NetShopUtil;
 import com.netshop.view.CirclePageIndicator;
 
 public class HomePageFragment extends Fragment implements OnClickListener{
@@ -55,10 +56,10 @@ public class HomePageFragment extends Fragment implements OnClickListener{
 				ProductEntity entity = gson.fromJson(json, ProductEntity.class);
 				productList = entity.getList().getProduct();
 				if(productList!=null && productList.size()==4){
-					imageWorker.loadImage(productList.get(0).getPimg(), productImg0);
-					imageWorker.loadImage(productList.get(1).getPimg(), productImg1);
-					imageWorker.loadImage(productList.get(2).getPimg(), productImg2);
-					imageWorker.loadImage(productList.get(3).getPimg(), productImg3);
+//					imageWorker.loadImage(productList.get(0).getPimg(), productImg0);
+//					imageWorker.loadImage(productList.get(1).getPimg(), productImg1);
+//					imageWorker.loadImage(productList.get(2).getPimg(), productImg2);
+//					imageWorker.loadImage(productList.get(3).getPimg(), productImg3);
 				}
 			}
 			
@@ -97,6 +98,8 @@ public class HomePageFragment extends Fragment implements OnClickListener{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		imageWorker = new DefaultLoader(getActivity());
+		int width = NetShopUtil.getScreenWidth(getActivity());
+		imageWorker.setRequestWidthAndHeight(width/2, 130);
 		View view =inflater.inflate(R.layout.homepager, null);
 		classificationImg = (ImageView)view.findViewById(R.id.main_img_classification);
 		classificationImg.setOnClickListener(this);

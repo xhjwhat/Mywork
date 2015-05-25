@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.netshop.activity.BannerDetailActivity;
 import com.netshop.entity.BannerEntity.Banner;
+import com.netshop.util.NetShopUtil;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +26,8 @@ public class BannerAdapter extends PagerAdapter {
 		this.context = context;
 		this.banners = banners;
 		worker = new DefaultLoader(context);
+		int width = NetShopUtil.getScreenHeight(context);
+		worker.setRequestWidthAndHeight(width, 300);
 	}
 	@Override
 	public int getCount() {

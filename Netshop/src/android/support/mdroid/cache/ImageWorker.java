@@ -367,17 +367,9 @@ public abstract class ImageWorker {
 			// fetch the bitmap from
 			// the cache
 			if (mImageCache != null && !isCancelled() && getAttachedImageView() != null && !mExitTasksEarly) {
-				if(mImageWidth > 0){
-					try {
-						bitmap = mImageCache.getValueFromDisk(key, mImageWidth);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}else{
-					
+				
 					bitmap = mImageCache.getFromDiskCache(key);
-				}
+				
 			}
 
 			// load in wifi only
