@@ -23,7 +23,7 @@ public class PersonInfoActivity extends Activity implements OnClickListener{
 	private TextView title;
 	private ImageView backImg;
 	
-	private TextView nickName,phone,sex,birth,fixPhone,addr,realName,area;
+	private TextView nickName,phone,sex,birth,fixPhone,addr,realName,area,plant;
 	
 	public void onCreate(Bundle bundle){
 		super.onCreate(bundle);
@@ -47,6 +47,7 @@ public class PersonInfoActivity extends Activity implements OnClickListener{
 		addr = (TextView)findViewById(R.id.person_addr_text);
 		realName = (TextView)findViewById(R.id.person_name_text);
 		area = (TextView)findViewById(R.id.person_area_text);
+		plant = (TextView)findViewById(R.id.person_plantype_text);
 		findViewById(R.id.nickname_layout).setOnClickListener(this);
 		findViewById(R.id.phone_layout).setOnClickListener(this);
 		findViewById(R.id.sex_layout).setOnClickListener(this);
@@ -110,6 +111,7 @@ public class PersonInfoActivity extends Activity implements OnClickListener{
 			startActivityForResult(intent,0);
 			break;
 		case R.id.addr_layout:
+			intent = new Intent(this,CityChooseActivity.class);
 			intent.putExtra("int", ADDR);
 			intent.putExtra("type", "addr");
 			intent.putExtra("nick", "地址：");
@@ -131,6 +133,7 @@ public class PersonInfoActivity extends Activity implements OnClickListener{
 			startActivityForResult(intent,0);
 			break;
 		case R.id.planttype_layout:
+			intent =new Intent(this,PlantTypeActivity.class);
 			intent.putExtra("int", PLANTTYPE);
 			intent.putExtra("type", "crop");
 			intent.putExtra("nick", "种植作物：");
@@ -172,6 +175,8 @@ public class PersonInfoActivity extends Activity implements OnClickListener{
 		case PLANTAREA:
 			area.setText(data.getStringExtra("name"));
 			break;
+		case PLANTTYPE:
+			plant.setText(data.getStringExtra("name"));
 		}
 	}
 	

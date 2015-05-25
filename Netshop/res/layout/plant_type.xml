@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <include layout="@layout/title_bar" />
+    <GridView android:id="@+id/planttype_grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:horizontalSpacing="10dip"
+        android:verticalSpacing="5dip"
+        android:numColumns="3"/>
+    
+    <Button
+        android:id="@+id/planttype_btn"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:layout_margin="20dip"
+        android:textSize="17sp"
+        android:background="@color/red_text"
+        android:text="确定"
+        android:textColor="#ffffff" />
+    </LinearLayout>

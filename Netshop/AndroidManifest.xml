@@ -76,6 +76,12 @@
         <activity android:name="com.netshop.activity.PersonInfoActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.netshop.activity.CityChooseActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.netshop.activity.PlantTypeActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

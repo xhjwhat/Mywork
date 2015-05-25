@@ -256,12 +256,11 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginBottom="20dip"
-                    android:layout_marginLeft="110dip"
-                    android:layout_marginRight="70dip"
+                    android:layout_marginLeft="90dip"
+                    android:layout_marginRight="80dip"
                     android:layout_marginTop="20dip"
-                    android:text="周大大的试试看的减肥速度水电费加速度开了房间速度开了房建设路口的附近"
                     android:textColor="@color/text_49"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/update_addr"
@@ -384,12 +383,23 @@
                     android:textColor="@color/red_text"
                     android:textSize="15sp" />
 
-                <GridView
+                <TextView
+                    android:id="@+id/person_plantype_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/person_plant_service"
+                    android:layout_marginBottom="10dip"
+                    android:layout_marginLeft="20dip"
+                    android:background="#ffffff"
+                    android:gravity="center"
+                    android:textColor="@color/text_49"
+                    android:textSize="14sp" />
+               <!--  <GridView
                     android:id="@+id/person_grid"
                     android:layout_width="match_parent"
                     android:layout_below="@id/person_plant_service"
                     android:layout_height="wrap_content"
-                    android:numColumns="3" />
+                    android:numColumns="3" /> -->
             </RelativeLayout>
 
             <View
