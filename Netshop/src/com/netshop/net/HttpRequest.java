@@ -51,6 +51,7 @@ public class HttpRequest {
 	public String pc = "";
 	public String userId = "";
 	public String password = "";
+	public String code="";
 	public SharedPreferences preferences;
 	//String tempstr = "<response description=\"获取成功\" error=\"0\"><list currentpage=\"1\" totalpage=\"1\" totalnum=\"4\"> <product pid=\"7\" pname=\"化肥7\" price=\"456\" pimg=\"http://localhost:8080/wxnhProject/upload/proImg/1430549033557.jpg\" weight=\"70\"/> <product pid=\"6\" pname=\"化肥6\" price=\"456\" pimg=\"http://localhost:8080/wxnhProject/upload/proImg/1430549033557.jpg\" weight=\"70\"/></list></response>";
 
@@ -83,6 +84,9 @@ public class HttpRequest {
 			}
 			if (!pg.equals("")) {
 				buffer.append("&pg=" + pg);
+			}
+			if(!code.equals("")){
+				buffer.append("&code="+ code);
 			}
 			if (!pc.equals("")) {
 				buffer.append("&pc=" + pc);
@@ -248,6 +252,14 @@ public class HttpRequest {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }

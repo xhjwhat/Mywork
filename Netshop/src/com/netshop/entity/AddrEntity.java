@@ -2,8 +2,13 @@ package com.netshop.entity;
 
 import java.util.List;
 
-public class ShopsEntity extends BaseEntity {
+public class AddrEntity extends BaseEntity {
+	public AddrEntity() {
+
+	}
+
 	public Lists list;
+
 	public Lists getList() {
 		return list;
 	}
@@ -16,32 +21,40 @@ public class ShopsEntity extends BaseEntity {
 		public String currentpage;
 		public String totalpage;
 		public String totalnum;
-		public List<ShopEntity.Shop> shop;
+		public Addr delivery;
+
 		public String getCurrentpage() {
 			return currentpage;
 		}
+
 		public void setCurrentpage(String currentpage) {
 			this.currentpage = currentpage;
 		}
+
 		public String getTotalpage() {
 			return totalpage;
 		}
+
 		public void setTotalpage(String totalpage) {
 			this.totalpage = totalpage;
 		}
+
 		public String getTotalnum() {
 			return totalnum;
 		}
+
 		public void setTotalnum(String totalnum) {
 			this.totalnum = totalnum;
 		}
-		public List<ShopEntity.Shop> getShop() {
-			return shop;
+
+		public Addr getDelivery() {
+			return delivery;
 		}
-		public void setShop(List<ShopEntity.Shop> shop) {
-			this.shop = shop;
+
+		public void setDelivery(Addr delivery) {
+			this.delivery = delivery;
 		}
-		
-		
+
+
 	}
 }

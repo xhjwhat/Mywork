@@ -180,6 +180,7 @@
         android:layout_marginTop="20dip"
         android:background="@drawable/login_btn"
         android:text="@string/register"
+        android:textColor="@color/red_text"
         android:textSize="18sp" />
 
 </RelativeLayout>

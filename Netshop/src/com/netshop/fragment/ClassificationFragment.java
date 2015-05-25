@@ -13,6 +13,7 @@ import com.netshop.entity.ProductTypes.ProductType;
 import com.netshop.net.HttpRequest;
 import com.netshop.net.HttpRequest.HttpCallBack;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -43,12 +44,13 @@ public class ClassificationFragment extends Fragment {
 	public FragmentTransaction transaction;
 	public FragmentManager manager;
 	public ClassFragment parentFragment;
+	public Context context;
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		HttpRequest request = new HttpRequest("3", "0001");
-		request.request(HttpRequest.REQUEST_GET, callback);
+		
 		
 		super.onActivityCreated(savedInstanceState);
+		
 	}
 
 	@Override
@@ -63,13 +65,16 @@ public class ClassificationFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		context = getActivity();
+		HttpRequest request = new HttpRequest("3", "0001");
+		request.request(HttpRequest.REQUEST_GET, callback);
 		View view = inflater.inflate(R.layout.classification, null);
 		searchEdit = (EditText)view.findViewById(R.id.main_search_edit);
 		searchImg = (ImageView)view.findViewById(R.id.main_seach_img);
 		searchImg.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(),SearchActivity.class);
+				Intent intent = new Intent(context,SearchActivity.class);
 				intent.putExtra("key", searchEdit.getText().toString());
 				startActivity(intent);
 				
@@ -108,16 +113,16 @@ public class ClassificationFragment extends Fragment {
 			Gson gson = new Gson();
 			ProductTypes entity = gson.fromJson(json, ProductTypes.class);
 			datas = (List<ProductType>) entity.getPtype();
-			adapter = new ProductTypeAdapter(getActivity(), datas);
+			adapter = new ProductTypeAdapter(context, datas);
 			seriesList.setAdapter(adapter);
 			ctypeList = datas.get(0).getCtype();
-			gridAdapter = new ProductGridAdapter(getActivity(),ctypeList );
+			gridAdapter = new ProductGridAdapter(context,ctypeList );
 			seriesGrid.setAdapter(gridAdapter);
 		}
 		
 		@Override
 		public void fail(String failReason) {
-			Toast.makeText(getActivity(), failReason, Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, failReason, Toast.LENGTH_SHORT).show();
 		}
 	};
 	

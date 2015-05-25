@@ -13,13 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.netshop.app.R;
-import com.netshop.entity.Shop;
+import com.netshop.entity.ShopEntity;
 
 public class StoreAdapter extends BaseAdapter {
 	public Context context;
-	public List<Shop> shopList;
+	public List<ShopEntity.Shop> shopList;
 	public ImageWorker imageWork;
-	public StoreAdapter(Context context,List<Shop> shops){
+	public StoreAdapter(Context context,List<ShopEntity.Shop> shops){
 		this.context = context;
 		shopList = shops;
 		imageWork = new DefaultLoader(context);

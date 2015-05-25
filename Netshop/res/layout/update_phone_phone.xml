@@ -5,8 +5,6 @@
     android:background="#ffffff"
     android:orientation="vertical" >
 
-    <include layout="@layout/title_bar" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -109,23 +107,27 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dip"
             android:textColor="#888888"
+            android:layout_marginRight="20dip"
+            android:layout_gravity="center_vertical"
             android:textSize="17sp" />
     </LinearLayout>
 
     
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dip"
         android:layout_margin="20dip" >
 
         <Button
             android:id="@+id/update_pwd_verifi_btn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dip"
             android:layout_alignParentRight="true"
             android:text="@string/get_verification2"
             android:textColor="#ffffff"
-            android:textSize="15sp" 
+            android:layout_centerVertical="true"
+            android:textSize="14sp" 
+            android:padding="3dip"
             android:background="#f5ac39"/>
 
         <EditText
@@ -134,17 +136,19 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/update_pwd_verifi_btn"
             android:textColor="#888888"
+            android:layout_marginRight="10dip"
             android:textSize="17sp" />
     </RelativeLayout>
 
     <Button
         android:id="@+id/update_phone_next_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dip"
         android:text="@string/next"
         android:layout_marginTop="20dip"
         android:textColor="#ffffff"
         android:background="#f5ac39"
+        android:layout_margin="20dip"
         android:textSize="17sp" />
 
 </LinearLayout>

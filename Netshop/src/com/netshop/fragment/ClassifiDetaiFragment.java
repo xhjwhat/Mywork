@@ -11,6 +11,7 @@ import com.netshop.entity.ProductEntity;
 import com.netshop.net.HttpRequest;
 import com.netshop.net.HttpRequest.HttpCallBack;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -32,10 +33,11 @@ public class ClassifiDetaiFragment extends Fragment {
 	private List<Product> datas;
 	public ClassFragment parentFragment;
 	public ProductAdapter adapter;
+	public Context context;
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		
+		context = getActivity();
 	}
 
 	@Override
@@ -80,15 +82,15 @@ public class ClassifiDetaiFragment extends Fragment {
 			ProductEntity entity = gson.fromJson(json, ProductEntity.class);
 			datas = (List<Product>) entity.getList().getProduct();
 			if(datas != null){
-				adapter = new ProductAdapter(getActivity(), datas);
+				adapter = new ProductAdapter(context, datas);
 				list.setAdapter(adapter);
 				list.setOnItemClickListener(new OnItemClickListener() {
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
-						Intent intent = new Intent(getActivity(),GoodsDetilsActivity.class);
+						Intent intent = new Intent(context,GoodsDetilsActivity.class);
 						intent.putExtra("id", datas.get(position).getPid());
-						getActivity().startActivity(intent);
+						context.startActivity(intent);
 					}
 				});
 			}

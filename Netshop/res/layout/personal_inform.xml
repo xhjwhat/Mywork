@@ -17,6 +17,7 @@
             <include layout="@layout/title_bar" />
 
             <RelativeLayout
+                android:id="@+id/nickname_layout"
                 android:layout_width="match_parent"
                 android:layout_height="50dip" >
 
@@ -47,6 +48,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dip"
                     android:drawableRight="@drawable/arrow_right"
+                    android:drawablePadding="5dip"
                     android:text="修改"
                     android:textColor="@color/red_text"
                     android:textSize="15sp" />
@@ -59,6 +61,7 @@
                 android:background="@color/line_bg" />
 
             <RelativeLayout
+                android:id="@+id/phone_layout"
                 android:layout_width="match_parent"
                 android:layout_height="50dip" >
 
@@ -90,6 +93,7 @@
                     android:layout_marginRight="20dip"
                     android:drawableRight="@drawable/arrow_right"
                     android:text="修改"
+                    android:drawablePadding="5dip"
                     android:textColor="@color/red_text"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -101,6 +105,7 @@
                 android:background="@color/line_bg" />
 
             <RelativeLayout
+                android:id="@+id/sex_layout"
                 android:layout_width="match_parent"
                 android:layout_height="50dip" >
 
@@ -132,6 +137,7 @@
                     android:layout_marginRight="20dip"
                     android:drawableRight="@drawable/arrow_right"
                     android:text="修改"
+                    android:drawablePadding="5dip"
                     android:textColor="@color/red_text"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -143,6 +149,7 @@
                 android:background="@color/line_bg" />
 
             <RelativeLayout
+                android:id="@+id/birth_layout"
                 android:layout_width="match_parent"
                 android:layout_height="50dip" >
 
@@ -174,6 +181,7 @@
                     android:layout_marginRight="20dip"
                     android:drawableRight="@drawable/arrow_right"
                     android:text="修改"
+                    android:drawablePadding="5dip"
                     android:textColor="@color/red_text"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -185,6 +193,7 @@
                 android:background="@color/line_bg" />
 
             <RelativeLayout
+                android:id="@+id/fixphone_layout"
                 android:layout_width="match_parent"
                 android:layout_height="50dip" >
 
@@ -216,6 +225,7 @@
                     android:layout_marginRight="20dip"
                     android:drawableRight="@drawable/arrow_right"
                     android:text="修改"
+                    android:drawablePadding="5dip"
                     android:textColor="@color/red_text"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -227,6 +237,7 @@
                 android:background="@color/line_bg" />
 
             <RelativeLayout
+                android:id="@+id/addr_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
@@ -261,6 +272,7 @@
                     android:layout_marginRight="20dip"
                     android:drawableRight="@drawable/arrow_right"
                     android:text="修改"
+                    android:drawablePadding="5dip"
                     android:textColor="@color/red_text"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -272,6 +284,7 @@
                 android:background="@color/line_bg" />
 
             <RelativeLayout
+                android:id="@+id/plantarea_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
@@ -307,6 +320,7 @@
                     android:layout_marginTop="20dip"
                     android:drawableRight="@drawable/arrow_right"
                     android:text="修改"
+                    android:drawablePadding="5dip"
                     android:textColor="@color/red_text"
                     android:textSize="15sp" />
 
@@ -330,6 +344,7 @@
                 android:background="@color/line_bg" />
 
             <RelativeLayout
+                android:id="@+id/planttype_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
@@ -365,6 +380,7 @@
                     android:layout_marginTop="20dip"
                     android:drawableRight="@drawable/arrow_right"
                     android:text="修改"
+                    android:drawablePadding="5dip"
                     android:textColor="@color/red_text"
                     android:textSize="15sp" />
 
@@ -382,6 +398,7 @@
                 android:layout_marginLeft="20dip"
                 android:background="@color/line_bg" />
             <RelativeLayout
+                android:id="@+id/realname_layout"
                 android:layout_width="match_parent"
                 android:layout_height="50dip" >
 
@@ -413,6 +430,7 @@
                     android:layout_marginRight="20dip"
                     android:drawableRight="@drawable/arrow_right"
                     android:text="修改"
+                    android:drawablePadding="5dip"
                     android:textColor="@color/red_text"
                     android:textSize="15sp" />
             </RelativeLayout>

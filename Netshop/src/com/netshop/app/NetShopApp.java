@@ -5,6 +5,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.netshop.util.NetShopUtil;
+
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,6 +20,7 @@ public class NetShopApp extends Application {
 	public static int MAX_HTTP_THREAD_COUNT = 5;
 	public ExecutorService threadPool;
 	public ImageCache mCache;
+	public double[] location = new double[]{0,0};
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -38,6 +41,7 @@ public class NetShopApp extends Application {
 								+ ints.getAndIncrement());
 					}
 				});
+		NetShopUtil.getLocation(this, location);
 	}
 	public ImageCache getImageCache(){
 		return mCache;
@@ -57,5 +61,7 @@ public class NetShopApp extends Application {
 	public String getPhoneNum() {
 		return share.getString("phone_num", "");
 	}
-
+	public double[] getLocation(){
+		return location;
+	}
 }

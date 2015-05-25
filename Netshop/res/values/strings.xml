@@ -27,7 +27,7 @@
 	<string name="next">下一步</string>
 	<string name="input_original_pwd">输入原密码</string>
 	<string name="input_new_pwd">输入新密码</string>
-	<string name="comfirm_pwd">确认密码</string>
+	<string name="comfirm_pwd">确认新密码</string>
 	<string name="update_pwd_complete">恭喜您，修改密码成功</string>
 	<string name="go_on_select_goods">您可以进入商城 继续购买商品</string>
 	<string name="input_new_phone">输入新手机号</string>
