@@ -10,7 +10,6 @@ import com.netshop.fragment.ShopcarFragment;
 import com.netshop.fragment.StoreFragment;
 import com.netshop.view.IconPagerAdapter;
 
-import android.R.integer;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -21,8 +20,10 @@ public class MainPagerAdapter extends FragmentPagerAdapter implements IconPagerA
 	                             R.drawable.icon_shopcar_selector,R.drawable.icon_person_selector};
 	
 	public String[] titles = new String[]{"首页","分类","门店","购物车","我的"};
+	public FragmentManager manager;
 	public MainPagerAdapter(FragmentManager fm) {
 		super(fm);
+		manager = fm;
 		
 	}
 
@@ -40,7 +41,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter implements IconPagerA
 		case MainActivity.PERSONAL:
 			return new PersonFragment();
 		}
-		return null;
+		return new HomePageFragment();
 	}
 
 	@Override
@@ -53,6 +54,16 @@ public class MainPagerAdapter extends FragmentPagerAdapter implements IconPagerA
 		return icons[index];
 	}
 
+//	@Override
+//    public void destroyItem(android.view.ViewGroup aContainer, int aPosition, java.lang.Object aObject)
+//    {
+//        if (aPosition <= getCount() && aObject != null)
+//        {
+//            FragmentTransaction trans = manager.beginTransaction();
+//            trans.remove((Fragment) aObject);
+//            trans.commit();
+//        }
+//    }
 	@Override
 	public CharSequence getPageTitle(int position) {
 		

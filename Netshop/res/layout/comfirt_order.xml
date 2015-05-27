@@ -68,6 +68,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/comfirm_order_addr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dip"
@@ -273,7 +274,7 @@
 	        android:layout_alignParentRight="true"
 	        android:layout_marginRight="10dip"/>
 	    <TextView 
-	        android:id="@+id/confirm_money_text"
+	        android:id="@+id/confirm_allmoney_text"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:textSize="16sp"
@@ -287,7 +288,7 @@
 	        android:textColor="@color/red_text"
 	        android:layout_centerVertical="true"
 	        android:text="合计："
-	        android:layout_toLeftOf="@id/confirm_money_text"/>
+	        android:layout_toLeftOf="@id/confirm_allmoney_text"/>
 	</RelativeLayout>
 </LinearLayout>
 

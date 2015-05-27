@@ -18,7 +18,7 @@ public class ClassFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.classfragment, null);
-		manager = getFragmentManager();
+		manager = getChildFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
 		fragment = (ClassificationFragment) manager.findFragmentByTag("classification");
 		

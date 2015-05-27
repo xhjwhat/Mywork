@@ -4,6 +4,7 @@ import com.netshop.app.R;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,9 +20,11 @@ public class ShopcarFragment extends Fragment {
 	private ListView listView;
 	private ImageView selectAllImg;
 	private Button settleBtn;
+	private FragmentManager manager;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		manager = getFragmentManager();
 		View view = inflater.inflate(R.layout.shopcar, null);
 		titleText = (TextView) view.findViewById(R.id.title_text);
 		titleText.setText("购物车");

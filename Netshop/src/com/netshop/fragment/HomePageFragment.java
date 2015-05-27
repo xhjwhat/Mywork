@@ -9,6 +9,7 @@ import android.support.mdroid.cache.DefaultLoader;
 import android.support.mdroid.cache.ImageCache;
 import android.support.mdroid.cache.ImageWorker;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,7 @@ public class HomePageFragment extends Fragment implements OnClickListener{
 	private ImageWorker imageWorker;
 	private BannerAdapter adapter;
 	private Context context;
+	private FragmentManager manager;
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		
@@ -103,6 +105,7 @@ public class HomePageFragment extends Fragment implements OnClickListener{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		context = getActivity();
+		manager = getFragmentManager();
 		imageWorker = new DefaultLoader(context);
 		View view =inflater.inflate(R.layout.homepager, null);
 		classificationImg = (ImageView)view.findViewById(R.id.main_img_classification);

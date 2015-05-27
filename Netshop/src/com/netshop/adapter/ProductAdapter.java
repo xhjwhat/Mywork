@@ -25,6 +25,9 @@ public class ProductAdapter extends BaseAdapter {
 		datas =dataList;
 		worker = new DefaultLoader(context);
 	}
+	public void setList(List<Product> dataList){
+		datas = dataList;
+	}
 	@Override
 	public int getCount() {
 		return datas.size();

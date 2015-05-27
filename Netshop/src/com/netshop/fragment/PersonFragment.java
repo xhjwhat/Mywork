@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,9 +28,11 @@ public class PersonFragment extends Fragment implements OnClickListener{
 	private TextView pointText;
 	private RelativeLayout orderLayout,collectLayout,addrLayout,accountLayout,moreLayout;
 	private ImageView editImg,exitImg;
+	private FragmentManager manager;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		manager = getFragmentManager();
 		View view = inflater.inflate(R.layout.my_inform, null);
 		nameText = (TextView)view.findViewById(R.id.myinform_name);
 		pointText = (TextView)view.findViewById(R.id.myinform_points);

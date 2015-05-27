@@ -51,12 +51,17 @@
         android:background="@color/background"
         android:orientation="horizontal" >
 
-        <ImageView
+        <!-- <ImageView
             android:id="@+id/shop_car_select_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dip" />
+            android:layout_marginLeft="20dip" /> -->
+            <RadioButton android:id="@+id/shop_car_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dip"/>
 
         <ImageView
             android:id="@+id/shop_car_product_img"
