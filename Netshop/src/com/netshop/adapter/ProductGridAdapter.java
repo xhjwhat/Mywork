@@ -45,9 +45,6 @@ public class ProductGridAdapter extends BaseAdapter {
 	}
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		if(datas.get(position)==null) {
-			return new TextView(context);
-		}
 		TextView text = null;
 		if(convertView == null){
 			text = new TextView(context);

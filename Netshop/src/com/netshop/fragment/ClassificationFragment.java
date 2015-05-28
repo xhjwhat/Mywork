@@ -1,7 +1,5 @@
 package com.netshop.fragment;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.google.l99gson.Gson;
@@ -14,7 +12,6 @@ import com.netshop.entity.ProductTypes.CType;
 import com.netshop.entity.ProductTypes.ProductType;
 import com.netshop.net.HttpRequest;
 import com.netshop.net.HttpRequest.HttpCallBack;
-import com.thoughtworks.xstream.XStream;
 
 import android.content.Context;
 import android.content.Intent;
@@ -92,18 +89,7 @@ public class ClassificationFragment extends Fragment {
 				if(adapter!=null){
 					adapter.setSelectItem(position);
 					adapter.notifyDataSetChanged();
-					Object tempObject = datas.get(position).getCtype();
-					ctypeList = new ArrayList<ProductTypes.CType>();
-					if(tempObject instanceof LinkedHashMap<?, ?>){
-						LinkedHashMap<String, CType> tempHashMap = (LinkedHashMap<String, CType>)tempObject;
-						CType type =tempHashMap.get("ctype");
-						ctypeList.add(type);
-					}else if(tempObject instanceof ArrayList<?>){
-						ArrayList<LinkedHashMap<String, CType>> tempList = (ArrayList<LinkedHashMap<String, CType>>)tempObject;
-						for(LinkedHashMap<String, CType> map:tempList){
-							ctypeList.add(map.get("ctype"));
-						}
-					}
+					ctypeList = datas.get(position).getCtype();
 					gridAdapter.setData(ctypeList);
 					gridAdapter.notifyDataSetChanged();
 				}
@@ -124,26 +110,12 @@ public class ClassificationFragment extends Fragment {
 	HttpCallBack callback = new HttpCallBack() {
 		@Override
 		public void success(String json) {
-			//Policy newPolicy = (Policy)xstream.fromXML(xml); 
-			//json="<response description=\"获取成功\" error=\"0\"><list><ptype name=\"粮食类作物\" id=\"1\"><clist><ctype name=\"大麦\" id=\"16\"/><ctype name=\"水稻\" id=\"17\"/></clist></ptype><ptype name=\"蔬菜类作物\" id=\"11\"><clist/></ptype><ptype name=\"水果类作物\" id=\"7\"><clist/></ptype><ptype name=\"花卉类作物\" id=\"12\"><clist/></ptype><ptype name=\"药用类作物\" id=\"13\"><clist/></ptype><ptype name=\"瓜类作物\" id=\"6\"><clist/></ptype><ptype name=\"豆类作物\" id=\"2\"><clist/></ptype><ptype name=\"干果类作物\" id=\"8\"><clist/></ptype><ptype name=\"嗜好类作物\" id=\"9\"><clist/></ptype><ptype name=\"根茎类作物\" id=\"10\"><clist/></ptype><ptype name=\"油料类作物\" id=\"3\"><clist/></ptype><ptype name=\"纤维类作物\" id=\"4\"><clist/></ptype><ptype name=\"糖料类作物\" id=\"5\"><clist/></ptype><ptype name=\"原料类作物\" id=\"14\"><clist/></ptype><ptype name=\"绿肥牧草作物\" id=\"15\"><clist/></ptype></list></response>";
 			Gson gson = new Gson();
 			ProductTypes entity = gson.fromJson(json, ProductTypes.class);
 			datas = (List<ProductType>) entity.getPtype();
 			adapter = new ProductTypeAdapter(context, datas);
 			seriesList.setAdapter(adapter);
-			//ctypeList = datas.get(0).getCtype();
-			Object tempObject = datas.get(0).getCtype();
-			ctypeList = new ArrayList<ProductTypes.CType>();
-			if(tempObject instanceof LinkedHashMap<?, ?>){
-				LinkedHashMap<String, CType> tempHashMap = (LinkedHashMap<String, CType>)tempObject;
-				CType type =tempHashMap.get("ctype");
-				ctypeList.add(type);
-			}else if(tempObject instanceof ArrayList<?>){
-				ArrayList<LinkedHashMap<String, CType>> tempList = (ArrayList<LinkedHashMap<String, CType>>)tempObject;
-				for(LinkedHashMap<String, CType> map:tempList){
-					ctypeList.add(map.get("ctype"));
-				}
-			}
+			ctypeList = datas.get(0).getCtype();
 			gridAdapter = new ProductGridAdapter(context,ctypeList );
 			seriesGrid.setAdapter(gridAdapter);
 		}
