@@ -16,7 +16,8 @@ public class ProductTypes extends BaseEntity {
 	public class ProductType{
 		public String name;
 		public String id;
-		public List<CType> clist;
+		public Object clist;
+		//public CType ctype;
 		public String getName() {
 			return name;
 		}
@@ -29,10 +30,10 @@ public class ProductTypes extends BaseEntity {
 		public void setId(String id) {
 			this.id = id;
 		}
-		public List<CType> getCtype() {
+		public Object getCtype() {
 			return clist;
 		}
-		public void setCtype(List<CType> ctype) {
+		public void setCtype(Object ctype) {
 			this.clist = ctype;
 		}
 		

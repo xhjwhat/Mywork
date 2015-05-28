@@ -169,6 +169,7 @@ public class HttpRequest {
 		protected void onPostExecute(String result) {
 			try {
 				XMLSerializer xmls = new XMLSerializer();
+				result="<response description=\"获取成功\" error=\"0\"><list><ptype name=\"粮食类作物\" id=\"1\"><clist><ctype name=\"大麦\" id=\"16\"/><ctype name=\"水稻\" id=\"17\"/></clist></ptype><ptype name=\"蔬菜类作物\" id=\"11\"><clist><ctype name=\"南瓜\" id=\"18\"/></clist></ptype><ptype name=\"水果类作物\" id=\"7\"><clist/></ptype><ptype name=\"花卉类作物\" id=\"12\"><clist/></ptype><ptype name=\"药用类作物\" id=\"13\"><clist/></ptype><ptype name=\"瓜类作物\" id=\"6\"><clist/></ptype><ptype name=\"豆类作物\" id=\"2\"><clist/></ptype><ptype name=\"干果类作物\" id=\"8\"><clist/></ptype><ptype name=\"嗜好类作物\" id=\"9\"><clist/></ptype><ptype name=\"根茎类作物\" id=\"10\"><clist/></ptype><ptype name=\"油料类作物\" id=\"3\"><clist/></ptype><ptype name=\"纤维类作物\" id=\"4\"><clist/></ptype><ptype name=\"糖料类作物\" id=\"5\"><clist/></ptype><ptype name=\"原料类作物\" id=\"14\"><clist/></ptype><ptype name=\"绿肥牧草作物\" id=\"15\"><clist/></ptype></list></response>";
 				String json = xmls.read(result).toString().replace("@", "");
 				Log.e("What", json);
 				JSONObject jsonObject = new JSONObject(json);
