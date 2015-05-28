@@ -18,7 +18,7 @@ public class GoodDetailActivity extends FragmentActivity {
 	/**
 	 * Tab标题
 	 */
-	private static final String[] TITLE = new String[] { "头条", "房产", "另一面"};
+	private static final String[] TITLE = new String[] { "产品特点", "使用说明", "效果验证"};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

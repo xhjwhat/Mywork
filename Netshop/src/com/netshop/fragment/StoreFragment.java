@@ -1,16 +1,21 @@
 package com.netshop.fragment;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.l99gson.Gson;
 import com.netshop.activity.ShopDetialsActivity;
@@ -38,7 +44,7 @@ import com.netshop.util.NetShopUtil;
 
 public class StoreFragment extends Fragment {
 	private TextView titleText;
-	private View areaLayout,orderLayout;
+	private View areaLayout, orderLayout;
 	private ListView listview;
 	private StoreAdapter adapter;
 	private ImageView cityBack;
@@ -48,12 +54,13 @@ public class StoreFragment extends Fragment {
 	private PopupWindow window;
 	private Context context;
 	private FragmentManager manager;
+	double[] location;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		manager = getFragmentManager();
 		double[] location = NetShopApp.getInstance().getLocation();
-		String pc="lan:"+location[0]+";lat:"+location[1];
+		String pc = "lan:" + location[0] + ";lat:" + location[1];
 		initData(pc);
 		View view = inflater.inflate(R.layout.stores_detail, null);
 		titleText = (TextView) view.findViewById(R.id.title_text);
@@ -62,12 +69,13 @@ public class StoreFragment extends Fragment {
 		cityAdapter = new CityAdapter(getActivity(), handler);
 		areaList.setAdapter(cityAdapter);
 		cityBack = new ImageView(getActivity());
-		areaLayout=view.findViewById(R.id.store_area_layout);
+		areaLayout = view.findViewById(R.id.store_area_layout);
 		areaLayout.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				if(window == null){
-					window = new PopupWindow(areaList, 
-							NetShopUtil.getScreenWidth(getActivity())/2, NetShopUtil.dip2px(getActivity(), 300));
+				if (window == null) {
+					window = new PopupWindow(areaList, NetShopUtil
+							.getScreenWidth(getActivity()) / 2, NetShopUtil
+							.dip2px(getActivity(), 300));
 					window.setFocusable(true);
 					window.setOutsideTouchable(true);
 					window.setBackgroundDrawable(new ColorDrawable(0x00000000));
@@ -76,25 +84,25 @@ public class StoreFragment extends Fragment {
 				window.showAsDropDown(areaLayout);
 			}
 		});
-		orderLayout=view.findViewById(R.id.store_order_layout);
-		listview = (ListView)view.findViewById(R.id.store_list);
-		
+		orderLayout = view.findViewById(R.id.store_order_layout);
+		listview = (ListView) view.findViewById(R.id.store_list);
+
 		return view;
 	}
-
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		context = getActivity();
 	}
-	public void initData(String pc){
+
+	public void initData(String pc) {
 		HttpRequest request = new HttpRequest("4", "0001");
 		request.setPg("1");
 		request.setPs("8");
 		request.setPc(pc);
 		request.request(HttpRequest.REQUEST_GET, new HttpCallBack() {
-			
+
 			@Override
 			public void success(String json) {
 				Gson gson = new Gson();
@@ -106,34 +114,37 @@ public class StoreFragment extends Fragment {
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
-						Intent intent = new Intent(context,ShopDetialsActivity.class);
+						Intent intent = new Intent(context,
+								ShopDetialsActivity.class);
 						intent.putExtra("id", shopList.get(position).getId());
 						startActivity(intent);
-						
+
 					}
 				});
 			}
-			
+
 			@Override
 			public void fail(String failReason) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 	}
+
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 	}
-	Handler handler = new Handler(){
-		public void handleMessage(Message msg){
-			if(window.isShowing()){
+
+	Handler handler = new Handler() {
+		public void handleMessage(Message msg) {
+			if (window.isShowing()) {
 				window.dismiss();
 			}
 			String pc = (String) msg.obj;
 			initData(pc);
 		}
 	};
-	
+
 }
