@@ -1,9 +1,13 @@
 package com.netshop.fragment;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
+import android.R.integer;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.mdroid.cache.DefaultLoader;
 import android.support.mdroid.cache.ImageCache;
@@ -49,6 +53,7 @@ public class HomePageFragment extends Fragment implements OnClickListener{
 	private BannerAdapter adapter;
 	private Context context;
 	private FragmentManager manager;
+	private ImageView[] images;
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		
@@ -58,13 +63,33 @@ public class HomePageFragment extends Fragment implements OnClickListener{
 			public void success(String json) {
 				Gson gson = new Gson();
 				ProductEntity entity = gson.fromJson(json, ProductEntity.class);
-				productList = entity.getList().getProduct();
-				if(productList!=null && productList.size()==4){
-					imageWorker.loadImage(productList.get(0).getPimg(), productImg0);
-					imageWorker.loadImage(productList.get(1).getPimg(), productImg1);
-					imageWorker.loadImage(productList.get(2).getPimg(), productImg2);
-					imageWorker.loadImage(productList.get(3).getPimg(), productImg3);
+				Object tempObject = entity.getList().getProduct();
+				productList = new ArrayList<Product>();
+				if(tempObject instanceof LinkedHashMap<?, ?>){
+					LinkedHashMap<String, Object> tempHashMap =(LinkedHashMap<String, Object>)tempObject;
+					//LinkedHashMap<String, Object> temp = (LinkedHashMap<String, Object>)tempHashMap.get("product");
+					Product product = new Product();
+					product.setPid(String.valueOf(tempHashMap.get("pid")));
+					product.setPimg(String.valueOf(tempHashMap.get("pimg")));
+					productList.add(product);
+				}else if(tempObject instanceof ArrayList<?>){
+					ArrayList<LinkedHashMap<String, Product>> list = (ArrayList<LinkedHashMap<String, Product>>) tempObject;
+					for(LinkedHashMap<String, Product> temp:list){
+						Product product = new Product();
+						product.setPid(String.valueOf(temp.get("pid")));
+						product.setPimg(String.valueOf(temp.get("pimg")));
+						productList.add(product);
+					}
 				}
+				for(int i=0;i<productList.size();i++){
+					imageWorker.loadImage(productList.get(i).getPimg(), images[i]);
+				}
+//				if(productList!=null && productList.size()==4){
+//					imageWorker.loadImage(productList.get(0).getPimg(), productImg0);
+//					imageWorker.loadImage(productList.get(1).getPimg(), productImg1);
+//					imageWorker.loadImage(productList.get(2).getPimg(), productImg2);
+//					imageWorker.loadImage(productList.get(3).getPimg(), productImg3);
+//				}
 			}
 			
 			@Override
@@ -132,6 +157,7 @@ public class HomePageFragment extends Fragment implements OnClickListener{
 		productImg2.setOnClickListener(this);
 		productImg3 = (ImageView)view.findViewById(R.id.main_img_bot4); 
 		productImg3.setOnClickListener(this);
+		images = new ImageView[]{productImg0,productImg1,productImg2,productImg3};
 		return view;
 	}
 

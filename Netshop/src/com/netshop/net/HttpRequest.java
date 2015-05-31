@@ -52,6 +52,10 @@ public class HttpRequest {
 	public String userId = "";
 	public String password = "";
 	public String code="";
+	public String shopid="";
+	public String addressid="";
+	
+
 	public SharedPreferences preferences;
 	//String tempstr = "<response description=\"获取成功\" error=\"0\"><list currentpage=\"1\" totalpage=\"1\" totalnum=\"4\"> <product pid=\"7\" pname=\"化肥7\" price=\"456\" pimg=\"http://localhost:8080/wxnhProject/upload/proImg/1430549033557.jpg\" weight=\"70\"/> <product pid=\"6\" pname=\"化肥6\" price=\"456\" pimg=\"http://localhost:8080/wxnhProject/upload/proImg/1430549033557.jpg\" weight=\"70\"/></list></response>";
 
@@ -87,6 +91,13 @@ public class HttpRequest {
 			}
 			if(!code.equals("")){
 				buffer.append("&code="+ code);
+			}
+			if(!shopid.equals("")){
+				buffer.append("&shopid="+shopid);
+			}
+			if(!addressid.equals("")){
+				
+				buffer.append("&addressid="+addressid);
 			}
 			if (!pc.equals("")) {
 				buffer.append("&pc=" + pc);
@@ -169,6 +180,7 @@ public class HttpRequest {
 		protected void onPostExecute(String result) {
 			try {
 				XMLSerializer xmls = new XMLSerializer();
+				//result = "<response description=\"操作成功\" error=\"0\"><list currentpage=\"1\" totalpage=\"1\" totalnum=\"1\"><order oid=\"20150430180559748376\" time=\"2015-04-30 18:07:46\" status=\"1\" statusdes=\"未支付\" shopid=\"2\" shopname=\"张三某某化肥店2\" total=\"52000\"><detaillist><detail pid=\"3\" pname=\"化肥3\" price=\"44\" amount=\"20袋\" weight=\"70KG/袋\" /><detail pid=\"6\" pname=\"化肥6\" price=\"456\" amount=\"40袋\" weight=\"70KG/袋\" /><detail pid=\"8\" pname=\"化肥8\" price=\"548\" amount=\"60袋\" weight=\"70KG/袋\" /></detaillist></order></list></response>";
 				String json = xmls.read(result).toString().replace("@", "");
 				Log.e("What", json);
 				JSONObject jsonObject = new JSONObject(json);
@@ -261,5 +273,19 @@ public class HttpRequest {
 	public void setCode(String code) {
 		this.code = code;
 	}
+	public String getShopid() {
+		return shopid;
+	}
 
+	public void setShopid(String shopid) {
+		this.shopid = shopid;
+	}
+
+	public String getAddressid() {
+		return addressid;
+	}
+
+	public void setAddressid(String addressid) {
+		this.addressid = addressid;
+	}
 }

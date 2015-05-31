@@ -1,5 +1,7 @@
 package com.netshop.entity;
 
+import java.io.Serializable;
+
 public class ShopEntity extends BaseEntity{
 	public Shop shop;
 	
@@ -14,7 +16,7 @@ public class ShopEntity extends BaseEntity{
 		this.shop = shop;
 	}
 
-	public class Shop{
+	public static class Shop implements Serializable{
 		public String id;
 		public String name;
 		public String img;

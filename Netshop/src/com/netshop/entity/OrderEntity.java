@@ -2,80 +2,47 @@ package com.netshop.entity;
 
 import java.util.List;
 
+
 public class OrderEntity extends BaseEntity {
-	public String oid;
-	public String time;
-	public String status;
-	public String statusdes;
-	public String shopid;
-	public String shopname;
-	public String total;
-	
-	public List<Product> detail;
-
-	public String getOid() {
-		return oid;
+	public Lists list;
+	public Lists getList() {
+		return list;
 	}
 
-	public void setOid(String oid) {
-		this.oid = oid;
+	public void setList(Lists list) {
+		this.list = list;
 	}
 
-	public String getTime() {
-		return time;
+	public class Lists {
+		public String currentpage;
+		public String totalpage;
+		public String totalnum;
+		public Object order;
+		public String getCurrentpage() {
+			return currentpage;
+		}
+		public void setCurrentpage(String currentpage) {
+			this.currentpage = currentpage;
+		}
+		public String getTotalpage() {
+			return totalpage;
+		}
+		public void setTotalpage(String totalpage) {
+			this.totalpage = totalpage;
+		}
+		public String getTotalnum() {
+			return totalnum;
+		}
+		public void setTotalnum(String totalnum) {
+			this.totalnum = totalnum;
+		}
+		public Object getOrder() {
+			return order;
+		}
+		public void setOrder(Object order) {
+			this.order = order;
+		}
+		
+		
 	}
-
-	public void setTime(String time) {
-		this.time = time;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getStatusdes() {
-		return statusdes;
-	}
-
-	public void setStatusdes(String statusdes) {
-		this.statusdes = statusdes;
-	}
-
-	public String getShopid() {
-		return shopid;
-	}
-
-	public void setShopid(String shopid) {
-		this.shopid = shopid;
-	}
-
-	public String getShopname() {
-		return shopname;
-	}
-
-	public void setShopname(String shopname) {
-		this.shopname = shopname;
-	}
-
-	public String getTotal() {
-		return total;
-	}
-
-	public void setTotal(String total) {
-		this.total = total;
-	}
-
-	public List<Product> getDetail() {
-		return detail;
-	}
-
-	public void setDetail(List<Product> detail) {
-		this.detail = detail;
-	}
-	
-	
 }

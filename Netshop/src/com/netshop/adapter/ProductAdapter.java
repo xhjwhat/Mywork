@@ -65,7 +65,7 @@ public class ProductAdapter extends BaseAdapter {
 		}
 		holder.productName.setText(datas.get(position).getPname());
 		holder.productPrice.setText(datas.get(position).getPrice());
-		holder.productWeight.setText(datas.get(position).getWeight());
+		holder.productWeight.setText("袋/"+datas.get(position).getWeight()+"kg");
 		return convertView;
 	}
 	public class HolderView{

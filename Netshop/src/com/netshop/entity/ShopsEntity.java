@@ -16,7 +16,7 @@ public class ShopsEntity extends BaseEntity {
 		public String currentpage;
 		public String totalpage;
 		public String totalnum;
-		public List<ShopEntity.Shop> shop;
+		public Object shop;
 		public String getCurrentpage() {
 			return currentpage;
 		}
@@ -35,10 +35,10 @@ public class ShopsEntity extends BaseEntity {
 		public void setTotalnum(String totalnum) {
 			this.totalnum = totalnum;
 		}
-		public List<ShopEntity.Shop> getShop() {
+		public Object getShop() {
 			return shop;
 		}
-		public void setShop(List<ShopEntity.Shop> shop) {
+		public void setShop(Object shop) {
 			this.shop = shop;
 		}
 		

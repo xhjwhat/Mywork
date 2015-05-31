@@ -5,6 +5,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.netshop.activity.LoginActivity;
 import com.netshop.util.NetShopUtil;
 
 import android.app.Application;
@@ -12,6 +13,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap.CompressFormat;
 import android.support.mdroid.cache.ImageCache;
+import android.support.mdroid.cache.ModelCache;
 import android.support.mdroid.cache.AbstractCache.CacheParams;
 
 public class NetShopApp extends Application {
@@ -21,12 +23,13 @@ public class NetShopApp extends Application {
 	public ExecutorService threadPool;
 	public ImageCache mCache;
 	public double[] location = new double[]{0,0};
+	public ModelCache modelCache;
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		instance = this;
 		share = getSharedPreferences("netshop", Context.MODE_PRIVATE);
-
+		modelCache = new ModelCache(this, "Netshop");
 		CacheParams cacheParams = new CacheParams("file_icon");
 		cacheParams.compressFormat = CompressFormat.JPEG;
 		// cacheParams.memCacheSize = (int) (Runtime.getRuntime().maxMemory() /
@@ -64,4 +67,11 @@ public class NetShopApp extends Application {
 	public double[] getLocation(){
 		return location;
 	}
+	public ModelCache getModelCache() {
+		return modelCache;
+	}
+	public void setModelCache(ModelCache modelCache) {
+		this.modelCache = modelCache;
+	}
+	
 }

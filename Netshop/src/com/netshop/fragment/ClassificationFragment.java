@@ -1,5 +1,7 @@
 package com.netshop.fragment;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.google.l99gson.Gson;
@@ -89,7 +91,24 @@ public class ClassificationFragment extends Fragment {
 				if(adapter!=null){
 					adapter.setSelectItem(position);
 					adapter.notifyDataSetChanged();
-					ctypeList = datas.get(position).getCtype();
+					Object tempObject = datas.get(position).getCtype();
+					ctypeList = new ArrayList<ProductTypes.CType>();
+					if(tempObject instanceof LinkedHashMap<?, ?>){
+						LinkedHashMap<String, Object> tempHashMap = (LinkedHashMap<String, Object>)tempObject;
+						LinkedHashMap<String, Object> temp = (LinkedHashMap<String, Object>) tempHashMap.get("ctype");
+						CType cType = new CType();
+						cType.setId(String.valueOf(temp.get("id")));
+						cType.setName(String.valueOf(temp.get("name")));
+						ctypeList.add(cType);
+					}else if(tempObject instanceof ArrayList<?>){
+						ArrayList<LinkedHashMap<String, CType>> tempList = (ArrayList<LinkedHashMap<String, CType>>)tempObject;
+						for(LinkedHashMap<String, CType> map:tempList){
+							CType ctype=new CType();
+							ctype.setId(String.valueOf(map.get("id")));
+							ctype.setName(String.valueOf(map.get("name")));
+							ctypeList.add(ctype);
+						}
+					}
 					gridAdapter.setData(ctypeList);
 					gridAdapter.notifyDataSetChanged();
 				}
@@ -115,7 +134,24 @@ public class ClassificationFragment extends Fragment {
 			datas = (List<ProductType>) entity.getPtype();
 			adapter = new ProductTypeAdapter(context, datas);
 			seriesList.setAdapter(adapter);
-			ctypeList = datas.get(0).getCtype();
+			Object tempObject = datas.get(0).getCtype();
+			ctypeList = new ArrayList<ProductTypes.CType>();
+			if(tempObject instanceof LinkedHashMap<?, ?>){
+				LinkedHashMap<String, Object> tempHashMap = (LinkedHashMap<String, Object>)tempObject;
+				LinkedHashMap<String, Object> temp = (LinkedHashMap<String, Object>) tempHashMap.get("ctype");
+				CType cType = new CType();
+				cType.setId(String.valueOf(temp.get("id")));
+				cType.setName(String.valueOf(temp.get("name")));
+				ctypeList.add(cType);
+			}else if(tempObject instanceof ArrayList<?>){
+				ArrayList<LinkedHashMap<String, CType>> tempList = (ArrayList<LinkedHashMap<String, CType>>)tempObject;
+				for(LinkedHashMap<String, CType> map:tempList){
+					CType ctype=new CType();
+					ctype.setId(String.valueOf(map.get("id")));
+					ctype.setName(String.valueOf(map.get("name")));
+					ctypeList.add(ctype);
+				}
+			}
 			gridAdapter = new ProductGridAdapter(context,ctypeList );
 			seriesGrid.setAdapter(gridAdapter);
 		}

@@ -117,7 +117,11 @@
                 android:layout_toLeftOf="@id/store_phone_img"
                 android:background="@color/line_bg" />
 	</RelativeLayout>
-	<TextView android:layout_width="wrap_content"
+	<RelativeLayout 
+	    android:id="@+id/product_layout"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content">
+	    <TextView android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_marginLeft="20dip"
 	    android:layout_marginTop="15dip"
@@ -125,8 +129,36 @@
 	    android:textSize="20sp"
 	    android:textColor="#000000"
 	    android:text="@string/sale_product"/>
-	<ListView android:id="@+id/store_product_list"
+	    <ImageView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/arrow_right"
+	        android:layout_alignParentRight="true"
+	        android:layout_centerVertical="true"
+	        android:layout_marginRight="10dip"/>
+	</RelativeLayout>
+	<RelativeLayout 
+	    android:id="@+id/comment_layout"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content">
+	    <TextView android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="20dip"
+	    android:layout_marginTop="15dip"
+	    android:layout_marginBottom="15dip"
+	    android:textSize="20sp"
+	    android:textColor="#000000"
+	    android:text="商品评论"/>
+	    <ImageView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/arrow_right"
+	        android:layout_alignParentRight="true"
+	        android:layout_centerVertical="true"
+	        android:layout_marginRight="10dip"/>
+	</RelativeLayout>
+	<!-- <ListView android:id="@+id/store_product_list"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:background="#ffffff"/>
+	    android:background="#ffffff"/> -->
 </LinearLayout>

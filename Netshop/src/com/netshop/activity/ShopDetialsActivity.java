@@ -28,6 +28,7 @@ public class ShopDetialsActivity extends Activity {
 	private ImageView storeImg;
 	private ImageView callImg;
 	private ImageWorker worker;
+	private View productLayout ,commentLayout;
 	public void onCreate(Bundle bundle){
 		super.onCreate(bundle);
 		setContentView(R.layout.store_details);
@@ -62,6 +63,21 @@ public class ShopDetialsActivity extends Activity {
 				if(!strMobile.equals(""));
 				 Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+strMobile));
 				 startActivity(intent);
+			}
+		});
+		productLayout = findViewById(R.id.product_layout);
+		productLayout.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				
+				
+			}
+		});
+		commentLayout = findViewById(R.id.comment_layout);
+		commentLayout.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				
 			}
 		});
 	}

@@ -1,7 +1,9 @@
 package com.netshop.activity;
 
 import com.google.l99gson.Gson;
+import com.netshop.entity.Account;
 import com.netshop.entity.AccountEntity;
+import com.netshop.entity.AccountInfo;
 import com.netshop.entity.ProductEntity;
 import com.netshop.app.NetShopApp;
 import com.netshop.app.R;
@@ -17,6 +19,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.support.mdroid.cache.CachedModel;
+import android.support.mdroid.cache.ModelCache;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -104,13 +108,18 @@ public class LoginActivity extends Activity implements OnClickListener {
 	HttpCallBack loginCallback = new HttpCallBack() {
 		@Override
 		public void success(String json) {
-//			Gson gson = new Gson();
-//			AccountEntity account = gson.fromJson(json, AccountEntity.class);
+			Gson gson = new Gson();
 			SharedPreferences share = NetShopApp.getInstance().share;
 			Editor editor = share.edit();
 			editor.putString("user_id", phone);
 			editor.putString("password", DESCrypto.GetMD5Code(password));
 			editor.commit();
+			AccountInfo info = gson.fromJson(json, AccountInfo.class);
+			Account account = info.getAccount();
+			ModelCache modelCache = new ModelCache(LoginActivity.this, "Netshop");
+			account.setSerializableId("account01");
+			account.save(modelCache);
+			
 			Intent intent = new Intent(LoginActivity.this,MainActivity.class);
 			startActivity(intent);
 			finish();

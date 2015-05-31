@@ -2,6 +2,7 @@ package com.netshop.fragment;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -36,7 +37,9 @@ import com.netshop.adapter.CityAdapter;
 import com.netshop.adapter.StoreAdapter;
 import com.netshop.app.NetShopApp;
 import com.netshop.app.R;
+import com.netshop.entity.Product;
 import com.netshop.entity.ShopEntity;
+import com.netshop.entity.ShopEntity.Shop;
 import com.netshop.entity.ShopsEntity;
 import com.netshop.net.HttpRequest;
 import com.netshop.net.HttpRequest.HttpCallBack;
@@ -48,7 +51,7 @@ public class StoreFragment extends Fragment {
 	private ListView listview;
 	private StoreAdapter adapter;
 	private ImageView cityBack;
-	private List<ShopEntity.Shop> shopList = new ArrayList<ShopEntity.Shop>();
+	private List<ShopEntity.Shop> shopList;
 	private ListView areaList;
 	private CityAdapter cityAdapter;
 	private PopupWindow window;
@@ -107,7 +110,34 @@ public class StoreFragment extends Fragment {
 			public void success(String json) {
 				Gson gson = new Gson();
 				ShopsEntity entity = gson.fromJson(json, ShopsEntity.class);
-				shopList = entity.getList().getShop();
+				Object tempObject = entity.getList().getShop();
+				shopList = new ArrayList<ShopEntity.Shop>();
+				if(tempObject instanceof LinkedHashMap<?, ?>){
+					LinkedHashMap<String, Object> tempHashMap =(LinkedHashMap<String, Object>)tempObject;
+					//LinkedHashMap<String, Object> temp = (LinkedHashMap<String, Object>)tempHashMap.get("product");
+					Shop shop = new Shop();
+					shop.setId(String.valueOf(tempHashMap.get("id")));
+					shop.setImg(String.valueOf(tempHashMap.get("img")));
+					shop.setAddress(String.valueOf(tempHashMap.get("address")));
+					shop.setIsnew(String.valueOf(tempHashMap.get("isnew")));
+					shop.setLinkname(String.valueOf(tempHashMap.get("linkname")));
+					shop.setName(String.valueOf(tempHashMap.get("name")));
+					shop.setPhone(String.valueOf(tempHashMap.get("phone")));
+					shopList.add(shop);
+				}else if(tempObject instanceof ArrayList<?>){
+					ArrayList<LinkedHashMap<String, Object>> list = (ArrayList<LinkedHashMap<String, Object>>) tempObject;
+					for(LinkedHashMap<String, Object> temp:list){
+						Shop shop = new Shop();
+						shop.setId(String.valueOf(temp.get("id")));
+						shop.setImg(String.valueOf(temp.get("img")));
+						shop.setAddress(String.valueOf(temp.get("address")));
+						shop.setIsnew(String.valueOf(temp.get("isnew")));
+						shop.setLinkname(String.valueOf(temp.get("linkname")));
+						shop.setName(String.valueOf(temp.get("name")));
+						shop.setPhone(String.valueOf(temp.get("phone")));
+						shopList.add(shop);
+					}
+				}
 				adapter = new StoreAdapter(context, shopList);
 				listview.setAdapter(adapter);
 				listview.setOnItemClickListener(new OnItemClickListener() {

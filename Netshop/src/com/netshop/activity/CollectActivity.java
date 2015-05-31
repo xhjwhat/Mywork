@@ -1,5 +1,7 @@
 package com.netshop.activity;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.google.l99gson.Gson;
@@ -53,7 +55,29 @@ public class CollectActivity extends Activity {
 		public void success(String json) {
 			Gson gson = new Gson();
 			ProductEntity entity = gson.fromJson(json, ProductEntity.class);
-			datas = (List<Product>) entity.getList().getProduct();
+			Object tempObject = entity.getList().getProduct();
+			datas = new ArrayList<Product>();
+			if(tempObject instanceof LinkedHashMap<?, ?>){
+				LinkedHashMap<String, Object> tempHashMap = (LinkedHashMap<String, Object>) tempObject;
+				Product product = new Product();
+				product.setPid(String.valueOf(tempHashMap.get("pid")));
+				product.setPname(String.valueOf(tempHashMap.get("pname")));
+				product.setPimg(String.valueOf(tempHashMap.get("pimg")));
+				product.setPrice(String.valueOf(tempHashMap.get("price")));
+				product.setWeight(String.valueOf(tempHashMap.get("weight")));
+				datas.add(product);
+			}else{
+				ArrayList<LinkedHashMap<String, Object>> list = (ArrayList<LinkedHashMap<String, Object>>) tempObject;
+				for(LinkedHashMap<String, Object> temp:list){
+					Product product = new Product();
+					product.setPid(String.valueOf(temp.get("pid")));
+					product.setPname(String.valueOf(temp.get("pname")));
+					product.setPimg(String.valueOf(temp.get("pimg")));
+					product.setPrice(String.valueOf(temp.get("price")));
+					product.setWeight(String.valueOf(temp.get("weight")));
+					datas.add(product);
+				}
+			}
 			if(datas != null){
 				adapter = new ProductAdapter(CollectActivity.this, datas);
 				listView.setAdapter(adapter);
@@ -94,7 +118,8 @@ public class CollectActivity extends Activity {
 								});
 							}
 						});
-						return false;
+						dialog.show();
+						return true;
 					}
 				});
 			}

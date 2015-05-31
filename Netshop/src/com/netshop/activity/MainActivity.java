@@ -1,5 +1,6 @@
 package com.netshop.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -41,5 +42,9 @@ public class MainActivity extends FragmentActivity {
 				
 			}
 		});
+	}
+	public void onNewIntent(Intent intent){
+		super.onNewIntent(intent);
+		viewpager.setCurrentItem(SHOPCAR);
 	}
 }

@@ -4,15 +4,18 @@ import com.netshop.activity.AccountActivity;
 import com.netshop.activity.AddrManagerActivity;
 import com.netshop.activity.CollectActivity;
 import com.netshop.activity.LoginActivity;
+import com.netshop.activity.MyOrderListActivity;
 import com.netshop.activity.PersonInfoActivity;
 import com.netshop.app.NetShopApp;
 import com.netshop.app.R;
+import com.netshop.entity.Account;
 import com.netshop.util.DESCrypto;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.support.mdroid.cache.CachedModel;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -29,10 +32,12 @@ public class PersonFragment extends Fragment implements OnClickListener{
 	private RelativeLayout orderLayout,collectLayout,addrLayout,accountLayout,moreLayout;
 	private ImageView editImg,exitImg;
 	private FragmentManager manager;
+	private Account account;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		manager = getFragmentManager();
+		account = (Account) CachedModel.find(NetShopApp.getInstance().modelCache, "account", Account.class);
 		View view = inflater.inflate(R.layout.my_inform, null);
 		nameText = (TextView)view.findViewById(R.id.myinform_name);
 		pointText = (TextView)view.findViewById(R.id.myinform_points);
@@ -49,6 +54,10 @@ public class PersonFragment extends Fragment implements OnClickListener{
 		accountLayout = (RelativeLayout)view.findViewById(R.id.my_account);
 		accountLayout.setOnClickListener(this);
 		moreLayout = (RelativeLayout)view.findViewById(R.id.my_more);
+		if(account!=null){
+			nameText.setText(account.getNickname());
+			pointText.setText(account.getIntegrating());
+		}
 		return view;
 	}
 
@@ -66,6 +75,8 @@ public class PersonFragment extends Fragment implements OnClickListener{
 	public void onClick(View v) {
 		switch(v.getId()){
 		case R.id.order_layout:
+			Intent orderIntent = new Intent(getActivity(),MyOrderListActivity.class);
+			startActivity(orderIntent);
 			break;
 		case R.id.my_collect:
 			Intent collectIntent = new Intent(getActivity(),CollectActivity.class);

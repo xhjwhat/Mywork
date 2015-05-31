@@ -17,7 +17,7 @@ public Lists list;
 		public String currentpage;
 		public String totalpage;
 		public String totalnum;
-		public List<Product> product;
+		public Object product;
 		public String getCurrentpage() {
 			return currentpage;
 		}
@@ -36,10 +36,10 @@ public Lists list;
 		public void setTotalnum(String totalnum) {
 			this.totalnum = totalnum;
 		}
-		public List<Product> getProduct() {
+		public Object getProduct() {
 			return product;
 		}
-		public void setProduct(List<Product> product) {
+		public void setProduct(Object product) {
 			this.product = product;
 		}
 		

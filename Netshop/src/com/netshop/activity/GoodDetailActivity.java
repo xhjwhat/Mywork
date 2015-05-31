@@ -1,8 +1,11 @@
 package com.netshop.activity;
 
 import com.netshop.app.R;
+import com.netshop.entity.Product;
 import com.netshop.fragment.ItemFragment;
+import com.netshop.view.IconPagerAdapter;
 import com.netshop.view.TabPageIndicator;
+import com.netshop.view.TitlePageIndicator;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,43 +14,50 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class GoodDetailActivity extends FragmentActivity {
-	/**
-	 * Tab标题
-	 */
+	public static final int INTRO = 0;
+	public static final int DESC = 1;
+	public static final int DEMO = 2;
 	private static final String[] TITLE = new String[] { "产品特点", "使用说明", "效果验证"};
-
+	private ImageView backImg;
+	private TextView title;
+	private Product product;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.goods_detai);
-		
+		product = (Product) getIntent().getSerializableExtra("product");
+		backImg = (ImageView) findViewById(R.id.title_back_img);
+		backImg.setVisibility(View.VISIBLE);
+		backImg.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
+		title = (TextView)findViewById(R.id.title_text);
+		title.setText("商品信息");
 		//ViewPager的adapter
 		FragmentPagerAdapter adapter = new TabPageIndicatorAdapter(getSupportFragmentManager());
         ViewPager pager = (ViewPager)findViewById(R.id.pager);
         pager.setAdapter(adapter);
 
-        //实例化TabPageIndicator然后设置ViewPager与之关联
-        TabPageIndicator indicator = (TabPageIndicator)findViewById(R.id.indicator);
+        TitlePageIndicator indicator = (TitlePageIndicator)findViewById(R.id.indicator);
         indicator.setViewPager(pager);
-        
-        //如果我们要对ViewPager设置监听，用indicator设置就行了
         indicator.setOnPageChangeListener(new OnPageChangeListener() {
-			
-			@Override
 			public void onPageSelected(int arg0) {
 				//Toast.makeText(getApplicationContext(), TITLE[arg0], Toast.LENGTH_SHORT).show();
 			}
-			
-			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
 				
 			}
-			
-			@Override
 			public void onPageScrollStateChanged(int arg0) {
 				
 			}
@@ -61,17 +71,28 @@ public class GoodDetailActivity extends FragmentActivity {
 	 * @author len
 	 *
 	 */
-    class TabPageIndicatorAdapter extends FragmentPagerAdapter {
+    class TabPageIndicatorAdapter extends FragmentPagerAdapter{
         public TabPageIndicatorAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
         public Fragment getItem(int position) {
-        	//新建一个Fragment来展示ViewPager item的内容，并传递参数
         	Fragment fragment = new ItemFragment();  
             Bundle args = new Bundle();  
-            args.putString("arg", TITLE[position]);  
+            switch (position) {
+			case INTRO:
+				args.putString("arg", product.getIntro());
+				break;
+			case DESC:
+				args.putString("arg", product.getDesc());
+				break;
+			case DEMO:
+				args.putString("arg", product.getDemo());
+				break;
+			default:
+				break;
+			}
             fragment.setArguments(args);  
         	
             return fragment;

@@ -20,21 +20,14 @@
         android:layout_alignParentBottom="true"
         android:background="#ffffff" >
 
-        <ImageView
-            android:id="@+id/shopcar_select_img"
+        <CheckBox
+            android:id="@+id/shopcar_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dip"
-            android:background="@drawable/shopcar_select" />
-
-        <TextView
-            android:id="@+id/select_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dip"
-            android:layout_toRightOf="@id/shopcar_select_img"
+            android:layout_marginLeft="15dip"
+            android:button="@drawable/check_item_selector"
+            android:paddingLeft="10dip"
             android:text="@string/all_selected"
             android:textColor="@color/text_49"
             android:textSize="17sp" />
@@ -45,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dip"
-            android:layout_toRightOf="@id/select_text"
+            android:layout_toRightOf="@id/shopcar_check"
             android:text="@string/combined"
             android:textColor="@color/text_49"
             android:textSize="17sp" />

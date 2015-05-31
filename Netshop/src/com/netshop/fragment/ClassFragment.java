@@ -20,15 +20,18 @@ public class ClassFragment extends Fragment {
 		View view = inflater.inflate(R.layout.classfragment, null);
 		manager = getChildFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
-		fragment = (ClassificationFragment) manager.findFragmentByTag("classification");
+		//fragment = (ClassificationFragment) manager.findFragmentByTag("classification");
 		
 		if(fragment == null){
 			fragment = new ClassificationFragment();
 			fragment.setParentFragment(this);
-			transaction.add(fragment, "classification");
+			transaction.add(R.id.frame_layout,fragment, "classification");
+			transaction.commit();
 		}
-		transaction.replace(R.id.frame_layout, fragment);
-		transaction.commit();
+		
+		//transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+		//transaction.addToBackStack(null);
+		//transaction.commit();
 		return view;
 	}
 
@@ -51,10 +54,20 @@ public class ClassFragment extends Fragment {
 			//transaction.add(detailFragment, "details");
 		}
 		detailFragment.setArguments(bundle);
-		transaction.replace(R.id.frame_layout, detailFragment);
+		transaction.hide(fragment);
+		transaction.add(R.id.frame_layout, detailFragment);
+		//transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+		transaction.addToBackStack(null);
 		transaction.commit();
 	}
 	public void changetoClassiFragment(){
-		
+		getChildFragmentManager().popBackStackImmediate();
+//		FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+//		fragment = (ClassificationFragment) getChildFragmentManager().findFragmentByTag("classification");
+//		if(fragment ==null){
+//			fragment = new ClassificationFragment();
+//		}
+//		transaction.replace(R.id.frame_layout, fragment);
+//		transaction.commit();
 	}
 }

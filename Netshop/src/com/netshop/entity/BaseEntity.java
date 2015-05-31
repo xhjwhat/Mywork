@@ -1,6 +1,8 @@
 package com.netshop.entity;
 
-public class BaseEntity {
+import java.io.Serializable;
+
+public class BaseEntity implements Serializable{
 	public String description;
 	public String error;
 	public String repertory;

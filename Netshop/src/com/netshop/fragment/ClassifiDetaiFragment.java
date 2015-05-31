@@ -1,9 +1,12 @@
 package com.netshop.fragment;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.google.l99gson.Gson;
 import com.netshop.activity.GoodsDetilsActivity;
+import com.netshop.activity.LoginActivity;
 import com.netshop.adapter.ProductAdapter;
 import com.netshop.app.R;
 import com.netshop.entity.Product;
@@ -15,6 +18,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -56,8 +62,16 @@ public class ClassifiDetaiFragment extends Fragment {
 		backImg.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getFragmentManager().popBackStack();
-				//parentFragment.changetoClassiFragment();
+//				FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+//				ClassificationFragment fragment = (ClassificationFragment) getChildFragmentManager().findFragmentByTag("classification");
+//				if(fragment ==null){
+//					fragment = new ClassificationFragment();
+//				}
+//				transaction.replace(R.id.frame_layout, fragment);
+//				transaction.commit();
+//				//getChildFragmentManager().popBackStackImmediate();
+				Log.e("what","back");
+				parentFragment.changetoClassiFragment();
 			}
 		});
 		editText = (EditText)view.findViewById(R.id.main_search_edit);
@@ -80,7 +94,29 @@ public class ClassifiDetaiFragment extends Fragment {
 		public void success(String json) {
 			Gson gson = new Gson();
 			ProductEntity entity = gson.fromJson(json, ProductEntity.class);
-			datas = (List<Product>) entity.getList().getProduct();
+			Object tempObject = entity.getList().getProduct();
+			datas = new ArrayList<Product>();
+			if(tempObject instanceof LinkedHashMap<?, ?>){
+				LinkedHashMap<String, Object> tempHashMap = (LinkedHashMap<String, Object>) tempObject;
+				Product product = new Product();
+				product.setPid(String.valueOf(tempHashMap.get("pid")));
+				product.setPname(String.valueOf(tempHashMap.get("pname")));
+				product.setPimg(String.valueOf(tempHashMap.get("pimg")));
+				product.setPrice(String.valueOf(tempHashMap.get("price")));
+				product.setWeight(String.valueOf(tempHashMap.get("weight")));
+				datas.add(product);
+			}else{
+				ArrayList<LinkedHashMap<String, Object>> list = (ArrayList<LinkedHashMap<String, Object>>) tempObject;
+				for(LinkedHashMap<String, Object> temp:list){
+					Product product = new Product();
+					product.setPid(String.valueOf(temp.get("pid")));
+					product.setPname(String.valueOf(temp.get("pname")));
+					product.setPimg(String.valueOf(temp.get("pimg")));
+					product.setPrice(String.valueOf(temp.get("price")));
+					product.setWeight(String.valueOf(temp.get("weight")));
+					datas.add(product);
+				}
+			}
 			if(datas != null){
 				adapter = new ProductAdapter(context, datas);
 				list.setAdapter(adapter);

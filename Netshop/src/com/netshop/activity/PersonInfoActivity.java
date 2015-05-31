@@ -1,10 +1,13 @@
 package com.netshop.activity;
 
+import com.netshop.app.NetShopApp;
 import com.netshop.app.R;
+import com.netshop.entity.Account;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.mdroid.cache.CachedModel;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -57,18 +60,23 @@ public class PersonInfoActivity extends Activity implements OnClickListener{
 		findViewById(R.id.addr_layout).setOnClickListener(this);
 		findViewById(R.id.plantarea_layout).setOnClickListener(this);
 		findViewById(R.id.planttype_layout).setOnClickListener(this);
+		initData();
 	}
-	public void init(){
-		backImg = (ImageView) findViewById(R.id.title_back_img);
-		backImg.setVisibility(View.VISIBLE);
-		backImg.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
-		title = (TextView)findViewById(R.id.title_text);
-		title.setText("个人信息");
+	public void initData(){
+		Account account = (Account) CachedModel.find(NetShopApp.getInstance().getModelCache(), "account01", Account.class);
+		if(account!=null){
+			nickName.setText(account.getNickname());
+			phone.setText(account.getTelphone());
+			sex.setText(account.getSex());
+			birth.setText(account.getBirth());
+			fixPhone.setText(account.getTelphone());
+			addr.setText(account.getAddress());
+			realName.setText(account.getRealname());
+			area.setText(account.getArea());
+			plant.setText(account.getCrops());
+		}else{
+			//重新登录获取数据
+		}
 	}
 	@Override
 	public void onClick(View v) {
@@ -146,38 +154,58 @@ public class PersonInfoActivity extends Activity implements OnClickListener{
 	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		data = new Intent();
+		data.putExtra("name", "快乐");
+		if(data ==null)return;
+		Account account = (Account) CachedModel.find(NetShopApp.getInstance().modelCache, "account01", Account.class);
+		if(account == null){
+			account = new Account("account01");
+		}
 		switch(resultCode){
 		case NICKNAME:
 			nickName.setText(data.getStringExtra("name"));
+			account.setNickname(data.getStringExtra("name"));
 			break;
 		case PHONE:
 			phone.setText(data.getStringExtra("name"));
+			account.setTelphone(data.getStringExtra("name"));
 			break;
 		case SEX:
 			if(data.getStringExtra("name").equals("0")){
 				sex.setText("男");
+				account.setSex("男");
 			}else{
 				sex.setText("女");
+				account.setSex("女");
 			}
+			
 			break;
 		case BIRTH:
 			birth.setText(data.getStringExtra("name"));
+			account.setBirth(data.getStringExtra("name"));
 			break;
 		case FIXPHONE:
 			fixPhone.setText(data.getStringExtra("name"));
+			account.setFixPhone(data.getStringExtra("name"));
 			break;
 		case ADDR:
 			addr.setText(data.getStringExtra("name"));
+			account.setAddress(data.getStringExtra("name"));
 			break;
 		case REALNAME:
 			realName.setText(data.getStringExtra("name"));
+			account.setRealname(data.getStringExtra("name"));
 			break;
 		case PLANTAREA:
 			area.setText(data.getStringExtra("name"));
+			account.setArea(data.getStringExtra("name"));
 			break;
 		case PLANTTYPE:
 			plant.setText(data.getStringExtra("name"));
+			account.setCrops(data.getStringExtra("name"));
+			break;
 		}
+		account.save(NetShopApp.getInstance().modelCache);
 	}
 	
 }

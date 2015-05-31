@@ -1,6 +1,11 @@
 package com.netshop.entity;
 
-public class Product {
+import java.io.Serializable;
+
+import android.support.mdroid.cache.CachedModel;
+import android.support.mdroid.cache.ModelCache;
+
+public class Product extends CachedModel{
 	public Product() {
 
 	}
@@ -16,6 +21,16 @@ public class Product {
 	public String id;
 	public String img;
 	public String url;
+	public String num = "1";
+
+
+	public String getNum() {
+		return num;
+	}
+
+	public void setNum(String num) {
+		this.num = num;
+	}
 
 	public String getId() {
 		return id;
@@ -123,6 +138,25 @@ public class Product {
 
 	public void setWeight(String weight) {
 		this.weight = weight;
+	}
+
+	@Override
+	public String createKey(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean reloadFromCachedModel(ModelCache modelCache,
+			CachedModel cachedModel) {
+		Product product = (Product)cachedModel;
+		this.pid=product.getPid();
+		this.pimg = product.getPid();
+		this.weight = product.getWeight();
+		this.price = product.getPrice();
+		this.pname = product.getPname();
+		this.num = product.getNum();
+		return false;
 	}
 
 }

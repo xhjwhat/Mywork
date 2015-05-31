@@ -4,122 +4,150 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff" >
-
-        <ImageView
-            android:id="@+id/shop_car_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dip" />
-
-        <TextView
-            android:id="@+id/shop_car_store_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dip"
-            android:layout_toRightOf="@id/shop_car_select"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/shop_car_store_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="15dip"
-            android:text="@string/edit"
-            android:textColor="@color/nomal_text"
-            android:textSize="17sp" />
-
-        <View
-            android:layout_width="1px"
-            android:layout_height="20dip"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/shop_car_store_edit"
-            android:background="@color/line_bg" />
-    </RelativeLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/background"
         android:orientation="horizontal" >
 
-        <!-- <ImageView
-            android:id="@+id/shop_car_select_img"
+        <CheckBox
+            android:id="@+id/shop_car_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dip" /> -->
-            <RadioButton android:id="@+id/shop_car_radio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dip"/>
+            android:layout_marginLeft="20dip"
+            android:button="@drawable/check_item_selector"
+            android:checked="false" />
 
         <ImageView
             android:id="@+id/shop_car_product_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="15dip" />
+            android:layout_marginBottom="15dip"
+            android:layout_marginLeft="15dip"
+            android:layout_marginTop="15dip" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/shop_car_product_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="18sp" />
-
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dip"
                 android:layout_marginBottom="10dip" >
 
                 <TextView
-                    android:id="@+id/shop_car_money"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="¥"
-                    android:textColor="@color/red_text"
-                    android:textSize="15sp" />
+                    android:id="@+id/shop_car_store_edit"
+                    android:layout_width="40dip"
+                    android:layout_height="30dip"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:layout_marginRight="10dip"
+                    android:text="@string/edit"
+                    android:textColor="@color/text_49"
+                    android:textSize="17sp" />
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="20dip"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dip"
+                    android:layout_toLeftOf="@id/shop_car_store_edit"
+                    android:background="@color/line_bg" />
 
                 <TextView
-                    android:id="@+id/shop_car_money_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/shop_car_money"
-                    android:textColor="@color/red_text"
-                    android:textSize="23sp" />
+                    android:id="@+id/shop_car_product_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dip"
+                    android:layout_marginRight="15dip"
+                    android:layout_toLeftOf="@id/shop_car_store_edit"
+                    android:text="飞翎化肥"
+                    android:textColor="#000000"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/price_layout"
+                android:layout_width="match_parent"
+                android:layout_height="25dip"
+                android:layout_marginBottom="10dip" >
 
                 <TextView
                     android:id="@+id/shop_car_price_text"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/shop_car_money_text"
+                    android:layout_height="match_parent"
+                    android:gravity="bottom"
+                    android:text="120"
+                    android:textColor="@color/red_text"
+                    android:textSize="23sp" />
+
+                <TextView
+                    android:id="@+id/shop_car_weight_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/shop_car_price_text"
+                    android:gravity="bottom"
+                    android:text="/袋/40kg"
                     android:textColor="@color/nomal_text"
                     android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/shop_car_num"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dip"
+                    android:gravity="bottom"
+                    android:text="1"
                     android:textColor="@color/red_text"
                     android:textSize="16sp" />
             </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/num_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" 
+                android:visibility="gone"
+                >
+
+                <ImageView
+                    android:id="@+id/add_img"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
+                    android:background="@drawable/icon_add" />
+
+                <EditText
+                    android:id="@+id/num_edit"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:text="1"
+                    android:inputType="number"
+                    android:layout_marginLeft="10dip"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/reduce_img"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
+                    android:layout_marginLeft="10dip"
+                    android:background="@drawable/icon_reduce" />
+
+                <Button
+                    android:id="@+id/delete_btn"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
+                    android:layout_marginLeft="20dip"
+                    android:background="@color/red_text"
+                    android:textColor="#ffffff"
+                    android:text="删除" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
