@@ -29,12 +29,14 @@ public class ShopDetialsActivity extends Activity {
 	private ImageView callImg;
 	private ImageWorker worker;
 	private View productLayout ,commentLayout;
+	private String shopid;
 	public void onCreate(Bundle bundle){
 		super.onCreate(bundle);
 		setContentView(R.layout.store_details);
 		initView();
 		Intent intent = getIntent();
 		if(intent!=null){
+			shopid = intent.getStringExtra("id");
 			initData(intent.getStringExtra("id"));
 		}
 	}
@@ -69,7 +71,9 @@ public class ShopDetialsActivity extends Activity {
 		productLayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
+				Intent intent = new Intent(ShopDetialsActivity.this,GoodsListActivity.class);
+				intent.putExtra("key", shopid);
+				startActivity(intent);
 				
 			}
 		});
@@ -77,7 +81,9 @@ public class ShopDetialsActivity extends Activity {
 		commentLayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
+				Intent intent = new Intent(ShopDetialsActivity.this,ShopCommentActivity.class);
+				intent.putExtra("key", shopid);
+				startActivity(intent);
 			}
 		});
 	}

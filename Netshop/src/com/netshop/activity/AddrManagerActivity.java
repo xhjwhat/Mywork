@@ -98,7 +98,7 @@ public class AddrManagerActivity extends Activity {
 				}else{
 					AddrEntity entity = gson.fromJson(json, AddrEntity.class);
 					if(entity!=null){
-						datas.add(entity.getList().getDelivery());
+						datas.add(entity.getDelivery());
 						adapter.setList(datas);
 						adapter.notifyDataSetChanged();
 					}

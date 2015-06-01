@@ -95,36 +95,17 @@ public class GoodsDetilsActivity extends Activity implements OnClickListener{
 		nameText = (TextView)findViewById(R.id.goods_collect_name_text);
 		seriesText = (TextView)findViewById(R.id.goods_collect_series_text);
 		priceText = (TextView)findViewById(R.id.goods_price_text);
-//		numText = (TextView)findViewById(R.id.selected_text_num);
-//		weightText = (TextView)findViewById(R.id.selected_price);
 		storeAddrText = (TextView)findViewById(R.id.store_addr);
-//		hasText = (TextView)findViewById(R.id.store_has_product);
-//		phoneText = (TextView)findViewById(R.id.store_phone);
-//		numLayout = findViewById(R.id.num_layout);
-		//numLayout.setOnClickListener(this);
 		informLayout = findViewById(R.id.inform_layout);
 		informLayout.setOnClickListener(this);
-//		addrLayout = findViewById(R.id.store_addr_layout);
-		//addrLayout.setOnClickListener(this);
 		commentLayout = findViewById(R.id.product_comment_layout);
 		commentLayout.setOnClickListener(this);
-//		cityLayout = findViewById(R.id.city_layout);
-//		buyLayout = findViewById(R.id.buy_layout);
 		pager = (ViewPager)findViewById(R.id.goods_viewpager);
 		indicator = (CirclePageIndicator)findViewById(R.id.goods_indicator);
 		myShopcarBtn = (Button)findViewById(R.id.goods_btn_my_car);
 		myShopcarBtn.setOnClickListener(this);
 		addToShopcarBtn = (Button)findViewById(R.id.goods_btn_add_car);
 		addToShopcarBtn.setOnClickListener(this);
-//		buyNowBtn = (Button)findViewById(R.id.goods_buy_btn_now);
-//		buyNowBtn.setOnClickListener(this);
-//		buyShopcarBtn = (Button)findViewById(R.id.goods_buy_btn_car);
-//		buyShopcarBtn.setOnClickListener(this);
-//		reduceImg = (ImageView)findViewById(R.id.jian_img);
-//		reduceImg.setOnClickListener(this);
-//		addImg = (ImageView)findViewById(R.id.jia_img);
-//		addImg.setOnClickListener(this);
-//		numEdit = (EditText)findViewById(R.id.num_edit);
 	}
 	@Override
 	public void onClick(View v) {
@@ -145,11 +126,6 @@ public class GoodsDetilsActivity extends Activity implements OnClickListener{
 				}
 			});
 			break;
-//		case R.id.num_layout:
-//			buyLayout.setVisibility(View.VISIBLE);
-//			break;
-//		case R.id.store_addr_layout:
-//			break;
 		case R.id.inform_layout:
 			Intent intent = new Intent(this,GoodDetailActivity.class);
 			intent.putExtra("product", product);
@@ -157,6 +133,9 @@ public class GoodsDetilsActivity extends Activity implements OnClickListener{
 			
 			break;
 		case R.id.product_comment_layout:
+			Intent commentIntent = new Intent(this,ProductCommentActivity.class);
+			commentIntent.putExtra("key", product.getPid());
+			startActivity(commentIntent);
 			break;
 		case R.id.goods_btn_my_car:
 			Intent intent2 = new Intent(this,MainActivity.class);
@@ -172,21 +151,6 @@ public class GoodsDetilsActivity extends Activity implements OnClickListener{
 				Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
 			}
 			break;
-//		case R.id.goods_buy_btn_car:
-//			break;
-//		case R.id.goods_buy_btn_now:
-//			break;
-//		case R.id.jia_img:
-//			int addNum =Integer.valueOf(numEdit.getText().toString())+1;
-//			numEdit.setText(addNum+"");
-//			break;
-//		case R.id.jian_img:
-//			int reduceNum =Integer.valueOf(numEdit.getText().toString());
-//			if(reduceNum > 0){
-//				reduceNum--;
-//				numEdit.setText(reduceNum+"");
-//			}
-//			break;
 		}
 		
 	}

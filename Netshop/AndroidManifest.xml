@@ -95,6 +95,18 @@
         <activity android:name="com.netshop.activity.MyOrderListActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.netshop.activity.ShopCommentActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.netshop.activity.ProductCommentActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.netshop.activity.GoodsListActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.netshop.activity.ChooseShopActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

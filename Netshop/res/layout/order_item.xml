@@ -6,14 +6,17 @@
 
         <ImageView
             android:id="@+id/shop_car_product_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_marginTop="10dip"
+            android:layout_marginBottom="10dip"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dip" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:orientation="vertical" >
 
             <TextView
@@ -25,50 +28,49 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="25dip"
                 android:layout_marginBottom="10dip" >
 
-                <TextView
-                    android:id="@+id/confirm_money"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="¥"
-                    android:textColor="@color/red_text"
-                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/confirm_price_text"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/confirm_money"
+                    android:layout_height="match_parent"
                     android:textColor="@color/red_text"
-                    android:textSize="23sp" />
+                    android:text="¥220"
+                    android:textSize="21sp"
+                    android:gravity="bottom" />
 
                 <TextView
                     android:id="@+id/confirm_weight_text"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/confirm_money_text"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/confirm_price_text"
                     android:textColor="@color/nomal_text"
-                    android:textSize="18sp" />
+                    android:text="袋/40kg"
+                    android:gravity="bottom"
+                    android:textSize="17sp" />
 
                 <TextView
                     android:id="@+id/confirm_num_text"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="10dip"
-                    android:layout_toRightOf="@id/confirm_price_text"
+                    android:layout_toRightOf="@id/confirm_weight_text"
                     android:textColor="@color/red_text"
+                    android:gravity="bottom"
+                    android:text="x3"
                     android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/confirm_has_text"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dip"
                     android:text="有货"
                     android:textColor="@color/red_text"
+                    android:gravity="bottom"
                     android:textSize="16sp" />
             </RelativeLayout>
         </LinearLayout>

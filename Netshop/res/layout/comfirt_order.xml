@@ -101,10 +101,11 @@
         android:background="@color/line_bg" />
 
     <LinearLayout
+        android:id="@+id/shop_layout"
         android:layout_width="match_parent"
-        android:layout_height="30dip"
+        android:layout_height="wrap_content"
         android:background="#ffffff"
-        android:orientation="horizontal" >
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/confirm_store_name_text"
@@ -115,23 +116,31 @@
             android:textColor="@color/text_49"
             android:textSize="18sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dip"
-            android:gravity="center_vertical"
-            android:text="联系商铺："
-            android:textColor="@color/nomal_text"
-            android:textSize="17sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dip"
+            android:background="#ffffff"
+            android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/confirm_store_num_text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dip"
-            android:gravity="center_vertical"
-            android:textColor="@color/nomal_text"
-            android:textSize="17sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dip"
+                android:gravity="center_vertical"
+                android:text="联系商铺："
+                android:textColor="@color/nomal_text"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/confirm_store_num_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dip"
+                android:gravity="center_vertical"
+                android:textColor="@color/nomal_text"
+                android:textSize="17sp" />
+        </LinearLayout>
     </LinearLayout>
 
     <View
@@ -142,8 +151,9 @@
     <ListView
         android:id="@+id/order_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:layout_weight="1"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:layout_weight="1" />
 
     <View
         android:layout_width="match_parent"
@@ -184,8 +194,8 @@
 
             <RadioButton
                 android:id="@+id/offline"
-                android:text="线下支付"
                 android:checked="true"
+                android:text="线下支付"
                 android:textColor="@color/nomal_text" />
         </RadioGroup>
     </LinearLayout>

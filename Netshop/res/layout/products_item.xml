@@ -32,27 +32,18 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dip"
+                android:layout_height="40dip"
                 android:layout_marginBottom="10dip" >
 
-                <TextView
-                    android:id="@+id/confirm_money"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="¥"
-                    android:textColor="@color/red_text"
-                    android:gravity="bottom"
-                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/confirm_money_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_toRightOf="@id/confirm_money"
                     android:textColor="@color/red_text"
-                    android:text="300"
-                    android:gravity="bottom"
-                    android:textSize="23sp" />
+                    android:text="¥300"
+                    android:gravity="center_vertical"
+                    android:textSize="20sp" />
 
                 
                 <TextView
@@ -62,9 +53,20 @@
                     android:layout_toRightOf="@id/confirm_money_text"
                     android:textColor="@color/nomal_text"
                     android:text="袋/70kg"
-                    android:gravity="bottom"
-                    android:textSize="18sp" 
+                    android:gravity="center_vertical"
+                    android:textSize="16sp" 
                     />
+                <Button android:id="@+id/add_shopcart_btn"
+                    android:layout_width="90dip"
+                    android:layout_height="30dip"
+                    android:background="@color/red_text"
+                    android:text="加入购物车"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dip"
+                    android:visibility="gone"/>
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

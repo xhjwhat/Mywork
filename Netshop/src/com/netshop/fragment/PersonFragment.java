@@ -37,7 +37,7 @@ public class PersonFragment extends Fragment implements OnClickListener{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		manager = getFragmentManager();
-		account = (Account) CachedModel.find(NetShopApp.getInstance().modelCache, "account", Account.class);
+		account = (Account) CachedModel.find(NetShopApp.getInstance().modelCache, "account01", Account.class);
 		View view = inflater.inflate(R.layout.my_inform, null);
 		nameText = (TextView)view.findViewById(R.id.myinform_name);
 		pointText = (TextView)view.findViewById(R.id.myinform_points);
