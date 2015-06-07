@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.l99gson.Gson;
+import com.netshop.activity.CollectActivity;
 import com.netshop.activity.ShopDetialsActivity;
 import com.netshop.adapter.CityAdapter;
 import com.netshop.adapter.StoreAdapter;
@@ -44,11 +45,13 @@ import com.netshop.entity.ShopsEntity;
 import com.netshop.net.HttpRequest;
 import com.netshop.net.HttpRequest.HttpCallBack;
 import com.netshop.util.NetShopUtil;
+import com.netshop.view.XListView;
+import com.netshop.view.XListView.IXListViewListener;
 
 public class StoreFragment extends Fragment {
 	private TextView titleText;
 	private View areaLayout, orderLayout;
-	private ListView listview;
+	private XListView listview;
 	private StoreAdapter adapter;
 	private ImageView cityBack;
 	private List<ShopEntity.Shop> shopList;
@@ -58,13 +61,20 @@ public class StoreFragment extends Fragment {
 	private Context context;
 	private FragmentManager manager;
 	double[] location;
+	private int totalPg = 0;
+	private int currentPg =1;
+	private int total = 0;
+	private boolean hasMore = true;
+	String pc;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		manager = getFragmentManager();
+		context = getActivity();
 		double[] location = NetShopApp.getInstance().getLocation();
-		String pc = "lan:" + location[0] + ";lat:" + location[1];
-		initData(pc);
+		//String pc = "lan:" + location[0] + ";lat:" + location[1];
+		pc = "province:"+"云南省"+";city:"+"楚雄州"+";country:"+"元谋县";
+		initData(pc,currentPg);
 		View view = inflater.inflate(R.layout.stores_detail, null);
 		titleText = (TextView) view.findViewById(R.id.title_text);
 		titleText.setText("门店");
@@ -72,37 +82,71 @@ public class StoreFragment extends Fragment {
 		cityAdapter = new CityAdapter(getActivity(), handler);
 		areaList.setAdapter(cityAdapter);
 		cityBack = new ImageView(getActivity());
-		areaLayout = view.findViewById(R.id.store_area_layout);
-		areaLayout.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				if (window == null) {
-					window = new PopupWindow(areaList, NetShopUtil
-							.getScreenWidth(getActivity()) / 2, NetShopUtil
-							.dip2px(getActivity(), 300));
-					window.setFocusable(true);
-					window.setOutsideTouchable(true);
-					window.setBackgroundDrawable(new ColorDrawable(0x00000000));
-				}
-				cityAdapter.reset();
-				window.showAsDropDown(areaLayout);
+//		areaLayout = view.findViewById(R.id.store_area_layout);
+//		areaLayout.setOnClickListener(new OnClickListener() {
+//			public void onClick(View v) {
+//				if (window == null) {
+//					window = new PopupWindow(areaList, NetShopUtil
+//							.getScreenWidth(getActivity()) / 2, NetShopUtil
+//							.dip2px(getActivity(), 300));
+//					window.setFocusable(true);
+//					window.setOutsideTouchable(true);
+//					window.setBackgroundDrawable(new ColorDrawable(0x00000000));
+//				}
+//				cityAdapter.reset();
+//				window.showAsDropDown(areaLayout);
+//			}
+//		});
+//		orderLayout = view.findViewById(R.id.store_order_layout);
+		listview = (XListView) view.findViewById(R.id.store_list);
+		listview.removeHeadView();
+		listview.setPullLoadEnable(true);
+		listview.setAutoLoadMoreEnable(true);
+		
+		shopList = new ArrayList<ShopEntity.Shop>();
+		adapter = new StoreAdapter(context, shopList);
+		listview.setAdapter(adapter);
+		listview.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Intent intent = new Intent(context,
+						ShopDetialsActivity.class);
+				intent.putExtra("id", shopList.get(position).getId());
+				startActivity(intent);
+
 			}
 		});
-		orderLayout = view.findViewById(R.id.store_order_layout);
-		listview = (ListView) view.findViewById(R.id.store_list);
-
+		listview.setXListViewListener(new IXListViewListener() {
+			@Override
+			public void onRefresh() {
+				
+			}
+			public void onLoadMore() {	
+				if(totalPg > currentPg){
+					initData(pc, currentPg+1);
+				}else{
+					listview.stopLoadMore();
+					if(hasMore){
+						hasMore = false;
+						Toast.makeText(getActivity(), "没有更多数据了", Toast.LENGTH_SHORT).show();
+					}
+				}
+			}
+		});
 		return view;
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		context = getActivity();
+		
 	}
 
-	public void initData(String pc) {
-		HttpRequest request = new HttpRequest("4", "0001");
-		request.setPg("1");
-		request.setPs("8");
+	public void initData(String pc,int pg) {
+		HttpRequest request = new HttpRequest("4", "0002");
+		request.setPg(pg+"");
+		request.setPs("20");
 		request.setPc(pc);
 		request.request(HttpRequest.REQUEST_GET, new HttpCallBack() {
 
@@ -110,8 +154,10 @@ public class StoreFragment extends Fragment {
 			public void success(String json) {
 				Gson gson = new Gson();
 				ShopsEntity entity = gson.fromJson(json, ShopsEntity.class);
+				currentPg = Integer.valueOf(entity.getList().getCurrentpage());
+				totalPg = Integer.valueOf(entity.getList().getTotalpage());
+				total = Integer.valueOf(entity.getList().getTotalnum());
 				Object tempObject = entity.getList().getShop();
-				shopList = new ArrayList<ShopEntity.Shop>();
 				if(tempObject instanceof LinkedHashMap<?, ?>){
 					LinkedHashMap<String, Object> tempHashMap =(LinkedHashMap<String, Object>)tempObject;
 					//LinkedHashMap<String, Object> temp = (LinkedHashMap<String, Object>)tempHashMap.get("product");
@@ -138,24 +184,23 @@ public class StoreFragment extends Fragment {
 						shopList.add(shop);
 					}
 				}
-				adapter = new StoreAdapter(context, shopList);
-				listview.setAdapter(adapter);
-				listview.setOnItemClickListener(new OnItemClickListener() {
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-						Intent intent = new Intent(context,
-								ShopDetialsActivity.class);
-						intent.putExtra("id", shopList.get(position).getId());
-						startActivity(intent);
+				adapter.setData(shopList);
+				adapter.notifyDataSetChanged();
+				listview.stopLoadMore();
+				if(total<=20){
+					listview.removeFootView();
+				}
+				if(shopList.size()== total){
+					listview.setAutoLoadMoreEnable(false);
+					listview.removeFootView();
+				}
 
-					}
-				});
 			}
 
 			@Override
 			public void fail(String failReason) {
-				// TODO Auto-generated method stub
+				Toast.makeText(getActivity(), failReason, Toast.LENGTH_SHORT).show();
+				listview.stopLoadMore();
 
 			}
 		});
@@ -173,7 +218,7 @@ public class StoreFragment extends Fragment {
 				window.dismiss();
 			}
 			String pc = (String) msg.obj;
-			initData(pc);
+			initData(pc,currentPg);
 		}
 	};
 

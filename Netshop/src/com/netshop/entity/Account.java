@@ -19,16 +19,18 @@ public class Account extends CachedModel{
 	public String status;
 	public String fixPhone;
 	
+	
+	public Account(String id){
+		super(id);
+	}
+	public Account(){}
+	
 	public String getFixPhone() {
 		return fixPhone;
 	}
 	public void setFixPhone(String fixPhone) {
 		this.fixPhone = fixPhone;
 	}
-	public Account(String id){
-		super(id);
-	}
-	public Account(){}
 	public String getNickname() {
 		return nickname;
 	}
@@ -147,6 +149,7 @@ public class Account extends CachedModel{
 		country = info.getCountry();
 		crops = info.getCrops();
 		telphone = info.getTelphone();
+		fixPhone = info.getFixPhone();
 		integrating = info.getIntegrating();
 		status = info.getStatus();
 		area = info.getArea();

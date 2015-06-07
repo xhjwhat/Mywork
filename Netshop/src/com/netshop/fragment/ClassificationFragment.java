@@ -5,10 +5,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.google.l99gson.Gson;
+import com.netshop.activity.BannerDetailActivity;
 import com.netshop.activity.SearchActivity;
+import com.netshop.adapter.BannerAdapter;
 import com.netshop.adapter.ProductGridAdapter;
 import com.netshop.adapter.ProductTypeAdapter;
 import com.netshop.app.R;
+import com.netshop.entity.BannerEntity;
 import com.netshop.entity.ProductTypes;
 import com.netshop.entity.ProductTypes.CType;
 import com.netshop.entity.ProductTypes.ProductType;
@@ -18,6 +21,8 @@ import com.netshop.net.HttpRequest.HttpCallBack;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.mdroid.cache.DefaultLoader;
+import android.support.mdroid.cache.ImageWorker;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -47,6 +52,7 @@ public class ClassificationFragment extends Fragment {
 	public FragmentManager manager;
 	public ClassFragment parentFragment;
 	public Context context;
+	public ImageWorker worker;
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		
@@ -68,20 +74,21 @@ public class ClassificationFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		context = getActivity();
+		worker = new DefaultLoader(getActivity(), 600, 250);
 		HttpRequest request = new HttpRequest("3", "0001");
 		request.request(HttpRequest.REQUEST_GET, callback);
 		View view = inflater.inflate(R.layout.classification, null);
-		searchEdit = (EditText)view.findViewById(R.id.main_search_edit);
-		searchImg = (ImageView)view.findViewById(R.id.main_seach_img);
-		searchImg.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(context,SearchActivity.class);
-				intent.putExtra("key", searchEdit.getText().toString());
-				startActivity(intent);
-				
-			}
-		});
+//		searchEdit = (EditText)view.findViewById(R.id.main_search_edit);
+//		searchImg = (ImageView)view.findViewById(R.id.main_seach_img);
+//		searchImg.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent = new Intent(context,SearchActivity.class);
+//				intent.putExtra("key", searchEdit.getText().toString());
+//				startActivity(intent);
+//				
+//			}
+//		});
 		seriesImg = (ImageView)view.findViewById(R.id.class_img);
 		seriesList = (ListView)view.findViewById(R.id.class_list);
 		seriesList.setOnItemClickListener(new OnItemClickListener() {
@@ -124,6 +131,34 @@ public class ClassificationFragment extends Fragment {
 				parentFragment.changetoDetialFragment(bundle);
 			}
 		});
+		HttpRequest bannerRequest = new HttpRequest("8", "0003");//首页banner
+		bannerRequest.request(HttpRequest.REQUEST_GET, new HttpCallBack() {
+			@Override
+			public void success(String json) {
+				Gson gson = new Gson();
+				BannerEntity entity = gson.fromJson(json, BannerEntity.class);
+				if(entity!=null){
+					worker.loadImage(entity.getLists().get(0).getImg(), seriesImg);
+					final String url = entity.getLists().get(0).getUrl();
+					seriesImg.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(context,BannerDetailActivity.class);
+							intent.putExtra("url", url);
+							context.startActivity(intent);
+						}
+					});
+				}
+			}
+			
+			@Override
+			public void fail(String failReason) {
+				if(failReason!=null)
+				Toast.makeText(context, failReason, Toast.LENGTH_SHORT).show();
+				
+			}
+		});
+		super.onActivityCreated(savedInstanceState);
 		return view;
 	}
 	HttpCallBack callback = new HttpCallBack() {
@@ -131,7 +166,17 @@ public class ClassificationFragment extends Fragment {
 		public void success(String json) {
 			Gson gson = new Gson();
 			ProductTypes entity = gson.fromJson(json, ProductTypes.class);
-			datas = (List<ProductType>) entity.getPtype();
+			Object object = entity.getPtype();
+			datas = new ArrayList<ProductTypes.ProductType>();
+			if(object instanceof LinkedHashMap<?, ?>){
+				LinkedHashMap<String, Object> tempHash = (LinkedHashMap<String, Object>)object;
+				LinkedHashMap<String, Object> temp = (LinkedHashMap<String, Object>) tempHash.get("ptype");
+				ProductType ptype = new ProductType();
+				ptype.setId(String.valueOf(temp.get("id")));
+				ptype.setName(String.valueOf(temp.get("name")));
+				ptype.setCtype(temp.get("clist"));
+				datas.add(ptype);
+			}
 			adapter = new ProductTypeAdapter(context, datas);
 			seriesList.setAdapter(adapter);
 			Object tempObject = datas.get(0).getCtype();

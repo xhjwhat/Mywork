@@ -72,7 +72,10 @@ public class ShopDetialsActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(ShopDetialsActivity.this,GoodsListActivity.class);
-				intent.putExtra("key", shopid);
+				
+				intent.putExtra("pc", shopid);
+				intent.putExtra("si", "3");
+				intent.putExtra("cd", "0009");
 				startActivity(intent);
 				
 			}

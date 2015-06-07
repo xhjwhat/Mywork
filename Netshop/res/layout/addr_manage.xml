@@ -16,6 +16,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="20dip"
         android:layout_marginRight="20dip"
+        android:layout_marginBottom="10dip"
         android:background="@color/red_text"
         android:gravity="center"
         android:text="+  新建收货人"
@@ -25,7 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_below="@id/title"
-        android:layout_above="@id/add_new"/>
+        android:layout_above="@id/add_new"
+        android:layout_marginBottom="10dip"/>
 
    
 

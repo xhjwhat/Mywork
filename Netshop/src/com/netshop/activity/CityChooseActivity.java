@@ -247,7 +247,7 @@ public class CityChooseActivity extends Activity {
 		public void onItemSelected(AdapterView<?> adapterView, View view, int position,
 				long id) {
 			district=((MyListItem) adapterView.getItemAtPosition(position)).getName();
-			Toast.makeText(CityChooseActivity.this, province+" "+city+" "+district, Toast.LENGTH_LONG).show();
+			//Toast.makeText(CityChooseActivity.this, province+" "+city+" "+district, Toast.LENGTH_LONG).show();
 		}
 
 		public void onNothingSelected(AdapterView<?> adapterView) {

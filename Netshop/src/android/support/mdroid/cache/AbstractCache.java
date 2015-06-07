@@ -15,7 +15,7 @@ public abstract class AbstractCache<ValT> {
     private static final String TAG = "AbstractCache";
 
     // Default memory cache size
-    private static final int DEFAULT_MEM_CACHE_SIZE = 1024 * 1024 * 5; // 4MB
+    private static final int DEFAULT_MEM_CACHE_SIZE = 1024 * 1024 * 8; // 4MB
 
     // Default disk cache size
     private static final int DEFAULT_DISK_CACHE_SIZE = 1024 * 1024 * 15; // 10MB

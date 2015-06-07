@@ -83,7 +83,10 @@ public class CachedList<CO extends CachedModel> extends CachedModel {
     public synchronized void addAll(List<CO> cachedObjects) {
         list.addAll(cachedObjects);
     }
-
+    
+    public synchronized void clear() {
+        list.clear();;
+    }
     /**
      * Synchronized method used to set an object at a location in the list.
      * 

@@ -19,6 +19,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -35,6 +37,7 @@ public class AddrManagerActivity extends Activity {
 	private ListView list;
 	private AddrAdapter adapter;
 	private List<Addr> datas;
+	String from;
 	public void onCreate(Bundle bundle){
 		super.onCreate(bundle);
 		setContentView(R.layout.addr_manage);
@@ -47,6 +50,8 @@ public class AddrManagerActivity extends Activity {
 		});
 		title = (TextView)findViewById(R.id.title_text);
 		title.setText("地址管理");
+		
+		from = getIntent().getStringExtra("from");
 		newText = (TextView)findViewById(R.id.add_new);
 		newText.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -55,6 +60,17 @@ public class AddrManagerActivity extends Activity {
 			}
 		});
 		list = (ListView) findViewById(R.id.addr_list);
+		list.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				if(from!=null && from.equals("order")){
+					Intent intent = new Intent();
+					intent.putExtra("addr", datas.get(position));
+					setResult(1, intent);
+					finish();
+				}
+			}
+		});
 		datas = new ArrayList<Addr>();
 		adapter = new AddrAdapter(this, datas, handler);
 		list.setAdapter(adapter);
@@ -98,7 +114,7 @@ public class AddrManagerActivity extends Activity {
 				}else{
 					AddrEntity entity = gson.fromJson(json, AddrEntity.class);
 					if(entity!=null){
-						datas.add(entity.getDelivery());
+						datas.add(entity.getList().getDelivery());
 						adapter.setList(datas);
 						adapter.notifyDataSetChanged();
 					}

@@ -227,6 +227,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/confirm_btn"
+            android:layout_marginRight="7dip"
             android:textColor="@color/red_text"
             android:textSize="16sp" />
 

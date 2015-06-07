@@ -27,7 +27,9 @@
             android:id="@+id/newconsignee_edit_consign"
             android:layout_width="match_parent"
             android:layout_height="40dip"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            android:inputType="textPhonetic" 
+            android:maxLength="6"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,11 +50,13 @@
             android:id="@+id/newconsignee_edit_conn"
             android:layout_width="match_parent"
             android:layout_height="40dip"
+            android:inputType="phone"
+            android:maxLength="13"
             android:layout_gravity="center_vertical" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dip"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="30dip"
         android:layout_marginRight="30dip"
         android:orientation="horizontal" >
@@ -68,7 +72,9 @@
         <EditText
             android:id="@+id/newconsignee_edit_addr"
             android:layout_width="match_parent"
-            android:layout_height="40dip"
+            android:layout_height="wrap_content"
+            android:minHeight="40dip"
+            android:maxLength="50"
             android:layout_gravity="center_vertical" />
     </LinearLayout>
 	<Button 

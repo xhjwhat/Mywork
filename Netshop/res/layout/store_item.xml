@@ -13,6 +13,7 @@
             android:id="@+id/store_item_img"
             android:layout_width="80dip"
             android:layout_height="80dip"
+            android:src="@drawable/icon"
             android:layout_margin="10dip" />
 
         <ImageView

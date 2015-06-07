@@ -30,6 +30,7 @@ public class ShopProductAdapter extends BaseAdapter {
 		this.context = context;
 		datas =dataList;
 		worker = new DefaultLoader(context);
+		worker.setRequestWidthAndHeight(200, 200);
 	}
 	public void setList(List<Product> dataList){
 		datas = dataList;

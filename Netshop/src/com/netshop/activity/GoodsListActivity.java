@@ -11,6 +11,8 @@ import com.netshop.entity.Product;
 import com.netshop.entity.ProductEntity;
 import com.netshop.net.HttpRequest;
 import com.netshop.net.HttpRequest.HttpCallBack;
+import com.netshop.view.XListView;
+import com.netshop.view.XListView.IXListViewListener;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -27,16 +29,23 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class GoodsListActivity extends Activity {
 	private ImageView backImg;
-	private ListView listView;
-	private String key;
+	private XListView listview;
+	private String pc,si,cd;
 	private List<Product> datas;
 	public ProductAdapter adapter;
 	private TextView title;
+	
+	private int totalPg = 0;
+	private int currentPg =1;
+	private int total = 0;
+	private boolean hasMore = true;
 	public void onCreate(Bundle bundle){
 		super.onCreate(bundle);
 		setContentView(R.layout.goods_list);
 		Intent intent = getIntent();
-		key = intent.getStringExtra("key");
+		pc = intent.getStringExtra("pc");
+		si = intent.getStringExtra("si");
+		cd = intent.getStringExtra("cd");
 		
 		backImg = (ImageView) findViewById(R.id.title_back_img);
 		backImg.setVisibility(View.VISIBLE);
@@ -47,14 +56,52 @@ public class GoodsListActivity extends Activity {
 			}
 		});
 		title = (TextView)findViewById(R.id.title_text);
-		title.setText("主营产品");
-		listView = (ListView)findViewById(R.id.search_list);
-		initData(key);
+		if(cd.equals("0009")){
+			title.setText("主营产品");
+		}else if(cd.equals("0002")){
+			title.setText("推荐新品");
+		}
+		
+		listview = (XListView)findViewById(R.id.search_list);
+		listview.removeHeadView();
+		listview.setPullLoadEnable(true);
+		listview.setAutoLoadMoreEnable(true);
+		
+		datas = new ArrayList<Product>();
+		adapter = new ProductAdapter(GoodsListActivity.this, datas);
+		listview.setAdapter(adapter);
+		listview.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Intent intent = new Intent(GoodsListActivity.this,GoodsDetilsActivity.class);
+				intent.putExtra("id", datas.get(position).getPid());
+				startActivity(intent);
+			}
+		});
+		listview.setXListViewListener(new IXListViewListener() {
+			@Override
+			public void onRefresh() {
+				
+			}
+			public void onLoadMore() {	
+				if(totalPg > currentPg){
+					initData(currentPg+1);
+				}else{
+					listview.stopLoadMore();
+					if(hasMore){
+						hasMore = false;
+						Toast.makeText(GoodsListActivity.this, "没有更多数据了", Toast.LENGTH_SHORT).show();
+					}
+				}
+			}
+		});
+		initData(currentPg);
 	}
-	public void initData(String key){
-		HttpRequest request = new HttpRequest("3", "0009");
-		request.setPc(key);
-		request.setPs("10");
+	public void initData(int currentPg){
+		HttpRequest request = new HttpRequest(si, cd);
+		request.setPc(pc);
+		request.setPs("20");
 		request.setPg("1");
 		request.request(callBack);
 		
@@ -64,7 +111,7 @@ public class GoodsListActivity extends Activity {
 		public void success(String json) {
 			Gson gson = new Gson();
 			ProductEntity entity = gson.fromJson(json, ProductEntity.class);
-			datas = new ArrayList<Product>();
+			
 			Object tempObject = entity.getList().getProduct();
 			if(tempObject == null){
 				Toast.makeText(GoodsListActivity.this, "没有数据", Toast.LENGTH_SHORT).show();
@@ -91,18 +138,11 @@ public class GoodsListActivity extends Activity {
 					datas.add(product);
 				}
 			}
-			if(datas != null){
-				adapter = new ProductAdapter(GoodsListActivity.this, datas);
-				listView.setAdapter(adapter);
-				listView.setOnItemClickListener(new OnItemClickListener() {
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-						Intent intent = new Intent(GoodsListActivity.this,GoodsDetilsActivity.class);
-						intent.putExtra("id", datas.get(position).getPid());
-						startActivity(intent);
-					}
-				});
+			adapter.setList(datas);
+			adapter.notifyDataSetChanged();
+			listview.stopLoadMore();
+			if(total<=20){
+				listview.removeFootView();
 			}
 		}
 		

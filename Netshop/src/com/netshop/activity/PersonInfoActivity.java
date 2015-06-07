@@ -52,7 +52,7 @@ public class PersonInfoActivity extends Activity implements OnClickListener{
 		area = (TextView)findViewById(R.id.person_area_text);
 		plant = (TextView)findViewById(R.id.person_plantype_text);
 		findViewById(R.id.nickname_layout).setOnClickListener(this);
-		findViewById(R.id.phone_layout).setOnClickListener(this);
+		//findViewById(R.id.phone_layout).setOnClickListener(this);
 		findViewById(R.id.sex_layout).setOnClickListener(this);
 		findViewById(R.id.birth_layout).setOnClickListener(this);
 		findViewById(R.id.fixphone_layout).setOnClickListener(this);
@@ -66,17 +66,25 @@ public class PersonInfoActivity extends Activity implements OnClickListener{
 		Account account = (Account) CachedModel.find(NetShopApp.getInstance().getModelCache(), "account01", Account.class);
 		if(account!=null){
 			nickName.setText(account.getNickname());
-			phone.setText(account.getTelphone());
-			sex.setText(account.getSex());
+			phone.setText(NetShopApp.getInstance().getUserId());
+			if(account.getSex().equals("0")){
+				sex.setText("男");
+			}else if(account.getSex().equals("1")){
+				sex.setText("女");
+			}else{
+				sex.setText(account.getSex());
+			}
 			birth.setText(account.getBirth());
-			fixPhone.setText(account.getTelphone());
+			fixPhone.setText(account.getFixPhone());
 			addr.setText(account.getAddress());
 			realName.setText(account.getRealname());
 			area.setText(account.getArea());
 			plant.setText(account.getCrops());
 		}else{
+			phone.setText(NetShopApp.getInstance().getUserId());
 			//重新登录获取数据
 		}
+		
 	}
 	@Override
 	public void onClick(View v) {
@@ -113,7 +121,7 @@ public class PersonInfoActivity extends Activity implements OnClickListener{
 			break;
 		case R.id.fixphone_layout:
 			intent.putExtra("int", FIXPHONE);
-			intent.putExtra("type", "fixphone");
+			intent.putExtra("type", "telphone");
 			intent.putExtra("nick", "固定电话：");
 			intent.putExtra("value", fixPhone.getText().toString());
 			startActivityForResult(intent,0);
@@ -154,12 +162,11 @@ public class PersonInfoActivity extends Activity implements OnClickListener{
 	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		data = new Intent();
-		data.putExtra("name", "快乐");
 		if(data ==null)return;
 		Account account = (Account) CachedModel.find(NetShopApp.getInstance().modelCache, "account01", Account.class);
 		if(account == null){
 			account = new Account("account01");
+			account.setTelphone(NetShopApp.getInstance().getUserId());
 		}
 		switch(resultCode){
 		case NICKNAME:

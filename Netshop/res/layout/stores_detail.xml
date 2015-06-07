@@ -30,13 +30,13 @@
                 android:textColor="@color/nomal_text"
                 android:textSize="16sp" />
 
-            <ImageView
+            <!-- <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="8dip"
-                android:background="@drawable/store_icon_down" />
+                android:background="@drawable/store_icon_down" /> -->
         </RelativeLayout>
 
         <View
@@ -63,13 +63,13 @@
                 android:textColor="@color/nomal_text"
                 android:textSize="16sp" />
 
-            <ImageView
+            <!-- <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="8dip"
-                android:background="@drawable/store_icon_down" />
+                android:background="@drawable/store_icon_down" /> -->
         </RelativeLayout>
 
         <View
@@ -95,13 +95,13 @@
                 android:textColor="@color/nomal_text"
                 android:textSize="16sp" />
 
-            <ImageView
+            <!-- <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="8dip"
-                android:background="@drawable/store_icon_down" />
+                android:background="@drawable/store_icon_down" /> -->
         </RelativeLayout>
     </LinearLayout>
 
@@ -150,7 +150,7 @@
             android:textSize="16sp" />
     </RelativeLayout>
 
-    <ListView
+    <com.netshop.view.XListView
         android:id="@+id/store_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

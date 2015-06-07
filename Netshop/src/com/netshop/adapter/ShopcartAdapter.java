@@ -34,6 +34,7 @@ public class ShopcartAdapter extends BaseAdapter {
 		datas = list;
 		this.handler = handler;
 		worker = new DefaultLoader(context);
+		worker.setRequestWidthAndHeight(200, 200);
 	}
 	@Override
 	public int getCount() {
@@ -82,8 +83,10 @@ public class ShopcartAdapter extends BaseAdapter {
 		holder.checkBox.setClickable(false);
 		if(allSelected){
 			holder.checkBox.setChecked(true);
+			
 		}else{
 			holder.checkBox.setChecked(false);
+			
 		}
 		holder.edit.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -139,7 +142,7 @@ public class ShopcartAdapter extends BaseAdapter {
 		holder.productWeight.setText("/袋/"+datas.get(position).getWeight()+"kg");
 		holder.productPrice.setText("¥"+datas.get(position).getPrice());
 		holder.productNum.setText(datas.get(position).getNum());
-		worker.loadImage(datas.get(position).getImg(), holder.productImg);
+		worker.loadImage(datas.get(position).getPimg(), holder.productImg);
 		convertView.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				if(holder.edit.getText().toString().equals("完成")){
@@ -148,11 +151,13 @@ public class ShopcartAdapter extends BaseAdapter {
 				Message msg = handler.obtainMessage();
 				if(holder.checkBox.isChecked()){
 					holder.checkBox.setChecked(false);
+					holder.edit.setClickable(true);
 					msg.what = position;
 					msg.arg1 = 0;
 					handler.sendMessage(msg);
 				}else{
 					holder.checkBox.setChecked(true);
+					holder.edit.setClickable(false);
 					msg.what = position;
 					msg.arg1 = 1;
 					handler.sendMessage(msg);

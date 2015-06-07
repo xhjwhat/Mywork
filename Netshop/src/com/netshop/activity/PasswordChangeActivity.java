@@ -2,6 +2,7 @@ package com.netshop.activity;
 
 import com.netshop.app.R;
 import com.netshop.fragment.Password1Fragment;
+import com.netshop.fragment.Password2Fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -34,7 +35,7 @@ public class PasswordChangeActivity extends FragmentActivity {
 		title.setText("修改密码");
 		manager = getSupportFragmentManager();
 		FragmentTransaction transaction =manager.beginTransaction();
-		Password1Fragment fragment = new Password1Fragment();
+		Password2Fragment fragment = new Password2Fragment();
 		Bundle bundle2 = new Bundle();
 		bundle2.putString("type", "password");
 		fragment.setArguments(bundle2);

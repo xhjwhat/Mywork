@@ -1,5 +1,6 @@
 package com.netshop.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -21,8 +22,15 @@ public class StoreAdapter extends BaseAdapter {
 	public ImageWorker imageWork;
 	public StoreAdapter(Context context,List<ShopEntity.Shop> shops){
 		this.context = context;
-		shopList = shops;
+		shopList = new ArrayList<ShopEntity.Shop>();
+		shopList.addAll(shops);
 		imageWork = new DefaultLoader(context);
+		imageWork.setRequestWidthAndHeight(200, 200);
+	}
+	
+	public void setData(List<ShopEntity.Shop> list){
+		shopList.clear();
+		shopList.addAll(list);
 	}
 	@Override
 	public int getCount() {

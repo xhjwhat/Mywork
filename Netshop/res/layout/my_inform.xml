@@ -78,7 +78,7 @@
     <RelativeLayout
         android:id="@+id/order_layout"
         android:layout_width="match_parent"
-        android:layout_height="40dip" >
+        android:layout_height="50dip" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -245,7 +245,7 @@
     <RelativeLayout
         android:id="@+id/my_collect"
         android:layout_width="match_parent"
-        android:layout_height="40dip" >
+        android:layout_height="50dip" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -277,7 +277,7 @@
     <RelativeLayout
         android:id="@+id/my_addr"
         android:layout_width="match_parent"
-        android:layout_height="40dip" >
+        android:layout_height="50dip" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -309,7 +309,7 @@
     <RelativeLayout
         android:id="@+id/my_account"
         android:layout_width="match_parent"
-        android:layout_height="40dip" >
+        android:layout_height="50dip" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -338,7 +338,7 @@
         android:layout_marginLeft="20dip"
         android:background="@color/line_bg" />
 
-    <RelativeLayout
+    <!-- <RelativeLayout
         android:id="@+id/my_more"
         android:layout_width="match_parent"
         android:layout_height="40dip" >
@@ -362,6 +362,6 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dip"
             android:background="@drawable/arrow_right" />
-    </RelativeLayout>
+    </RelativeLayout> -->
 
 </LinearLayout>

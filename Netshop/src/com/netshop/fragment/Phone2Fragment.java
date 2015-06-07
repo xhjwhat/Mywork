@@ -2,6 +2,7 @@ package com.netshop.fragment;
 
 import com.netshop.app.NetShopApp;
 import com.netshop.app.R;
+import com.netshop.entity.Account;
 import com.netshop.net.HttpRequest;
 import com.netshop.net.HttpRequest.HttpCallBack;
 import com.netshop.util.DESCrypto;
@@ -12,6 +13,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.support.mdroid.cache.CachedModel;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -36,7 +38,7 @@ public class Phone2Fragment extends Fragment {
 		manager = getFragmentManager();
 		View view = inflater.inflate(R.layout.update_phone_phone, null);
 		phoneEditText = (EditText)view.findViewById(R.id.input_original_edit);
-		verifiEditText = (EditText)view.findViewById(R.id.update_pwd_edit);
+		//verifiEditText = (EditText)view.findViewById(R.id.update_pwd_edit);
 		nextBtn = (Button)view.findViewById(R.id.update_phone_next_btn);
 		nextBtn.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -53,11 +55,11 @@ public class Phone2Fragment extends Fragment {
 					Toast.makeText(context, R.string.illegal_mobile_num,Toast.LENGTH_SHORT).show();
 					return;
 				}
-				HttpRequest request = new HttpRequest("1", "0007");
-				request.setCode(verifiEditText.getText().toString());
-				request.setPc("phone:"+NetShopApp.getInstance().getUserId());
-				request.request(new HttpCallBack() {
-					public void success(String json) {
+//				HttpRequest request = new HttpRequest("1", "0007");
+//				request.setCode(verifiEditText.getText().toString());
+//				request.setPc("phone:"+NetShopApp.getInstance().getUserId());
+//				request.request(new HttpCallBack() {
+//					public void success(String json) {
 						HttpRequest request = new HttpRequest("1", "0005");
 						request.setPc("oldphone:"+NetShopApp.getInstance().getUserId()+";phone:"+phoneEditText.getText().toString());
 						request.request(new HttpCallBack() {
@@ -66,6 +68,11 @@ public class Phone2Fragment extends Fragment {
 								Editor editor = share.edit();
 								editor.putString("user_id", newPhone);
 								editor.commit();
+								Account account = (Account) CachedModel.find(NetShopApp.getInstance().modelCache, "account01", Account.class);
+								if(account !=null){
+									account.setTelphone(newPhone);
+									account.save(NetShopApp.getInstance().modelCache);
+								}
 								FragmentTransaction transaction = manager.beginTransaction();
 								transaction.replace(R.id.password_frame, new Phone3Fragment());
 								transaction.commit();
@@ -78,14 +85,14 @@ public class Phone2Fragment extends Fragment {
 						});
 					}
 					
-					@Override
-					public void fail(String failReason) {
-						
-					}
-				});
-			}
+			// @Override
+			// public void fail(String failReason) {
+			//
+			// }
+			// });
+			// }
 		});
-		verifiBtn = (Button)view.findViewById(R.id.update_pwd_verifi_btn);
+		/*verifiBtn = (Button)view.findViewById(R.id.update_pwd_verifi_btn);
 		verifiBtn.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				HttpRequest request = new HttpRequest("1", "0003");
@@ -100,7 +107,7 @@ public class Phone2Fragment extends Fragment {
 					}
 				});
 			}
-		});
+		});*/
 		return view;
 	}
 

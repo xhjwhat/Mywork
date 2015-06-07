@@ -40,11 +40,13 @@ public class ShopcarFragment extends Fragment {
 	private ArrayList<Product> selectedList;
 	private ShopcartAdapter adapter;
 	private int totalMoney = 0;
+	private CachedList<Product> cachedList;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		manager = getFragmentManager();
+		totalMoney = 0;
 		View view = inflater.inflate(R.layout.shopcar, null);
 		titleText = (TextView) view.findViewById(R.id.title_text);
 		titleText.setText("购物车");
@@ -88,19 +90,20 @@ public class ShopcarFragment extends Fragment {
 		settleBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(selectedList!=null && selectedList.size()>0){
-					
+				if (selectedList != null && selectedList.size() > 0) {
+
 					Intent intent = new Intent(getActivity(),
 							ConfirmOrderActivity.class);
 					intent.putExtra("selected", selectedList);
 					getActivity().startActivity(intent);
-				}else{
-					Toast.makeText(getActivity(), "还没选择商品", Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(getActivity(), "还没选择商品", Toast.LENGTH_SHORT)
+							.show();
 				}
 			}
 		});
 
-		CachedList<Product> cachedList = (CachedList<Product>) CachedList.find(
+		cachedList = (CachedList<Product>) CachedList.find(
 				NetShopApp.getInstance().modelCache, "shopcart01",
 				CachedList.class);
 		if (cachedList != null) {
@@ -132,25 +135,29 @@ public class ShopcarFragment extends Fragment {
 					}
 				}
 				moneyText.setText("" + totalMoney);
+				cachedList.clear();
+				cachedList.addAll(dataList);
+				cachedList.save(NetShopApp.getInstance().modelCache);
+			} else {
+				if (msg.arg1 == 1) {
+					selectedList.add(dataList.get(msg.what));
+				} else {
+					selectedList.remove(dataList.get(msg.what));
+				}
+				totalMoney = 0;
+				if (selectedList.size() > 0) {
+					for (Product temp : selectedList) {
+						totalMoney += Integer.valueOf(temp.getPrice())
+								* Integer.valueOf(temp.getNum());
+					}
+				} else if (selectedList.size() == 0) {
+					if (checkBox.isChecked()) {
+						checkBox.setChecked(false);
+					}
+				}
+				moneyText.setText("" + totalMoney);
 			}
 
-			if (msg.arg1 == 1) {
-				selectedList.add(dataList.get(msg.what));
-			} else {
-				selectedList.remove(dataList.get(msg.what));
-			}
-			totalMoney = 0;
-			if (selectedList.size() > 0) {
-				for (Product temp : selectedList) {
-					totalMoney += Integer.valueOf(temp.getPrice())
-							* Integer.valueOf(temp.getNum());
-				}
-			} else if (selectedList.size() == 0) {
-				if (checkBox.isChecked()) {
-					checkBox.setChecked(false);
-				}
-			}
-			moneyText.setText("" + totalMoney);
 		}
 
 	};

@@ -5,7 +5,8 @@
     android:orientation="vertical" >
 
     <include layout="@layout/title_bar" />
-	<ListView android:id="@+id/myorder_listview"
+	<com.netshop.view.XListView 
+	    android:id="@+id/myorder_listview"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"/>
     <!-- <com.netshop.view.TitlePageIndicator

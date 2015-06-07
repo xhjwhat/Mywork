@@ -26,6 +26,7 @@ public class MainActivity extends FragmentActivity {
 		indicator = (TabPageIndicator)findViewById(R.id.main_indicator);
 		adapter = new MainPagerAdapter(getSupportFragmentManager());
 		viewpager.setAdapter(adapter);
+		viewpager.setOffscreenPageLimit(1);
 		indicator.setViewPager(viewpager, 0);
 		indicator.setOnPageChangeListener(new OnPageChangeListener() {
 			@Override
@@ -45,6 +46,7 @@ public class MainActivity extends FragmentActivity {
 	}
 	public void onNewIntent(Intent intent){
 		super.onNewIntent(intent);
-		viewpager.setCurrentItem(SHOPCAR);
+		int to = intent.getIntExtra("to", 1);
+		viewpager.setCurrentItem(to);
 	}
 }

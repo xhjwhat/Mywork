@@ -84,18 +84,17 @@
                     android:textColor="@color/text_49"
                     android:textSize="18sp" />
 
-                <TextView
+                <!-- <TextView
                     android:id="@+id/update_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dip"
-                    android:drawableRight="@drawable/arrow_right"
                     android:text="修改"
                     android:drawablePadding="5dip"
                     android:textColor="@color/red_text"
-                    android:textSize="15sp" />
+                    android:textSize="15sp" /> -->
             </RelativeLayout>
 
             <View
@@ -319,7 +318,7 @@
                     android:layout_marginTop="20dip"
                     android:drawableRight="@drawable/arrow_right"
                     android:text="修改"
-                    android:drawablePadding="5dip"
+                    android:drawablePadding="2dip"
                     android:textColor="@color/red_text"
                     android:textSize="15sp" />
 
@@ -329,11 +328,12 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/person_area_service"
                     android:layout_marginBottom="10dip"
+                    android:padding="8dip"
                     android:layout_marginLeft="20dip"
                     android:background="#ffffff"
                     android:gravity="center"
                     android:textColor="@color/nomal_text"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
             </RelativeLayout>
 
             <View
@@ -379,7 +379,7 @@
                     android:layout_marginTop="20dip"
                     android:drawableRight="@drawable/arrow_right"
                     android:text="修改"
-                    android:drawablePadding="5dip"
+                    android:drawablePadding="2dip"
                     android:textColor="@color/red_text"
                     android:textSize="15sp" />
 
@@ -389,11 +389,12 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/person_plant_service"
                     android:layout_marginBottom="10dip"
+                    android:padding="8dip"
                     android:layout_marginLeft="20dip"
                     android:background="#ffffff"
                     android:gravity="center"
-                    android:textColor="@color/text_49"
-                    android:textSize="14sp" />
+                    android:textColor="@color/nomal_text"
+                    android:textSize="16sp" />
                <!--  <GridView
                     android:id="@+id/person_grid"
                     android:layout_width="match_parent"

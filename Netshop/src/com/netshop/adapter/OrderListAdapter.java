@@ -25,6 +25,7 @@ public class OrderListAdapter extends BaseAdapter {
 		this.context = context;
 		dataList = list;
 		worker = new DefaultLoader(context);
+		worker.setRequestWidthAndHeight(200, 200);
 	}
 	@Override
 	public int getCount() {

@@ -10,6 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dip"
+        android:paddingTop="5dip"
+        android:paddingBottom="5dip"
         android:textColor="@color/text_49"
         android:textSize="18sp" />
 
@@ -56,7 +58,7 @@
             android:textColor="@color/red_text"
             android:textSize="17sp" />
 
-        <Button
+        <!-- <Button
             android:id="@+id/myorder_btn"
             android:layout_width="60dip"
             android:layout_height="30dip"
@@ -66,7 +68,7 @@
             android:background="@color/red_text"
             android:text="去付款"
             android:textColor="#ffffff"
-            android:textSize="17sp" />
+            android:textSize="17sp" /> -->
     </RelativeLayout>
 
 </LinearLayout>

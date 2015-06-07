@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.mdroid.cache.CachedList;
 import android.support.mdroid.cache.CachedModel;
+import android.support.mdroid.cache.DefaultLoader;
+import android.support.mdroid.cache.ImageWorker;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,8 +35,6 @@ public class GoodsDetilsActivity extends Activity implements OnClickListener{
 	private TextView nameText,hasText,phoneText;
 	private TextView seriesText,priceText,numText,weightText,storeAddrText;
 	private View numLayout,informLayout,addrLayout,commentLayout,cityLayout,buyLayout;
-	private ViewPager pager;
-	private CirclePageIndicator indicator;
 	private Button myShopcarBtn,addToShopcarBtn,buyShopcarBtn,buyNowBtn;
 	private EditText numEdit;
 	
@@ -42,6 +42,8 @@ public class GoodsDetilsActivity extends Activity implements OnClickListener{
 	private ListView listView;
 	private ImageView backImg;
 	private Product product;
+	private ImageView productImg;
+	private ImageWorker worker;
 	public void onCreate(Bundle bundle){
 		super.onCreate(bundle);
 		setContentView(R.layout.goods_detail);
@@ -57,6 +59,7 @@ public class GoodsDetilsActivity extends Activity implements OnClickListener{
 		title = (TextView)findViewById(R.id.title_text);
 		title.setText("商品详情");
 		listView = (ListView)findViewById(R.id.list);
+		worker = new DefaultLoader(this);
 		HttpRequest  request = new HttpRequest("3", "0004");
 		Intent intent = getIntent();
 		String id=intent.getStringExtra("id");
@@ -74,7 +77,7 @@ public class GoodsDetilsActivity extends Activity implements OnClickListener{
 						product = productInfo.getProduct();
 						nameText.setText(product.getPname());
 						priceText.setText("¥"+product.getPrice());
-						
+						worker.loadImage(product.getPimg(), productImg);
 					}
 				}catch(Exception e){
 					Toast.makeText(GoodsDetilsActivity.this, "网络数据有误", Toast.LENGTH_SHORT).show();
@@ -100,12 +103,11 @@ public class GoodsDetilsActivity extends Activity implements OnClickListener{
 		informLayout.setOnClickListener(this);
 		commentLayout = findViewById(R.id.product_comment_layout);
 		commentLayout.setOnClickListener(this);
-		pager = (ViewPager)findViewById(R.id.goods_viewpager);
-		indicator = (CirclePageIndicator)findViewById(R.id.goods_indicator);
 		myShopcarBtn = (Button)findViewById(R.id.goods_btn_my_car);
 		myShopcarBtn.setOnClickListener(this);
 		addToShopcarBtn = (Button)findViewById(R.id.goods_btn_add_car);
 		addToShopcarBtn.setOnClickListener(this);
+		productImg =(ImageView)findViewById(R.id.goods_details_img);
 	}
 	@Override
 	public void onClick(View v) {
@@ -139,6 +141,7 @@ public class GoodsDetilsActivity extends Activity implements OnClickListener{
 			break;
 		case R.id.goods_btn_my_car:
 			Intent intent2 = new Intent(this,MainActivity.class);
+			intent2.putExtra("to", 3);
 			startActivity(intent2);
 			break;
 		case R.id.goods_btn_add_car:

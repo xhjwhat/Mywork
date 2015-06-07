@@ -27,6 +27,10 @@ public class OrderItemAdapter extends BaseAdapter {
 		datas = list;
 		this.context = context;
 		worker = new DefaultLoader(context);
+		worker.setRequestWidthAndHeight(200, 200);
+	}
+	public void setData(List<Order> list){
+		datas = list;
 	}
 	@Override
 	public int getCount() {
@@ -54,7 +58,7 @@ public class OrderItemAdapter extends BaseAdapter {
 			holder = new HolderView();
 			holder.shopname = (TextView)convertView.findViewById(R.id.myorder_shopname);
 			holder.total = (TextView)convertView.findViewById(R.id.myorder_total);
-			holder.btn = (Button)convertView.findViewById(R.id.myorder_btn);
+			//holder.btn = (Button)convertView.findViewById(R.id.myorder_btn);
 			holder.layout = (LinearLayout)convertView.findViewById(R.id.myorder_list);
 			convertView.setTag(holder);
 		}else{
@@ -62,13 +66,14 @@ public class OrderItemAdapter extends BaseAdapter {
 		}
 		holder.shopname.setText(datas.get(position).getShopname());
 		holder.total.setText(datas.get(position).getTotal());
-		holder.btn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				
-			}
-		});
+//		holder.btn.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				
+//			}
+//		});
 		for(Product product:datas.get(position).getProducts()){
+			holder.layout.removeAllViews();
 			holder.layout.addView(getView(product, datas.get(position).getTime()));
 			View view = new View(context);
 			view.setBackgroundColor(0xff888888);
@@ -80,7 +85,7 @@ public class OrderItemAdapter extends BaseAdapter {
 	class HolderView{
 		TextView shopname;
 		TextView total;
-		Button btn;
+		//Button btn;
 		LinearLayout layout;
 	}
 	public View getView(Product product,String date){

@@ -6,11 +6,15 @@ import java.util.List;
 
 import com.google.l99gson.Gson;
 import com.netshop.adapter.ProductAdapter;
+import com.netshop.adapter.StoreAdapter;
 import com.netshop.app.R;
 import com.netshop.entity.Product;
 import com.netshop.entity.ProductEntity;
+import com.netshop.entity.ShopEntity;
 import com.netshop.net.HttpRequest;
 import com.netshop.net.HttpRequest.HttpCallBack;
+import com.netshop.view.XListView;
+import com.netshop.view.XListView.IXListViewListener;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -29,10 +33,14 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class CollectActivity extends Activity {
 	private TextView title;
-	private ListView listView;
+	private XListView listview;
 	private ImageView backImg;
 	private List<Product> datas;
 	public ProductAdapter adapter;
+	private int totalPg = 0;
+	private int currentPg =1;
+	private int total = 0;
+	private boolean hasMore = true;
 	public void onCreate(Bundle bundle){
 		super.onCreate(bundle);
 		setContentView(R.layout.collect);
@@ -46,8 +54,78 @@ public class CollectActivity extends Activity {
 		});
 		title = (TextView)findViewById(R.id.title_text);
 		title.setText("收藏");
-		listView = (ListView)findViewById(R.id.list);
+		listview = (XListView)findViewById(R.id.list);
+		listview.removeHeadView();
+		listview.setPullLoadEnable(true);
+		listview.setAutoLoadMoreEnable(true);
+		
+		datas = new ArrayList<Product>();
+		adapter = new ProductAdapter(CollectActivity.this, datas);
+		listview.setAdapter(adapter);
+		listview.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Intent intent = new Intent(CollectActivity.this,GoodsDetilsActivity.class);
+				intent.putExtra("id", datas.get(position).getPid());
+				CollectActivity.this.startActivity(intent);
+			}
+		});
+		listview.setOnItemLongClickListener(new OnItemLongClickListener() {
+			public boolean onItemLongClick(AdapterView<?> parent,
+					View view, final int position, long id) {
+				AlertDialog dialog = new AlertDialog.Builder(CollectActivity.this).create();
+				dialog.setTitle("提示");
+				dialog.setMessage("确认要删除当前收藏吗？");
+				dialog.setButton(DialogInterface.BUTTON_POSITIVE, "确定", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						String id = datas.get(position).getPid();
+						HttpRequest request = new HttpRequest("5", "0003");
+						request.setPc(id);
+						request.request(new HttpCallBack(){
+							@Override
+							public void success(String json) {
+								datas.remove(position);
+								adapter.setList(datas);
+								adapter.notifyDataSetChanged();
+								Toast.makeText(CollectActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+							}
+							@Override
+							public void fail(String failReason) {
+								Toast.makeText(CollectActivity.this, failReason, Toast.LENGTH_SHORT).show();
+							}
+							
+						});
+					}
+				});
+				dialog.show();
+				return true;
+			}
+		});
+		listview.setXListViewListener(new IXListViewListener() {
+			@Override
+			public void onRefresh() {
+				
+			}
+			public void onLoadMore() {	
+				if(totalPg > currentPg){
+					initData(currentPg+1);
+				}else{
+					listview.stopLoadMore();
+					if(hasMore){
+						hasMore = false;
+						Toast.makeText(CollectActivity.this, "没有更多数据了", Toast.LENGTH_SHORT).show();
+					}
+				}
+			}
+		});
+		initData(currentPg);
+	}
+	public void initData(int currentPg){
 		HttpRequest request = new HttpRequest("5", "0001");
+		request.setPg(currentPg + "");
+		request.setPs("20");
 		request.request(callBack);
 	}
 	HttpCallBack callBack = new HttpCallBack() {
@@ -56,7 +134,7 @@ public class CollectActivity extends Activity {
 			Gson gson = new Gson();
 			ProductEntity entity = gson.fromJson(json, ProductEntity.class);
 			Object tempObject = entity.getList().getProduct();
-			datas = new ArrayList<Product>();
+			
 			if(tempObject instanceof LinkedHashMap<?, ?>){
 				LinkedHashMap<String, Object> tempHashMap = (LinkedHashMap<String, Object>) tempObject;
 				Product product = new Product();
@@ -78,50 +156,15 @@ public class CollectActivity extends Activity {
 					datas.add(product);
 				}
 			}
-			if(datas != null){
-				adapter = new ProductAdapter(CollectActivity.this, datas);
-				listView.setAdapter(adapter);
-				listView.setOnItemClickListener(new OnItemClickListener() {
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-						Intent intent = new Intent(CollectActivity.this,GoodsDetilsActivity.class);
-						intent.putExtra("id", datas.get(position).getPid());
-						CollectActivity.this.startActivity(intent);
-					}
-				});
-				listView.setOnItemLongClickListener(new OnItemLongClickListener() {
-					public boolean onItemLongClick(AdapterView<?> parent,
-							View view, final int position, long id) {
-						AlertDialog dialog = new AlertDialog.Builder(CollectActivity.this).create();
-						dialog.setTitle("提示");
-						dialog.setMessage("确认要删除当前收藏吗？");
-						dialog.setButton(DialogInterface.BUTTON_POSITIVE, "确定", new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								String id = datas.get(position).getPid();
-								HttpRequest request = new HttpRequest("5", "0003");
-								request.setPc(id);
-								request.request(new HttpCallBack(){
-									@Override
-									public void success(String json) {
-										datas.remove(position);
-										adapter.setList(datas);
-										adapter.notifyDataSetChanged();
-										Toast.makeText(CollectActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
-									}
-									@Override
-									public void fail(String failReason) {
-										Toast.makeText(CollectActivity.this, failReason, Toast.LENGTH_SHORT).show();
-									}
-									
-								});
-							}
-						});
-						dialog.show();
-						return true;
-					}
-				});
+			adapter.setList(datas);;
+			adapter.notifyDataSetChanged();
+			listview.stopLoadMore();
+			if(total<=20){
+				listview.removeFootView();
+			}
+			if(datas.size()== total){
+				listview.setAutoLoadMoreEnable(false);
+				listview.removeFootView();
 			}
 		}
 		
@@ -130,4 +173,5 @@ public class CollectActivity extends Activity {
 			
 		}
 	};
+	
 }

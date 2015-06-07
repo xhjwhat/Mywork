@@ -8,6 +8,7 @@ import com.netshop.app.R;
 import com.netshop.entity.Addr;
 import com.netshop.entity.AddrEntity;
 import com.netshop.entity.BaseEntity;
+import com.netshop.entity.DeliveryEntity;
 import com.netshop.entity.Product;
 import com.netshop.entity.ShopEntity.Shop;
 import com.netshop.net.HttpRequest;
@@ -63,7 +64,7 @@ public class ConfirmOrderActivity extends Activity implements OnClickListener {
 		defaultRequest.request(new HttpCallBack() {
 			public void success(String json) {
 				Gson gson = new Gson();
-				AddrEntity entity = gson.fromJson(json, AddrEntity.class);
+				DeliveryEntity entity = gson.fromJson(json, DeliveryEntity.class);
 				if (entity != null) {
 					addr = entity.getDelivery();
 					nameText.setText(addr.getName());
@@ -115,6 +116,7 @@ public class ConfirmOrderActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.addr_layout:
 			Intent intent = new Intent(this, AddrManagerActivity.class);
+			intent.putExtra("from", "order");
 			startActivityForResult(intent, 1);
 			break;
 		case R.id.shop_layout:

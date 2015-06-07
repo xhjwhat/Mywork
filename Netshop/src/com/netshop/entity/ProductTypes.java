@@ -1,19 +1,20 @@
 package com.netshop.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class ProductTypes extends BaseEntity {
 	
-	public List<ProductType> list;
+	public Object list;
 	
 	
-	public List<ProductType> getPtype() {
+	public Object getPtype() {
 		return list;
 	}
-	public void setPtype(List<ProductType> list) {
+	public void setPtype(Object list) {
 		this.list = list;
 	}
-	public class ProductType{
+	public static  class ProductType implements Serializable{
 		public String name;
 		public String id;
 		public Object clist;

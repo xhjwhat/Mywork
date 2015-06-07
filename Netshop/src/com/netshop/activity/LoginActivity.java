@@ -58,8 +58,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 		registBtn.setOnClickListener(this);
 		phoneEdit = (EditText) findViewById(R.id.login_edit_phone);
 		pwdEdit = (EditText) findViewById(R.id.login_edit_pwd);
-		forgetText = (TextView) findViewById(R.id.login_text_forgetpwd);
-		forgetText.setOnClickListener(this);
+		/*forgetText = (TextView) findViewById(R.id.login_text_forgetpwd);
+		forgetText.setOnClickListener(this);*/
 	}
 
 	@Override

@@ -53,7 +53,7 @@ public class PersonFragment extends Fragment implements OnClickListener{
 		addrLayout.setOnClickListener(this);
 		accountLayout = (RelativeLayout)view.findViewById(R.id.my_account);
 		accountLayout.setOnClickListener(this);
-		moreLayout = (RelativeLayout)view.findViewById(R.id.my_more);
+		//moreLayout = (RelativeLayout)view.findViewById(R.id.my_more);
 		if(account!=null){
 			nameText.setText(account.getNickname());
 			pointText.setText(account.getIntegrating());

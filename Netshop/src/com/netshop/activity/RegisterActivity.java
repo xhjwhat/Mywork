@@ -1,5 +1,8 @@
 package com.netshop.activity;
 
+import javax.crypto.spec.PSource;
+
+import com.netshop.app.NetShopApp;
 import com.netshop.app.R;
 import com.netshop.net.HttpRequest;
 import com.netshop.net.HttpRequest.HttpCallBack;
@@ -9,6 +12,10 @@ import com.netshop.util.StringUtil;
 import com.netshop.util.ToastUtil;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -22,7 +29,9 @@ import android.widget.Toast;
 public class RegisterActivity extends Activity implements OnClickListener {
 	private Button verificationBtn, registBtn;
 	private EditText phoneEdit, pwdEdit, verificationEdit;
-
+	ProgressDialog dialog;
+	String phone;
+	String password;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,38 +40,42 @@ public class RegisterActivity extends Activity implements OnClickListener {
 	}
 
 	public void initView() {
-		verificationBtn = (Button) findViewById(R.id.regist_verification_btn);
-		verificationBtn.setOnClickListener(this);
+//		verificationBtn = (Button) findViewById(R.id.regist_verification_btn);
+//		verificationBtn.setOnClickListener(this);
 		registBtn = (Button) findViewById(R.id.login_register);
 		registBtn.setOnClickListener(this);
 		phoneEdit = (EditText) findViewById(R.id.login_edit_phone);
 		pwdEdit = (EditText) findViewById(R.id.login_edit_pwd);
-		verificationEdit = (EditText) findViewById(R.id.login_edit_verification);
+		//verificationEdit = (EditText) findViewById(R.id.login_edit_verification);
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.regist_verification_btn:
-			// 获取验证码
-			HttpRequest veriRequest = new HttpRequest("1", "0003");
-			veriRequest.request(HttpRequest.REQUEST_GET, veriCcallback);
-			break;
+//		case R.id.regist_verification_btn:
+//			// 获取验证码
+//			HttpRequest veriRequest = new HttpRequest("1", "0003");
+//			veriRequest.request(HttpRequest.REQUEST_GET, veriCcallback);
+//			break;
 		case R.id.login_register:
 			// 注册
-			register(phoneEdit.getText().toString(), pwdEdit.getText()
-					.toString(), verificationEdit.getText().toString());
+			phone = phoneEdit.getText().toString();
+			password = pwdEdit.getText().toString();
+			register(phone, password);
+			dialog = new ProgressDialog(this);
+			dialog.setMessage("正在请求数据，请稍后...");
+			dialog.show();
 			break;
-		case R.id.login_text_forgetpwd:
+		/*case R.id.login_text_forgetpwd:
 			// 忘记密码
-			break;
+			break;*/
 		default:
 			break;
 		}
 
 	}
 
-	private void register(String account, String passWord, String verification) {
+	private void register(String account, String passWord) {
 		// 验证用户名必须是手机号
 		if (StringUtil.isMobileNum(account)) {
 			// 需要验证
@@ -91,12 +104,16 @@ public class RegisterActivity extends Activity implements OnClickListener {
 
 		@Override
 		public void success(String obj) {
+			
 			Toast.makeText(RegisterActivity.this, "获取成功，请稍后",
 					Toast.LENGTH_SHORT).show();
 		}
 
 		@Override
 		public void fail(String failReason) {
+			if(dialog!=null && dialog.isShowing()){
+				dialog.dismiss();
+			}
 			Toast.makeText(RegisterActivity.this, failReason,
 					Toast.LENGTH_SHORT).show();
 		}
@@ -106,13 +123,27 @@ public class RegisterActivity extends Activity implements OnClickListener {
 
 		@Override
 		public void success(String obj) {
-			Log.e("register_callback", obj);
+			if(dialog!=null && dialog.isShowing()){
+				dialog.dismiss();
+			}
+			SharedPreferences share = NetShopApp.getInstance().share;
+			Editor editor = share.edit();
+			editor.putString("user_id", phone);
+			editor.putString("password", DESCrypto.GetMD5Code(password));
+			editor.commit();
 			Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT)
-					.show();
+			.show();
+			Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+			finish();
 		}
 
 		@Override
 		public void fail(String failReason) {
+			if(dialog!=null && dialog.isShowing()){
+				dialog.dismiss();
+			}
 			Log.e("register_callback", failReason);
 			Toast.makeText(RegisterActivity.this, failReason,
 					Toast.LENGTH_SHORT).show();

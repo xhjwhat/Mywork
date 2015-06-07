@@ -5,10 +5,6 @@
     android:background="#ffffff"
     android:orientation="vertical" >
 
-    <include
-        android:layout_width="match_parent"
-        layout="@layout/title_bar" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -108,7 +104,7 @@
         android:textColor="#f5ac39"
         android:textSize="20sp" />
 
-    <RelativeLayout
+    <!-- <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dip"
         android:layout_marginLeft="30dip"
@@ -125,6 +121,6 @@
             android:text="@string/go_on_select_goods"
             android:textColor="#ffffff"
             android:textSize="18sp" />
-    </RelativeLayout>
+    </RelativeLayout> -->
 
 </LinearLayout>
